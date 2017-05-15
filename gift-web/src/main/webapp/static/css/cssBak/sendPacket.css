@@ -1,0 +1,45 @@
+body{background: url(../../images/bg.png)}
+.packet-wrap{position:absolute;width:8rem;height: 11.6rem;left:50%;top:50%;margin-left:-4rem;margin-top:-5.8rem;text-align: center;background: #e92a21;border-radius: 0.16rem }
+.packet-text{
+    margin:1.92rem 0 1.6rem;
+    color:#f5c78a;
+    font-size:22px;
+    text-align: center;
+}
+[data-dpr="2"] .packet-text{
+    font-size:44px;
+}
+[data-dpr="3"] .packet-text{
+    font-size:66px;
+}
+.packet-border{
+    width: 100%;
+    height: 1.2rem;
+    margin-top:0.64rem;
+    background: url(../../images/packet-img2.png) center no-repeat;
+}
+.packet-btn{
+    margin-top:1.2rem;
+}
+.circle-btn{
+    width: 2.24rem;
+    height: 2.24rem;
+    color:#ffdb8b;
+    font-size: 18px;
+    background: url(../../images/circle-btn.png) center no-repeat;
+    background-size: cover;
+}
+[data-dpr="2"] .circle-btn{
+    font-size:36px;
+}
+[data-dpr="3"] .circle-btn{
+    font-size:54px;
+}
+.packet-tip{
+    margin-top:2rem;
+    color:#f5c78a;
+    text-align: center;
+}
+.page-cover img{
+    width: 6.18rem;
+}

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:reg="http://www.dangdang.com/schema/ddframe/reg"
+       xmlns:job="http://www.dangdang.com/schema/ddframe/job"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans.xsd
+                        http://www.dangdang.com/schema/ddframe/reg
+                        http://www.dangdang.com/schema/ddframe/reg/reg.xsd
+                        http://www.dangdang.com/schema/ddframe/job
+                        http://www.dangdang.com/schema/ddframe/job/job.xsd
+                        ">
+   <!-- configure registry center-->
+    <reg:zookeeper id="regCenter" server-lists="${dubbo.registry.address}" namespace="minitrade-job-weixin"
+                   base-sleep-time-milliseconds="60000" max-sleep-time-milliseconds="120000" max-retries="30"/>
+
+    <job:simple id="wxJob" class="cn.datai.weixinjob.WeixinJob" registry-center-ref="regCenter"
+                cron="0 0 0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23 * * ?" sharding-total-count="1" sharding-item-parameters="0=a" overwrite="true" />
+</beans>

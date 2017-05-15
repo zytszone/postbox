@@ -1,0 +1,46 @@
+<RestClientRequest>
+  <option name="biscuits">
+    <list>
+      <Biscuit>
+        <option name="date" value="-1" />
+        <option name="domain" value="wp.jsdttec.com" />
+        <option name="name" value="SESSION" />
+        <option name="path" value="/" />
+        <option name="value" value="e59340ea-31be-4dfc-bf28-28fa43662611" />
+      </Biscuit>
+    </list>
+  </option>
+  <option name="httpMethod" value="POST" />
+  <option name="urlBase" value="https://wp.jsdttec.com" />
+  <option name="urlPath" value="/test/wxpay/notify" />
+  <option name="headers">
+    <list>
+      <KeyValuePair>
+        <option name="key" value="Accept" />
+        <option name="value" value="*/*" />
+      </KeyValuePair>
+      <KeyValuePair>
+        <option name="key" value="Cache-Control" />
+        <option name="value" value="no-cache" />
+      </KeyValuePair>
+      <KeyValuePair>
+        <option name="key" value="Content-Type" />
+        <option name="value" value="&quot;application/xml; charset=utf-8&quot;" />
+      </KeyValuePair>
+    </list>
+  </option>
+  <option name="parameters">
+    <list>
+      <KeyValuePair>
+        <option name="key" value="" />
+        <option name="value" value="" />
+      </KeyValuePair>
+    </list>
+  </option>
+  <option name="parametersEnabled" value="false" />
+  <option name="haveTextToSend" value="true" />
+  <option name="haveFileToSend" value="false" />
+  <option name="isFileUpload" value="false" />
+  <option name="textToSend" value="&lt;xml&gt;   &lt;appid&gt;&lt;![CDATA[wx2421b1c4370ec43b]]&gt;&lt;/appid&gt;   &lt;attach&gt;&lt;![CDATA[支付测试]]&gt;&lt;/attach&gt;   &lt;bank_type&gt;&lt;![CDATA[CFT]]&gt;&lt;/bank_type&gt;   &lt;fee_type&gt;&lt;![CDATA[CNY]]&gt;&lt;/fee_type&gt;   &lt;is_subscribe&gt;&lt;![CDATA[Y]]&gt;&lt;/is_subscribe&gt;   &lt;mch_id&gt;&lt;![CDATA[10000100]]&gt;&lt;/mch_id&gt;   &lt;nonce_str&gt;&lt;![CDATA[5d2b6c2a8db53831f7eda20af46e531c]]&gt;&lt;/nonce_str&gt;   &lt;openid&gt;&lt;![CDATA[oUpF8uMEb4qRXf22hE3X68TekukE]]&gt;&lt;/openid&gt;   &lt;out_trade_no&gt;&lt;![CDATA[1409811653]]&gt;&lt;/out_trade_no&gt;   &lt;result_code&gt;&lt;![CDATA[SUCCESS]]&gt;&lt;/result_code&gt;   &lt;return_code&gt;&lt;![CDATA[SUCCESS]]&gt;&lt;/return_code&gt;   &lt;sign&gt;&lt;![CDATA[B552ED6B279343CB493C5DD0D78AB241]]&gt;&lt;/sign&gt;   &lt;sub_mch_id&gt;&lt;![CDATA[10000100]]&gt;&lt;/sub_mch_id&gt;   &lt;time_end&gt;&lt;![CDATA[20140903131540]]&gt;&lt;/time_end&gt;   &lt;total_fee&gt;1&lt;/total_fee&gt;   &lt;trade_type&gt;&lt;![CDATA[JSAPI]]&gt;&lt;/trade_type&gt;   &lt;transaction_id&gt;&lt;![CDATA[1004400740201409030005092168]]&gt;&lt;/transaction_id&gt; &lt;/xml&gt;" />
+  <option name="filesToSend" value="" />
+</RestClientRequest>

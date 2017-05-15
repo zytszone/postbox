@@ -1,0 +1,159 @@
+html{background: #f3f3f3}
+.fixed{
+    position: fixed;
+    left: 0%;
+    top:0;
+    width: 100%;
+    z-index:1;
+}
+.list-header{
+    height:1.16rem;
+    padding:0 0.4rem;
+    color:#666666;
+    background: #fff;
+    border-bottom: 1px solid #ccc;
+}
+.list-header .name{
+    width: 50%;
+    text-align: left;
+    line-height: 1.16rem;
+}
+.list-header .number{
+    width: 20%;
+    text-align: right;
+    line-height: 1.16rem;
+}
+.list-header .value{
+    width: 30%;
+    text-align: right;
+    line-height: 1.16rem;
+}
+.list-container li.item-header{
+    height: 0.8rem;
+    padding:0 0.36rem;
+    color:#999;
+    line-height: 0.8rem;
+    background: #fafafa;
+    border-bottom: 1px solid #ccc;
+}
+.list-container{
+    padding-top:2.32rem;
+    background: #fff;
+    overflow:hidden;
+}
+.scroll{
+    height: 100%;
+    overflow: auto;
+}
+.list-container li{
+    height:1.6rem;
+    padding:0 0.4rem;
+    color:#666666;
+    font-size:13px;
+    border-bottom: 1px solid #ccc;
+}
+[data-dpr="2"] .list-container li{
+    font-size:26px;
+}
+[data-dpr="3"] .list-container li{
+    font-size:39px;
+}
+.list-container .type{
+    width:0.84rem;
+    height:0.84rem;
+    margin-top:0.4rem;
+    color:#fff;
+    text-align: center;
+    line-height: 0.84rem;
+    border-radius: 100%;
+}
+.list-container .type.fa{
+    background: #cc0000;
+}
+.list-container .type.shou{
+    background: #ff3300;
+}
+.list-container .type.ti{
+    background: #e88338;
+}
+.list-container .type.mai{
+    background: #60c042;
+}
+.list-container a > div:nth-child(1){
+    width: 10%;
+}
+.list-container a > div:nth-child(2){
+    width: 35%;
+    padding-left:0.28rem;
+    text-align: left;
+}
+.list-container a > div:nth-child(3){
+    width: 20%;
+    text-align: right;
+}
+.list-container a > div:nth-child(4){
+    width: 35%;
+    text-align: right;
+}
+.list-container li .name{
+    margin-top: 0.4rem;
+}
+.list-container li .name{
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+.list-container li .date{
+    margin-top:0.16rem;
+    coloe:#999;
+    font-size: 12px;
+}
+[data-dpr="2"] .list-container li .date{
+    font-size:24px;
+}
+[data-dpr="3"] .list-container li .date{
+    font-size:36px;
+}
+.list-container li .number{
+    margin-top: 0.4rem;
+}
+.list-container li .number span{
+    font-size:14px;
+}
+[data-dpr="2"] .list-container li .number span{
+    font-size:28px;
+}
+[data-dpr="3"] .list-container li .number span{
+    font-size:42px;
+}
+.list-container li .money{
+    margin-top: 0.4rem;
+    color:#666;
+    font-size:12px;
+}
+[data-dpr="2"] .list-container li .money{
+    font-size:24px;
+}
+[data-dpr="3"] .list-container li .money{
+    font-size:36px;
+}
+.list-container li .money span{
+    font-size:14px;
+}
+[data-dpr="2"] .list-container li .money span{
+    font-size:28px;
+}
+[data-dpr="3"] .list-container li .money span{
+    font-size:42px;
+}
+.list-container li .state{
+    margin-top: 0.24rem;
+    color:#999;
+    font-size:12px;
+}
+[data-dpr="2"] .list-container li .state{
+    font-size:24px;
+}
+[data-dpr="3"] .list-container li .state{
+    font-size:36px;
+}
