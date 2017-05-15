@@ -5,13 +5,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>cn.datai</groupId>
-    <artifactId>gift</artifactId>
+    <artifactId>postbox</artifactId>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>gift-utils</module>
-        <module>gift-persist</module>
-        <module>gift-web</module>
-        <module>gift-wxpay</module>
+        <module>postbox-utils</module>
+        <module>postbox-persist</module>
+        <module>postbox-web</module>
     </modules>
     <packaging>pom</packaging>
 

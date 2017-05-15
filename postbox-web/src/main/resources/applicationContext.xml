@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xsi:schemaLocation="
+       http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context-4.3.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
+       http://www.springframework.org/schema/util
+       http://www.springframework.org/schema/util/spring-util-4.3.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+       http://www.springframework.org/schema/task
+       http://www.springframework.org/schema/task/spring-task-3.0.xsd">
+
+    <util:list id="propertiesLocations">
+        <value>classpath:/config/*.properties</value>
+    </util:list>
+
+    <bean id="initProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="fileEncoding" value="UTF-8"/>
+        <property name="locations" ref="propertiesLocations"></property>
+    </bean>
+
+    <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="fileEncoding" value="UTF-8"/>
+        <property name="locations" ref="propertiesLocations"></property>
+    </bean>
+
+    <context:component-scan base-package="cn.datai.gift.web">
+        <!--@desc 16-12-6 排除Controller-->
+        <context:exclude-filter type="annotation"
+                                expression="org.springframework.stereotype.Controller"/>
+        <context:exclude-filter type="annotation"
+                                expression="org.springframework.web.bind.annotation.ControllerAdvice"/>
+    </context:component-scan>
+
+    <tx:annotation-driven transaction-manager="transactionManager" mode="proxy" proxy-target-class="true"/>
+
+    <!-- 配置事务管理器 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="duridDataSource" />
+        <property name="rollbackOnCommitFailure" value="true"/>
+        <property name="nestedTransactionAllowed" value="true"/>
+    </bean>
+    
+    <import resource="classpath:applicationContext-redis.xml"/>
+    <import resource="classpath:applicationContext-persist.xml"/>
+    <import resource="classpath:applicationContext-elastic-job.xml"/>
+    <import resource="classpath:applicationContext-restClient.xml"/>
+
+
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+</beans>
