@@ -3,10 +3,7 @@ package cn.datai.gift.web.service.impl;
 import cn.datai.gift.persist.mapper.UserInfoMapperExt;
 import cn.datai.gift.persist.mapper.UserWxInfoMapperExt;
 import cn.datai.gift.persist.mapper.UserWxReltMapperExt;
-import cn.datai.gift.persist.po.UserInfo;
-import cn.datai.gift.persist.po.UserWxInfo;
-import cn.datai.gift.persist.po.UserWxRelt;
-import cn.datai.gift.persist.po.UserWxReltExample;
+import cn.datai.gift.persist.po.*;
 import cn.datai.gift.web.contants.PhotoContants;
 import cn.datai.gift.web.service.BaseInfoService;
 import org.slf4j.Logger;
@@ -42,7 +39,7 @@ public class BaseInfoServiceImpl implements BaseInfoService {
      */
     @Override
     public void insertUserWxInfo(UserWxInfo userWxInfo) {
-
+        userWxInfoMapperExt.insertSelective(userWxInfo);
     }
 
     /**
@@ -52,7 +49,7 @@ public class BaseInfoServiceImpl implements BaseInfoService {
      */
     @Override
     public void insertUserInfo(UserInfo userInfo) {
-
+        userInfoMapperExt.insertSelective(userInfo);
     }
 
     /**
@@ -64,7 +61,7 @@ public class BaseInfoServiceImpl implements BaseInfoService {
      */
     @Override
     public UserWxInfo queryUserWxInfo(String openId, String unionId) {
-        return null;
+        return userWxInfoMapperExt.selectByPrimaryKey(openId,unionId);
     }
 
     /**
@@ -75,7 +72,7 @@ public class BaseInfoServiceImpl implements BaseInfoService {
      */
     @Override
     public UserInfo queryUserInfo(Long userInfoId) {
-        return null;
+        return userInfoMapperExt.selectByPrimaryKey(userInfoId);
     }
 
     /**
@@ -85,7 +82,7 @@ public class BaseInfoServiceImpl implements BaseInfoService {
      */
     @Override
     public void updateUserWxInfo(UserWxInfo userWxInfo) {
-
+        userWxInfoMapperExt.updateByPrimaryKeySelective(userWxInfo);
     }
 
     /**
@@ -95,7 +92,7 @@ public class BaseInfoServiceImpl implements BaseInfoService {
      */
     @Override
     public void updateUserInfo(UserInfo userInfo) {
-
+        userInfoMapperExt.updateByPrimaryKeySelective(userInfo);
     }
 
     /**
@@ -121,17 +118,6 @@ public class BaseInfoServiceImpl implements BaseInfoService {
             this.updateUserWxInfo(userWxInfo);
         }else{
             this.insertUserWxInfo(userWxInfo);//插入用户微信信息
-
-            UserWxRelt userWxRelt = queryUserWxReltByUnionId(userWxInfo.getUnionid());
-
-            if(userWxRelt == null){
-
-                UserInfo userInfo = userWxInfo2UserInfo(userWxInfo);
-                this.insertUserInfo(userInfo);//插入用户信息
-
-                //微信用户信与基本用户信息关联信息
-                this.insertUserWxRelt(this.assemblyUserWxRelt(userWxInfo.getUnionid(),userInfo.getUserInfoId()));
-            }
 
         }
     }
@@ -166,33 +152,21 @@ public class BaseInfoServiceImpl implements BaseInfoService {
         this.userWxReltMapperExt.insertSelective(userWxRelt);
     }
 
-    private static UserWxRelt assemblyUserWxRelt(String unionId,Long userInfoId){
-        UserWxRelt userWxRelt = new UserWxRelt();
-        userWxRelt.setUnionid(unionId);
-        userWxRelt.setUserInfoId(userInfoId);
-        userWxRelt.setCreateTime(new Date());
-        return userWxRelt;
-    }
-
     /**
-     * 用户信息的基本信息目前我们只获取用户第一次微信进入时的基本信息，
-     * 在此之后用户再更新用户头像昵称等信息时，用户微信信息表和session中的用户微信信息会更新，但是用户基本信息表不会再更新
-     * @param userWxInfo
+     * 通过手机号查询用户
+     *
+     * @param phone
      * @return
      */
-    private static UserInfo userWxInfo2UserInfo(UserWxInfo userWxInfo){
-        UserInfo userInfo = new UserInfo();
-        userInfo.setCountry(userWxInfo.getCountry());
-        userInfo.setProvince(userWxInfo.getProvince());
-        userInfo.setCity(userWxInfo.getCity());
-        userInfo.setNickname(userWxInfo.getNickname());
-        userInfo.setSex(userWxInfo.getSex());
-        userInfo.setHeadImgPath(userWxInfo.getUnionid()+ PhotoContants.FILENAME_SUFFIX);//只保存用户头像名称（unionId.jpg）
-        userInfo.setRegisterTime(new Date());
-        //...
-        // TODO: 2017/3/13
-        return userInfo;
+    @Override
+    public UserInfo queryUserInfoByPhone(String phone) {
+        UserInfoExample userInfoExample = new UserInfoExample();
+        userInfoExample.createCriteria().andMobilePhoneEqualTo(phone);
+        List<UserInfo> userInfoList = this.userInfoMapperExt.selectByExample(userInfoExample);
+        if(null == userInfoList || userInfoList.isEmpty()){
+            return null;
+        }
+        return userInfoList.get(0);
     }
-
 
 }

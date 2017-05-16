@@ -30,10 +30,6 @@ public class BaseController {
         httpSession.setAttribute(SessionAttrs.USER_LOGIN_INFO, userLoginInfo);
     }
 
-    public static UserWxInfo getUserWxInfo(HttpSession httpSession) {
-        UserWxInfo userWxInfo = (UserWxInfo) httpSession.getAttribute(SessionAttrs.USER_WX_INFO);
-        return userWxInfo;
-    }
 
     public void setUserWxInfo(HttpSession httpSession, UserWxInfo userWxInfo) {
         httpSession.setAttribute(SessionAttrs.USER_WX_INFO, userWxInfo);
@@ -55,5 +51,10 @@ public class BaseController {
             return null;
         }
         return baseInfoService.queryUserInfo(userLoginInfo.getUserInfoId());
+    }
+
+    @ModelAttribute("userWxInfo")
+    public UserWxInfo getUserWxInfo(HttpSession httpSession) {
+        return  (UserWxInfo) httpSession.getAttribute(SessionAttrs.USER_WX_INFO);
     }
 }

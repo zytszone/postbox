@@ -147,7 +147,10 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
             //数据库插入（或更新）用户微信信息,插入微信用户与基本用户关联信息，插入用户（包含特别用户）基本信息
             baseInfoService.insertOrUpDate(weixinUserInfo);
             //存入session
-            this.cacheWeixinUserInfo(weixinUserInfo, request.getSession());
+            UserLoginInfo userLoginInfo = this.cacheWeixinUserInfo(weixinUserInfo, request.getSession());
+            if(null == userLoginInfo){
+                return true;
+            }
             logger.info("微信用户登录成功，登录信息：{}", request.getSession().getAttribute(SessionAttrs.USER_LOGIN_INFO));
 
 
@@ -289,21 +292,19 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
      * @return boolean
      */
     private UserLoginInfo cacheWeixinUserInfo(UserWxInfo weixinUserInfo, HttpSession session) {
+
+        session.setAttribute(SessionAttrs.USER_WX_INFO, weixinUserInfo);//微信信息放入缓存
+
         UserLoginInfo userLoginInfo = (UserLoginInfo) session.getAttribute(SessionAttrs.USER_LOGIN_INFO);
         if (userLoginInfo == null || userLoginInfo.getUserInfoId() == null) {
-            userLoginInfo = new UserLoginInfo();
-            UserInfo userInfo = baseInfoService.queryUserInfoByUnionId(weixinUserInfo.getUnionid());
-            if(null != userInfo){
-                userLoginInfo.setUserInfoId(userInfo.getUserInfoId());//用户Id
-//                session.setAttribute(SessionAttrs.USER_INFO, userInfo);
-            }
+            return null;
         }
-        userLoginInfo.setAppId(this.APPID);//appID
-        userLoginInfo.setUnionId(weixinUserInfo.getUnionid());//unionId
-        userLoginInfo.setWeixinOpenId(weixinUserInfo.getOpenid());//openId
+//        userLoginInfo.setAppId(this.APPID);//appID
+//        userLoginInfo.setUnionId(weixinUserInfo.getUnionid());//unionId
+//        userLoginInfo.setWeixinOpenId(weixinUserInfo.getOpenid());//openId
+//
+//        session.setAttribute(SessionAttrs.USER_LOGIN_INFO, userLoginInfo);
 
-        session.setAttribute(SessionAttrs.USER_LOGIN_INFO, userLoginInfo);
-        session.setAttribute(SessionAttrs.USER_WX_INFO, weixinUserInfo);
 
         return userLoginInfo;
     }

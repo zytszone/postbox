@@ -74,5 +74,12 @@ public interface BaseInfoService {
      */
     void insertUserWxRelt(UserWxRelt userWxRelt);
 
+    /**
+     * 通过手机号查询用户是否注册
+     * @param phone
+     * @return
+     */
+    UserInfo queryUserInfoByPhone(String phone);
+
 
 }

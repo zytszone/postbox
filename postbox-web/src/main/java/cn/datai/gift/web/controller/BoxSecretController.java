@@ -53,12 +53,13 @@ public class BoxSecretController extends BaseController {
 
             String decode = this.boxInfoService.updateForDecode(boxId, mkey, userInfo);
             if (StringUtils.isNotBlank(decode)) {
-                model.addAttribute("decode", boxId);
+                model.addAttribute("decode", decode);
 
                 // 快递员
                 if ("true".equalsIgnoreCase(userInfo.getIsSpecial())) {
                     String uuid = UUID.randomUUID().toString();
                     model.addAttribute("skey", uuid);
+                    model.addAttribute("boxId", boxId);
                     request.getSession().setAttribute("skey", uuid);
                 }
                 return "";
