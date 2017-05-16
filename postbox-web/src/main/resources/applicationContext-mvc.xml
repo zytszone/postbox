@@ -76,8 +76,8 @@
 
             <bean id="xmlHttpMessageConverter" class="org.springframework.http.converter.xml.MarshallingHttpMessageConverter">
                 <property name="defaultCharset" value="UTF-8"/>
-                <property name="marshaller" ref="xstreamMarshaller"/>
-                <property name="unmarshaller" ref="xstreamMarshaller"/>
+              <!--  <property name="marshaller" ref="xstreamMarshaller"/>
+                <property name="unmarshaller" ref="xstreamMarshaller"/>-->
                 <property name="supportedMediaTypes">
                     <list>
                         <bean class="org.springframework.http.MediaType">
@@ -97,7 +97,7 @@
     </mvc:annotation-driven>
 
     <!--xstream转换-->
-    <bean id="xstreamMarshaller" class="org.springframework.oxm.xstream.XStreamMarshaller">
+   <!-- <bean id="xstreamMarshaller" class="org.springframework.oxm.xstream.XStreamMarshaller">
         <property name="streamDriver" ref="wxXppDriver"/>
         <property name="autodetectAnnotations" value="true"/>
         <property name="annotatedClasses">
@@ -105,7 +105,7 @@
                 <value>cn.datai.gift.wxpay.bean.common.WxPayNotifyReceiver</value>
             </array>
         </property>
-    </bean>
+    </bean>-->
 
 
     <!-- 内容协商管理器 -->
@@ -150,9 +150,9 @@
         <property name="defaultViews">
             <list>
                 <bean class="org.springframework.web.servlet.view.json.MappingJackson2JsonView"/>
-                <bean class="org.springframework.web.servlet.view.xml.MarshallingView">
+               <!-- <bean class="org.springframework.web.servlet.view.xml.MarshallingView">
                     <property name="marshaller" ref="xstreamMarshaller"/>
-                </bean>
+                </bean>-->
             </list>
         </property>
 

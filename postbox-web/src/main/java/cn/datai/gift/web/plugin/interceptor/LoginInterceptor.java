@@ -145,7 +145,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
             weixinUserInfo.setAppid(APPID);
 
             //数据库插入（或更新）用户微信信息,插入微信用户与基本用户关联信息，插入用户（包含特别用户）基本信息
-//            baseInfoService.insertOrUpDate(weixinUserInfo);
+            baseInfoService.insertOrUpDate(weixinUserInfo);
             //存入session
             this.cacheWeixinUserInfo(weixinUserInfo, request.getSession());
             logger.info("微信用户登录成功，登录信息：{}", request.getSession().getAttribute(SessionAttrs.USER_LOGIN_INFO));
