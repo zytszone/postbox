@@ -2,9 +2,8 @@ package cn.datai.gift.persist.mapper;
 
 import cn.datai.gift.persist.po.UserWxRelt;
 import cn.datai.gift.persist.po.UserWxReltExample;
-import org.apache.ibatis.annotations.Param;
-
 import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface UserWxReltMapper {
     /**

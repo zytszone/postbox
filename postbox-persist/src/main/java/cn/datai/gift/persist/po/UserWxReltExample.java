@@ -1,7 +1,6 @@
 package cn.datai.gift.persist.po;
 
 import cn.datai.gift.persist.vo.Page;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
