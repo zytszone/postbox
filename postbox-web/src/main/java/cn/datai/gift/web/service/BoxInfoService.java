@@ -18,4 +18,11 @@ public interface BoxInfoService {
      * @return
      */
     String updateForDecode(Long boxId, String mkey, UserInfo userInfo);
+
+    /**
+     * 更新箱子的属主手机号
+     * @param boxId
+     * @param mobileno
+     */
+    void updateBoxMobile(Long boxId, String mobileno);
 }
