@@ -27,6 +27,31 @@ public class UserLoginInfo implements Serializable {
      */
     private String unionId;
 
+    /**
+     * 手机号
+     */
+    private String phone;
+
+    /**
+     * true：快递员，false:普通用户
+     */
+    private String isSpecial;
+
+    public String getIsSpecial() {
+        return isSpecial;
+    }
+
+    public void setIsSpecial(String isSpecial) {
+        this.isSpecial = isSpecial;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 
     public String getAppId() {
         return appId;

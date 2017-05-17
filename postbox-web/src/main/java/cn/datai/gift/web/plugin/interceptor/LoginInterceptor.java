@@ -3,8 +3,10 @@ package cn.datai.gift.web.plugin.interceptor;
 
 import cn.datai.gift.persist.po.UserInfo;
 import cn.datai.gift.persist.po.UserWxInfo;
+import cn.datai.gift.persist.po.UserWxRelt;
 import cn.datai.gift.utils.RespResult;
 import cn.datai.gift.utils.enums.RespCode;
+import cn.datai.gift.web.contants.PhotoContants;
 import cn.datai.gift.web.contants.SessionAttrs;
 import cn.datai.gift.web.plugin.annotation.Auth;
 import cn.datai.gift.web.plugin.vo.UserLoginInfo;
@@ -21,6 +23,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.util.StringUtils;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -31,6 +34,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -149,10 +153,14 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
             //存入session
             UserLoginInfo userLoginInfo = this.cacheWeixinUserInfo(weixinUserInfo, request.getSession());
             if(null == userLoginInfo){
-                return true;
+                return false;
+            }else{
+                if(StringUtils.isEmpty(userLoginInfo.getPhone())){
+                    String redirect = getPath(request) + "main/signIn";
+                    response.sendRedirect(redirect + "?redirecturl=" + getWholeURL(request));
+                }
             }
             logger.info("微信用户登录成功，登录信息：{}", request.getSession().getAttribute(SessionAttrs.USER_LOGIN_INFO));
-
 
             return true;
         } else {
@@ -295,16 +303,34 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 
         session.setAttribute(SessionAttrs.USER_WX_INFO, weixinUserInfo);//微信信息放入缓存
 
-        UserLoginInfo userLoginInfo = (UserLoginInfo) session.getAttribute(SessionAttrs.USER_LOGIN_INFO);
-        if (userLoginInfo == null || userLoginInfo.getUserInfoId() == null) {
-            return null;
-        }
-//        userLoginInfo.setAppId(this.APPID);//appID
-//        userLoginInfo.setUnionId(weixinUserInfo.getUnionid());//unionId
-//        userLoginInfo.setWeixinOpenId(weixinUserInfo.getOpenid());//openId
-//
-//        session.setAttribute(SessionAttrs.USER_LOGIN_INFO, userLoginInfo);
+        //根据微信信息查询用户信息
+        UserWxRelt userWxRelt = baseInfoService.queryUserWxReltByUnionId(weixinUserInfo.getUnionid());
 
+        UserLoginInfo userLoginInfo = new UserLoginInfo();
+        if(null == userWxRelt){
+            //用户和微信不存在关系说明该用户还没有注册
+
+            //开始注册
+            UserInfo userInfo = userWxInfo2UserInfo(weixinUserInfo);
+            baseInfoService.insertUserInfo(userInfo);//用户
+
+            //微信用户信与基本用户信息关联信息
+            baseInfoService.insertUserWxRelt(this.assemblyUserWxRelt(weixinUserInfo.getUnionid(),userInfo.getUserInfoId()));//用户与微信关系表
+
+            userLoginInfo.setUserInfoId(userInfo.getUserInfoId());//用户Id
+        }else{
+            //关系存在
+            UserInfo userInfo = baseInfoService.queryUserInfo(userWxRelt.getUserInfoId());
+
+            userLoginInfo.setPhone(userInfo.getMobilePhone());
+            userLoginInfo.setIsSpecial(userInfo.getIsSpecial());
+            userLoginInfo.setUserInfoId(userInfo.getUserInfoId());//用户Id
+            session.setAttribute(SessionAttrs.USER_LOGIN_INFO, userLoginInfo);
+        }
+
+        userLoginInfo.setAppId(this.APPID);//appID
+        userLoginInfo.setUnionId(weixinUserInfo.getUnionid());//unionId
+        userLoginInfo.setWeixinOpenId(weixinUserInfo.getOpenid());//openId
 
         return userLoginInfo;
     }
@@ -321,6 +347,44 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         }else
             return false;
     }
+
+    /**
+     * 用户信息的基本信息目前我们只获取用户第一次微信进入时的基本信息，
+     * 在此之后用户再更新用户头像昵称等信息时，用户微信信息表和session中的用户微信信息会更新，但是用户基本信息表不会再更新
+     * @param userWxInfo
+     * @return
+     */
+    private static UserInfo userWxInfo2UserInfo(UserWxInfo userWxInfo){
+        UserInfo userInfo = new UserInfo();
+        userInfo.setCountry(userWxInfo.getCountry());
+        userInfo.setProvince(userWxInfo.getProvince());
+        userInfo.setCity(userWxInfo.getCity());
+        userInfo.setNickname(userWxInfo.getNickname());
+        userInfo.setSex(userWxInfo.getSex());
+        userInfo.setHeadImgPath(userWxInfo.getUnionid()+ PhotoContants.FILENAME_SUFFIX);//只保存用户头像名称（unionId.jpg）
+        userInfo.setRegisterTime(new Date());
+        //...
+        return userInfo;
+    }
+
+    private static UserWxRelt assemblyUserWxRelt(String unionId, Long userInfoId){
+        UserWxRelt userWxRelt = new UserWxRelt();
+        userWxRelt.setUnionid(unionId);
+        userWxRelt.setUserInfoId(userInfoId);
+        userWxRelt.setCreateTime(new Date());
+        return userWxRelt;
+    }
+
+    private static String getPath(HttpServletRequest request){
+        String path = request.getContextPath();
+        String basePath = request.getScheme() + "://" + request.getServerName();
+        if (request.getServerPort() != 80 && request.getServerPort() != 443) {
+            basePath = basePath + ":" + request.getServerPort();
+        }
+        basePath = basePath + path + "/";
+        return basePath;
+    }
+
 
 
 

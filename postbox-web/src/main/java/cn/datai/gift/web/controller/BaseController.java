@@ -57,4 +57,5 @@ public class BaseController {
     public UserWxInfo getUserWxInfo(HttpSession httpSession) {
         return  (UserWxInfo) httpSession.getAttribute(SessionAttrs.USER_WX_INFO);
     }
+
 }

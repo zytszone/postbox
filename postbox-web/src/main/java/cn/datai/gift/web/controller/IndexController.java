@@ -7,6 +7,7 @@ import cn.datai.gift.utils.RespResult;
 import cn.datai.gift.utils.enums.RespCode;
 import cn.datai.gift.web.contants.PhotoContants;
 import cn.datai.gift.web.plugin.annotation.Auth;
+import cn.datai.gift.web.plugin.vo.UserLoginInfo;
 import cn.datai.gift.web.service.BaseInfoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,6 +17,8 @@ import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -32,7 +35,7 @@ public class IndexController extends BaseController{
     @Autowired
     private BaseInfoService baseInfoService;
 
-    @RequestMapping(value = "/toIndex")
+    @RequestMapping(value = "/signIn")
     @Auth(needLogin = true,weixinJsAuth = true)
     public String toIndex(Model model){
         return "postbox/index";
@@ -45,34 +48,36 @@ public class IndexController extends BaseController{
      * @return
      */
     @Auth(needLogin = true,weixinJsAuth = true)
-    @RequestMapping(value = "/signIn",method = RequestMethod.POST)
-    @ResponseBody
-    public RespResult signIn(@RequestParam("phone") String phone, @RequestParam("isSpecial") String isSpecial, @ModelAttribute("userWxInfo")UserWxInfo userWxInfo){
+    @RequestMapping(value = "/bind",method = RequestMethod.POST)
+    public String bind(@RequestParam("phone") String phone,
+                             @RequestParam("isSpecial") String isSpecial,
+                             @ModelAttribute("userWxInfo")UserWxInfo userWxInfo,
+                             @ModelAttribute("userLoginInfo")UserLoginInfo userLoginInfo, String redirecturl, HttpServletResponse response){
         try {
             RespResult respResult = checkParams(phone, isSpecial);
             if(!respResult.getCode().equals(RespCode.SUCCESS.getCode())){
-                return respResult;
+                return "错误页面，展示错误信息";
             }
             UserInfo userInfo = this.baseInfoService.queryUserInfoByPhone(phone);
             if(null != userInfo){
-                return new RespResult(RespCode.FAIL,"该手机号已注册");
+                return ("错误页面，该手机号已注册");
             }
 
-            //开始注册
-            userInfo = userWxInfo2UserInfo(userWxInfo);
+            //绑定手机号操作
+            userInfo = this.baseInfoService.queryUserInfo(userLoginInfo.getUserInfoId());
+            if(null == userInfo){
+                return ("错误页面，没有找到该用户");
+            }
             userInfo.setMobilePhone(phone);
             userInfo.setIsSpecial(isSpecial);
 
-            baseInfoService.insertUserInfo(userInfo);//用户
+            baseInfoService.updateUserInfo(userInfo);
 
-            //微信用户信与基本用户信息关联信息
-            baseInfoService.insertUserWxRelt(this.assemblyUserWxRelt(userWxInfo.getUnionid(),userInfo.getUserInfoId()));//用户与微信关心表
-
-            return new RespResult(RespCode.SUCCESS,"注册成功");
+            return "redirect:"+redirecturl;
         } catch (Exception e) {
             e.printStackTrace();
             logger.error("注册失败，错误信息：{}",e);
-            return new RespResult(RespCode.FAIL,"注册发生异常");
+            return ("错误页面，绑定失败");
         }
 
     }
@@ -106,32 +111,6 @@ public class IndexController extends BaseController{
         Pattern p = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9]))\\d{8}$");
         Matcher m = p.matcher(mobiles);
         return m.matches();
-    }
-    /**
-     * 用户信息的基本信息目前我们只获取用户第一次微信进入时的基本信息，
-     * 在此之后用户再更新用户头像昵称等信息时，用户微信信息表和session中的用户微信信息会更新，但是用户基本信息表不会再更新
-     * @param userWxInfo
-     * @return
-     */
-    private static UserInfo userWxInfo2UserInfo(UserWxInfo userWxInfo){
-        UserInfo userInfo = new UserInfo();
-        userInfo.setCountry(userWxInfo.getCountry());
-        userInfo.setProvince(userWxInfo.getProvince());
-        userInfo.setCity(userWxInfo.getCity());
-        userInfo.setNickname(userWxInfo.getNickname());
-        userInfo.setSex(userWxInfo.getSex());
-        userInfo.setHeadImgPath(userWxInfo.getUnionid()+ PhotoContants.FILENAME_SUFFIX);//只保存用户头像名称（unionId.jpg）
-        userInfo.setRegisterTime(new Date());
-        //...
-        return userInfo;
-    }
-
-    private static UserWxRelt assemblyUserWxRelt(String unionId, Long userInfoId){
-        UserWxRelt userWxRelt = new UserWxRelt();
-        userWxRelt.setUnionid(unionId);
-        userWxRelt.setUserInfoId(userInfoId);
-        userWxRelt.setCreateTime(new Date());
-        return userWxRelt;
     }
 
 
