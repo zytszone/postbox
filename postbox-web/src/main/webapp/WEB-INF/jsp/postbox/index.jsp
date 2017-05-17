@@ -30,24 +30,16 @@
     <meta name="keywords" content="大泰信息技术有限公司"/>
     <meta name="description" content="大泰信息技术有限公司"/>
     <title>礼尚</title>
-    <!--- add js --->
-    <!--weixin start-->
+
     <jsp:include page="../include/weixinDefaultShare.jsp"/>
-    <!--weixin end-->
-   <%-- <link rel="stylesheet" type="text/css" href="${staticPath}/static/css/common.css"/>
-    <link rel="stylesheet" type="text/css" href="${staticPath}/static/css/swiper-3.4.0.min.css"/>
-    <link rel="stylesheet" type="text/css" href="${staticPath}/static/css/views/index.css"/>--%>
-  <%--  <script type="text/javascript" src="${staticPath}/static/js/flexible_css.debug.js"></script>
-    <script type="text/javascript" src="${staticPath}/static/js/flexible.debug.js"></script>--%>
+
     <script type="text/javascript" src="${staticPath}/static/js/jquery.min.js"></script>
-  <%--  <script type="text/javascript" src="${staticPath}/static/js/vue.js"></script>
-    <script type="text/javascript" src="${staticPath}/static/js/swiper.min.js"></script>--%>
+
 </head>
 <body>
 <script>
     var staticPath = '${staticPath}';
     var basePath = '<%=basePath %>';
-    var isBackControl = true;
 </script>
 <!--page start-->
 <div>
