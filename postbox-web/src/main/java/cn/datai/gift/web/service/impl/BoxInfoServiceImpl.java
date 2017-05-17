@@ -4,9 +4,7 @@ import cn.datai.gift.persist.mapper.TBoxInfoMapperExt;
 import cn.datai.gift.persist.po.TBoxInfo;
 import cn.datai.gift.persist.po.UserInfo;
 import cn.datai.gift.utils.SecurityUtils;
-import cn.datai.gift.web.service.BaseInfoService;
 import cn.datai.gift.web.service.BoxInfoService;
-import cn.datai.gift.web.service.UserInfoService;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,9 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Calendar;
 import java.util.Date;
-
-import static cn.datai.gift.utils.SecurityUtils.decryptDES;
-import static com.sun.deploy.util.BufferUtil.TB;
 
 /**
  * Created by H.CAAHN on 2017/5/16.

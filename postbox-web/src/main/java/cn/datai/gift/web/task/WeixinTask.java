@@ -1,24 +1,22 @@
 package cn.datai.gift.web.task;
 
-import cn.datai.gift.web.contants.enums.TokenContants;
+import cn.datai.gift.web.call.weixin.auth.WeixinAuthService;
+import cn.datai.gift.web.contants.TokenContants;
 import cn.datai.gift.web.plugin.vo.JsapiTicket;
 import cn.datai.gift.web.plugin.vo.WeixinErrorResp;
 import cn.datai.gift.web.plugin.vo.WeixinResult;
 import cn.datai.gift.web.plugin.vo.WeixinToken;
-import cn.datai.gift.web.call.weixin.auth.WeixinAuthService;
 import cn.datai.gift.web.utils.StrUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.PostConstruct;
 import java.io.IOException;
-import java.util.concurrent.TimeUnit;
 
 /**
  * 微信刷新基础token
@@ -35,6 +33,9 @@ public class WeixinTask {
     @Value("${weixin.appsecret}")
     private String secret;
 
+   /* @Autowired
+    private RedisTemplate redisTemplate;*/
+
     @Autowired
     private RestTemplate restTemplate;
 
@@ -49,7 +50,7 @@ public class WeixinTask {
 
             //检查是否拥有微信token和jsapiTicket
             String accessToken = TokenContants.WEIXIN_TOKEN;
-            String jsapiTicket = TokenContants.JSAPI_TECKET;
+            String jsapiTicket = TokenContants.JSAPI_TICKET;
             if (StrUtil.isBlank(accessToken) || StrUtil.isBlank(jsapiTicket)) {
                 logger.info("检查系统不存在授权信息，获取授权信息中......");
                 //如果系统中没有两个值，系统启动时就需要执行一次获取动作
@@ -94,6 +95,7 @@ public class WeixinTask {
                 }
             }
             //获取到微信accessToken之后的动作
+
             TokenContants.WEIXIN_TOKEN = weixinToken.getAccessToken();
             logger.info("存储微信accessToken成功");
             JsapiTicket jsapiTicket = this.refreshJsapiTicket(weixinToken.getAccessToken());//尝试获取jsapiTicket
@@ -117,7 +119,8 @@ public class WeixinTask {
         jsapiTicket = weixinAuthService.getTicket(weixinAccessToken, "jsapi").execute().body();
         long errcode = jsapiTicket.getErrcode();
         if (errcode == WeixinResult.REQUEST_SUCCESS) {
-            TokenContants.JSAPI_TECKET = jsapiTicket.getTicket();
+
+            TokenContants.JSAPI_TICKET = jsapiTicket.getTicket();
             logger.info("获取jsapi_ticket成功, {}", jsapiTicket);
             return jsapiTicket;
         } else if (errcode == WeixinResult.SYS_BUSY) {

@@ -44,7 +44,7 @@
     <!-- 设置servlet编码结束 -->
 
     <!--spring redis session-->
-    <filter>
+  <!--  <filter>
         <filter-name>springSessionRepositoryFilter</filter-name>
         <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
     </filter>
@@ -53,7 +53,7 @@
         <url-pattern>/*</url-pattern>
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>ERROR</dispatcher>
-    </filter-mapping>
+    </filter-mapping>-->
 
     <servlet>
         <!-- 配置一个Servlet，有这个Servlet统一调度页面的请求 -->
