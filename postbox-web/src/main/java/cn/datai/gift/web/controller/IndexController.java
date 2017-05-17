@@ -35,10 +35,10 @@ public class IndexController extends BaseController{
     @Autowired
     private BaseInfoService baseInfoService;
 
-    @RequestMapping(value = "/signIn")
+    @RequestMapping(value = "/register")
     @Auth(needLogin = true,weixinJsAuth = true)
     public String toIndex(Model model){
-        return "postbox/index";
+        return "postbox/register";
     }
 
     /**

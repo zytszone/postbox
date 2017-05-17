@@ -156,7 +156,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
                 return false;
             }else{
                 if(StringUtils.isEmpty(userLoginInfo.getPhone())){
-                    String redirect = getPath(request) + "main/signIn";
+                    String redirect = getPath(request) + "main/register";
                     response.sendRedirect(redirect + "?redirecturl=" + getWholeURL(request));
                 }
             }
