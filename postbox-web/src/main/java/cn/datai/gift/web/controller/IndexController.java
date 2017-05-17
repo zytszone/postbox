@@ -59,16 +59,16 @@ public class IndexController extends BaseController{
             if(!respResult.getCode().equals(RespCode.SUCCESS.getCode())){
                 return new RespResult(RespCode.FAIL,"注册参数错误");
             }
-            UserInfo userInfo = this.baseInfoService.queryUserInfoByPhone(phone);
-            if(null != userInfo){
-                return new RespResult(RespCode.FAIL,"手机号已注册");
-            }
 
             //绑定手机号操作
-            userInfo = this.baseInfoService.queryUserInfo(userLoginInfo.getUserInfoId());
+            UserInfo userInfo = this.baseInfoService.queryUserInfo(userLoginInfo.getUserInfoId());
             if(null == userInfo){
                 return new RespResult(RespCode.FAIL,"没有找到该用户");
             }
+            if(!StringUtils.isEmpty(userInfo.getMobilePhone())){
+                return new RespResult(RespCode.FAIL,"您已绑定手机号，不能重复绑定");
+            }
+
             userInfo.setMobilePhone(phone);
             userInfo.setIsSpecial(isSpecial);
 

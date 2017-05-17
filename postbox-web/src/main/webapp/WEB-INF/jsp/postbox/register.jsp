@@ -77,11 +77,10 @@
         $('#register').on('click', function () {
             var phone = $("#mobileNumber").val();
             var check = $("#check").val();
-
             $.ajax({
-                url: basePath + "main/register",
+                url: basePath + "main/bind",
                 type: "POST",
-                data: {"phone":phone,"ipSpecial":check},
+                data: {"phone":phone,"isSpecial":true},
                 type: 'POST',
                 dataType: 'json',
                 success: function (res) {
