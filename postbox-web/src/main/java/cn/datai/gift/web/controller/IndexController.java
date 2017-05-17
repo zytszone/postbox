@@ -49,35 +49,36 @@ public class IndexController extends BaseController{
      */
     @Auth(needLogin = true,weixinJsAuth = true)
     @RequestMapping(value = "/bind",method = RequestMethod.POST)
-    public String bind(@RequestParam("phone") String phone,
+    @ResponseBody
+    public RespResult bind(@RequestParam("phone") String phone,
                              @RequestParam("isSpecial") String isSpecial,
                              @ModelAttribute("userWxInfo")UserWxInfo userWxInfo,
-                             @ModelAttribute("userLoginInfo")UserLoginInfo userLoginInfo, String redirecturl, HttpServletResponse response){
+                             @ModelAttribute("userLoginInfo")UserLoginInfo userLoginInfo, String redirecturl){
         try {
             RespResult respResult = checkParams(phone, isSpecial);
             if(!respResult.getCode().equals(RespCode.SUCCESS.getCode())){
-                return "错误页面，展示错误信息";
+                return new RespResult(RespCode.FAIL,"注册参数错误");
             }
             UserInfo userInfo = this.baseInfoService.queryUserInfoByPhone(phone);
             if(null != userInfo){
-                return ("错误页面，该手机号已注册");
+                return new RespResult(RespCode.FAIL,"手机号已注册");
             }
 
             //绑定手机号操作
             userInfo = this.baseInfoService.queryUserInfo(userLoginInfo.getUserInfoId());
             if(null == userInfo){
-                return ("错误页面，没有找到该用户");
+                return new RespResult(RespCode.FAIL,"没有找到该用户");
             }
             userInfo.setMobilePhone(phone);
             userInfo.setIsSpecial(isSpecial);
 
             baseInfoService.updateUserInfo(userInfo);
 
-            return "redirect:"+redirecturl;
+            return new RespResult(RespCode.SUCCESS,redirecturl);
         } catch (Exception e) {
             e.printStackTrace();
             logger.error("注册失败，错误信息：{}",e);
-            return ("错误页面，绑定失败");
+            return new RespResult(RespCode.FAIL,"注册绑定失败");
         }
 
     }

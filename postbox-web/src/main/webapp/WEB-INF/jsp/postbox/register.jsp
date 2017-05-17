@@ -33,6 +33,10 @@
     <script src="${staticPath}/static/js/views/jquery.min.js"></script>
 </head>
 <body>
+<script>
+    var staticPath = '${staticPath}';
+    var basePath = '<%=basePath %>';
+</script>
 <!--page start-->
 <form>
 <div class="login-con">
@@ -71,17 +75,24 @@
             }
         });
         $('#register').on('click', function () {
+            var phone = $("#mobileNumber").val();
+            var check = $("#check").val();
+
             $.ajax({
                 url: basePath + "main/register",
                 type: "POST",
-                data: {"phone":$("#mobileNumber").val(),"ipSpecial":$("#check").val()},
+                data: {"phone":phone,"ipSpecial":check},
                 type: 'POST',
                 dataType: 'json',
-                success: function () {
-
+                success: function (res) {
+                    if(res.code == 0){
+                        alert("页面跳转到相关页面");
+                    }else{
+                        alert(res.body);
+                    }
                 },
                 error: function () {
-
+                    alert("请求发生异常");
                 }
             });
         })
