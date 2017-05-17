@@ -69,6 +69,12 @@ public class IndexController extends BaseController{
                 return new RespResult(RespCode.FAIL,"您已绑定手机号，不能重复绑定");
             }
 
+            UserInfo userInfo1 = this.baseInfoService.queryUserInfoByPhone(phone);
+            if(null != userInfo1){
+                return new RespResult(RespCode.FAIL,"改手机号已被绑定");
+            }
+
+
             userInfo.setMobilePhone(phone);
             userInfo.setIsSpecial(isSpecial);
 
