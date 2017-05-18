@@ -89,6 +89,16 @@ public class IndexController extends BaseController{
 
     }
 
+    /**
+     * 跳转密码页
+     * @return
+     */
+    @Auth(needLogin = true,weixinJsAuth = true)
+    @RequestMapping(value = "value = /getSecret" ,method = RequestMethod.GET)
+    public String getSecret(){
+        return "postbox/secret";
+    }
+
 
     /**
      * 验证注册参数

@@ -53,7 +53,7 @@
         <input type="checkbox" id="check" name="check" checked>
     </div>
     <div class="form-group">
-        <button type="submit" class="tran pr">
+        <button id="btn"  type="submit" class="tran pr">
             <a href="javascript:;" class="tran" id="register">注册</a>
         </button>
     </div>
@@ -64,18 +64,25 @@
     $(document).ready(function () {
         $('#mobileNumber').on('input',function () {
             var value = $('#mobileNumber').val();
-            var re = new RegExp("^1[0-9]*$");
+            var re = new RegExp("^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\\d{8}$");
             if (!re.test(value)){
                 $('.error-notic').show();
+                $('#btn').attr("disabled",true);
                 if(value==''){
                     $('.error-notic').hide();
+                    $('#btn').attr("disabled",false);
                 }
             }else{
                 $('.error-notic').hide();
+                $('#btn').attr("disabled",false);
             }
         });
         $('#register').on('click', function () {
             var phone = $("#mobileNumber").val();
+            if('' == phone) {
+                alert("请输入手机号");
+                return;
+            }
             var check = $("#check").val();
             $.ajax({
                 url: basePath + "main/bind",
