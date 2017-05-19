@@ -96,11 +96,20 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
             //情况二：另一种是可能用户的页面已被重定向至微信授权页面，微信再重定向回本系统的页面，但会带上授权信息例如code，这时不能把用户重定向，否则会死循环，而要根据拿到的code去获取用户openid，成功后放入session
             //如果包含参数code和state，说明微信服务器对用户已做了授权操作判断，然后微信服务器给客户做了个跳转，并带上能获取用户令牌的code参数及自定义参数state
             if (parameterMap.containsKey("code") && parameterMap.containsKey("state")) {
-                return haveCodeAndState(request,response);
+                return haveCodeAndState(auth,request,response);
             }else{
                 return haveNoCodeAndNoState(request,response);
             }
         }else{
+            boolean needPhone = auth.needPhone();
+            if(!needPhone){
+                return true;
+            }
+            if(StringUtils.isEmpty(userLoginInfo.getPhone())){
+                String redirect = getPath(request) + "main/register";
+                response.sendRedirect(redirect + "?redirecturl=" + URLEncoder.encode(getWholeURL(request),"UTF-8"));
+                return false;
+            }
             //SESSION中有值
             result = true;
         }
@@ -136,7 +145,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
      * @param response
      * @return
      */
-    private boolean haveCodeAndState(HttpServletRequest request,HttpServletResponse response) throws Exception {
+    private boolean haveCodeAndState(Auth auth, HttpServletRequest request,HttpServletResponse response) throws Exception {
 
         String code = request.getParameter("code");
         String state = request.getParameter("state");
@@ -155,9 +164,13 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
             if(null == userLoginInfo){
                 return false;
             }else{
+                if (!auth.needPhone()) {
+                    return true;
+                }
                 if(StringUtils.isEmpty(userLoginInfo.getPhone())){
                     String redirect = getPath(request) + "main/register";
-                    response.sendRedirect(redirect + "?redirecturl=" + getWholeURL(request));
+                    response.sendRedirect(redirect + "?redirecturl=" + URLEncoder.encode(getWholeURL(request),"UTF-8"));
+                    return false;
                 }
             }
             logger.info("微信用户登录成功，登录信息：{}", request.getSession().getAttribute(SessionAttrs.USER_LOGIN_INFO));
@@ -331,6 +344,8 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         userLoginInfo.setAppId(this.APPID);//appID
         userLoginInfo.setUnionId(weixinUserInfo.getUnionid());//unionId
         userLoginInfo.setWeixinOpenId(weixinUserInfo.getOpenid());//openId
+
+        session.setAttribute(SessionAttrs.USER_LOGIN_INFO, userLoginInfo);
 
         return userLoginInfo;
     }

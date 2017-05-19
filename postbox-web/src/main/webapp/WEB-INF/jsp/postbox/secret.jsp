@@ -1,3 +1,17 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%
+    String path = request.getContextPath();
+
+    String basePath = request.getScheme() + "://" + request.getServerName();
+    if (request.getServerPort() != 80 && request.getServerPort() != 443) {
+        basePath = basePath + ":" + request.getServerPort();
+    }
+    basePath = basePath + path + "/";
+%>
+<c:set var="basePath" value="<%=basePath %>"></c:set>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,9 +28,9 @@
     <meta name="description" content=""/>
     <meta name="viewport"
           content="width=device-width,initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
-    <title>注册</title>
-    <link rel="stylesheet" type="text/css" href="password.css"/>
-    <script src="jquery.min.js"></script>
+    <title>开箱密码</title>
+    <link rel="stylesheet" type="text/css" href="${basePath}/static/css/views/password.css"/>
+    <script src="${basePath}/static/js/views/jquery.min.js"></script>
 </head>
 <body>
 <!--page start-->
@@ -24,32 +38,15 @@
     <span></span><span></span><span></span><span></span><span></span><span></span>
 </div>
 
-
-<div class="link-wrap">
-    <a class="link link--kukuri" href="#" data-letters="123456">123456</a>
-</div>
-
 <!--page end-->
 <script>
     $(document).ready(function () {
         //第一种
-        var number = '123456';
+        var number = '${decode}';
         var span = $('.animate span');
         for(var i=0;i<number.length;i++){
             span.eq(i).html(number[i]);
         }
-
-        //第二种
-        $('.link').addClass('hover');
-        setTimeout(function () {
-            $('.link').removeClass('hover')
-        },2000);
-        setInterval(function () {
-            $('.link').addClass('hover');
-            setTimeout(function () {
-                $('.link').removeClass('hover')
-            },2000);
-        },4000);
     });
 </script>
 </body>

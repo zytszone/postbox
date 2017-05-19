@@ -87,12 +87,12 @@
             $.ajax({
                 url: basePath + "main/bind",
                 type: "POST",
-                data: {"phone":phone,"isSpecial":true},
+                data: {"phone":phone,"isSpecial":false,"redirecturl":'${redirecturl}'},
                 type: 'POST',
                 dataType: 'json',
                 success: function (res) {
                     if(res.code == 0){
-                        alert("页面跳转到相关页面");
+                        window.location.href=res.body;
                     }else{
                         alert(res.body);
                     }

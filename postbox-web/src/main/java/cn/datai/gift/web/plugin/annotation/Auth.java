@@ -24,4 +24,6 @@ public @interface Auth {
      */
     boolean weixinJsAuth() default false;
 
+    boolean needPhone() default true;
+
 }

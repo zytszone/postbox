@@ -56,6 +56,13 @@ public interface BaseInfoService {
     UserInfo queryUserInfoByUnionId(String unionId);
 
     /**
+     * 通过用户userId查询 用户基本信息
+     * @param userId
+     * @return
+     */
+    UserInfo queryUserInfoByUserId(Long userId);
+
+    /**
      * 数据库插入（或更新）用户微信信息,插入微信用户与基本用户关联信息，插入用户基本信息
      * @param userWxInfo
      */
