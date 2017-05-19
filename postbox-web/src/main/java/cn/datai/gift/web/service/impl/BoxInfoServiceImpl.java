@@ -3,6 +3,7 @@ package cn.datai.gift.web.service.impl;
 import cn.datai.gift.persist.mapper.TBoxInfoMapperExt;
 import cn.datai.gift.persist.po.TBoxInfo;
 import cn.datai.gift.persist.po.UserInfo;
+import cn.datai.gift.utils.SecurityUtils;
 import cn.datai.gift.web.service.BoxInfoService;
 import cn.datai.gift.web.utils.DESUtil;
 import org.apache.commons.lang3.StringUtils;

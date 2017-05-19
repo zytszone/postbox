@@ -1,6 +1,7 @@
 package cn.datai.gift.web.service;
 
 import cn.datai.gift.persist.po.UserInfo;
+import cn.datai.gift.utils.RespResult;
 
 /**
  * Created by H.CAAHN on 2017/5/16.
@@ -17,7 +18,7 @@ public interface BoxInfoService {
      * @param userInfo
      * @return
      */
-    String updateForDecode(Long boxId, String mkey, UserInfo userInfo);
+    String updateForDecode(Long boxId, String mkey, UserInfo userInfo) throws Exception;
 
     /**
      * 更新箱子的属主手机号

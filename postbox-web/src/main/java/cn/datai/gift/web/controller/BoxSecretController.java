@@ -48,7 +48,7 @@ public class BoxSecretController extends BaseController {
             UserInfo userInfo = baseInfoService.queryUserInfoByUserId(userLoginInfo.getUserInfoId());
             // 如果用户未注册，则跳转到注册页面
             if (userInfo == null) {
-                return "";
+                return "postbox/register";
             }
 
             String decode = this.boxInfoService.updateForDecode(boxId, mkey, userInfo);

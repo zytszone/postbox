@@ -29,18 +29,73 @@
     <meta name="viewport"
           content="width=device-width,initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
     <title>开箱密码</title>
+    <link rel="stylesheet" type="text/css" href="${staticPath}/static/css/views/register.css"/>
     <link rel="stylesheet" type="text/css" href="${basePath}/static/css/views/password.css"/>
+
     <script src="${basePath}/static/js/views/jquery.min.js"></script>
 </head>
 <body>
 <!--page start-->
-<div class="animate seven">
+<form style="margin-top:180px;" >
+    <div class="login-con">
+        <div class="form-group">
+            <input type="tel" placeholder="请输入手机号码" id="mobileNumber">
+            <span class="error-notic">手机号码不正确</span>
+        </div>
+        <div class="form-group">
+            <button id="btn"  type="submit" class="tran pr">
+                <a href="javascript:;" class="tran" id="register">提交</a>
+            </button>
+        </div>
+    </div>
+</form>
+<div class="animate seven" style="display: none;">
     <span></span><span></span><span></span><span></span><span></span><span></span>
 </div>
 
 <!--page end-->
 <script>
     $(document).ready(function () {
+        $('#mobileNumber').on('input',function () {
+            var value = $('#mobileNumber').val();
+            var re = new RegExp("^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\\d{8}$");
+            if (!re.test(value)){
+                $('.error-notic').show();
+                $('#btn').attr("disabled",true);
+                if(value==''){
+                    $('.error-notic').hide();
+                    $('#btn').attr("disabled",false);
+                }
+            }else{
+                $('.error-notic').hide();
+                $('#btn').attr("disabled",false);
+            }
+        });
+        $('#register').on('click', function () {
+            var phone = $("#mobileNumber").val();
+            if('' == phone) {
+                alert("请输入手机号");
+                return;
+            }
+            var check = $("#check").val();
+            $.ajax({
+                url: basePath + "main/bind",
+                type: "POST",
+                data: {"phone":phone,"isSpecial":false,"redirecturl":'${redirecturl}'},
+                type: 'POST',
+                dataType: 'json',
+                success: function (res) {
+                    if(res.code == 0){
+                        window.location.href=res.body;
+                    }else{
+                        alert(res.body);
+                    }
+                },
+                error: function () {
+                    alert("请求发生异常");
+                }
+            });
+        })
         //第一种
         var number = '${decode}';
         var span = $('.animate span');
