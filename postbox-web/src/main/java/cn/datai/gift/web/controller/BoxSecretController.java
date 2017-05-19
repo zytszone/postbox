@@ -13,10 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.UUID;
@@ -83,7 +80,7 @@ public class BoxSecretController extends BaseController {
      * @param request
      * @return
      */
-    @RequestMapping("/saveBoxMobile")
+    @RequestMapping(value = "/saveBoxMobile",method = RequestMethod.POST)
     @ResponseBody
     public RespResult saveBoxMobile(@RequestParam("boxId") Long boxId, @RequestParam("mobile") String mobile,
                                     @RequestParam("skey") String skey, HttpServletRequest request) {

@@ -34,6 +34,10 @@
 
     <script src="${basePath}/static/js/views/jquery.min.js"></script>
 </head>
+<script>
+    var staticPath = '${staticPath}';
+    var basePath = '<%=basePath %>';
+</script>
 <body>
 <!--page start-->
 <form id="phoneId" style="margin-top:180px;display: none;" >
@@ -64,9 +68,9 @@
         var decode = '${decode}';
         if(undefined == decode || ''==decode){
             //没有权限打开
-            $("#phoneId").attr("display",none);
-            $("#decodeId").attr("display",none);
-            $("#errorMsgId").attr("display",display);
+            $("#phoneId").css("display",'none');
+            $("#decodeId").css("display",'none');
+            $("#errorMsgId").css("display",'block');
             $("#errorMsgId").html("没有权限打开");
         }else {
             var number = decode;
@@ -74,16 +78,17 @@
             for(var i=0;i<number.length;i++){
                 span.eq(i).html(number[i]);
             }
-            $("#phoneId").attr("display",none);
-            $("#errorMsgId").attr("display",none);
-            $("#decodeId").attr("display",none);
-
+            $("#phoneId").css("display",'none');
+            $("#errorMsgId").css("display",'none');
+            $("#decodeId").css("display",'none');
+console.log("用户");
             if('${isSpecial}' == 'false'){
+                console.log("用户显示");
                 //普通用户
-                $("#decodeId").attr("display",display);
+                $("#decodeId").css("display",'block');
             }else{
                 //快递员
-                $("#phoneId").attr("display",display);
+                $("#phoneId").css("display",'block');
             }
         }
 
@@ -116,9 +121,9 @@
                 dataType: 'json',
                 success: function (res) {
                     if(res.code == 0){
-                        $("#phoneId").attr("display",none);
-                        $("#errorMsgId").attr("display",none);
-                        $("#decodeId").attr("display",display);
+                        $("#phoneId").css("display",'none');
+                        $("#errorMsgId").css("display",'none');
+                        $("#decodeId").css("display",'block');
                     }else{
                         alert("更新箱子属主失败");
                     }

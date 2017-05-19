@@ -50,7 +50,7 @@
     </div>
     <div class="form-group checkbox">
         <label for="check">是否成为快递员：</label>
-        <input type="checkbox" id="check" name="check" checked>
+        <input type="checkbox" id="check" name="check">
     </div>
     <div class="form-group">
         <button id="btn"  type="submit" class="tran pr">
@@ -83,10 +83,10 @@
                 alert("请输入手机号");
                 return;
             }
-            var check = $("#check").val();
+            var check = $("input[type='checkbox']").is(':checked');
             $.ajax({
                 url: basePath + "main/bind",
-                data: {"phone":phone,"isSpecial":false,"redirecturl":'${redirecturl}'},
+                data: {"phone":phone,"isSpecial":check,"redirecturl":'${redirecturl}'},
                 type: 'POST',
                 dataType: 'json',
                 success: function (res) {
