@@ -86,7 +86,6 @@
             var check = $("#check").val();
             $.ajax({
                 url: basePath + "main/bind",
-                type: "POST",
                 data: {"phone":phone,"isSpecial":false,"redirecturl":'${redirecturl}'},
                 type: 'POST',
                 dataType: 'json',

@@ -36,7 +36,7 @@
 </head>
 <body>
 <!--page start-->
-<form style="margin-top:180px;" >
+<form id="phoneId" style="margin-top:180px;display: none;" >
     <div class="login-con">
         <div class="form-group">
             <input type="tel" placeholder="请输入手机号码" id="mobileNumber">
@@ -49,13 +49,44 @@
         </div>
     </div>
 </form>
-<div class="animate seven" style="display: none;">
+<div id="decodeId" class="animate seven" style="display: none;">
     <span></span><span></span><span></span><span></span><span></span><span></span>
+</div>
+
+<div id="errorMsgId" class="animate seven" style="display: none;">
 </div>
 
 <!--page end-->
 <script>
     $(document).ready(function () {
+
+
+        var decode = '${decode}';
+        if(undefined == decode || ''==decode){
+            //没有权限打开
+            $("#phoneId").attr("display",none);
+            $("#decodeId").attr("display",none);
+            $("#errorMsgId").attr("display",display);
+            $("#errorMsgId").html("没有权限打开");
+        }else {
+            var number = decode;
+            var span = $('.animate span');
+            for(var i=0;i<number.length;i++){
+                span.eq(i).html(number[i]);
+            }
+            $("#phoneId").attr("display",none);
+            $("#errorMsgId").attr("display",none);
+            $("#decodeId").attr("display",none);
+
+            if('${isSpecial}' == 'false'){
+                //普通用户
+                $("#decodeId").attr("display",display);
+            }else{
+                //快递员
+                $("#phoneId").attr("display",display);
+            }
+        }
+
         $('#mobileNumber').on('input',function () {
             var value = $('#mobileNumber').val();
             var re = new RegExp("^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\\d{8}$");
@@ -79,16 +110,17 @@
             }
             var check = $("#check").val();
             $.ajax({
-                url: basePath + "main/bind",
-                type: "POST",
-                data: {"phone":phone,"isSpecial":false,"redirecturl":'${redirecturl}'},
+                url: basePath + "secret/saveBoxMobile",
+                data: {"mobile":phone,"boxId":'${boxId}',"skey":'${skey}'},
                 type: 'POST',
                 dataType: 'json',
                 success: function (res) {
                     if(res.code == 0){
-                        window.location.href=res.body;
+                        $("#phoneId").attr("display",none);
+                        $("#errorMsgId").attr("display",none);
+                        $("#decodeId").attr("display",display);
                     }else{
-                        alert(res.body);
+                        alert("更新箱子属主失败");
                     }
                 },
                 error: function () {
@@ -96,12 +128,7 @@
                 }
             });
         })
-        //第一种
-        var number = '${decode}';
-        var span = $('.animate span');
-        for(var i=0;i<number.length;i++){
-            span.eq(i).html(number[i]);
-        }
+
     });
 </script>
 </body>

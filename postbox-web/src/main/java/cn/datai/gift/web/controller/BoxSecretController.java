@@ -1,6 +1,8 @@
 package cn.datai.gift.web.controller;
 
 import cn.datai.gift.persist.po.UserInfo;
+import cn.datai.gift.utils.RespResult;
+import cn.datai.gift.utils.enums.RespCode;
 import cn.datai.gift.web.plugin.annotation.Auth;
 import cn.datai.gift.web.plugin.vo.UserLoginInfo;
 import cn.datai.gift.web.service.BaseInfoService;
@@ -14,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.UUID;
@@ -52,6 +55,7 @@ public class BoxSecretController extends BaseController {
             }
 
             String decode = this.boxInfoService.updateForDecode(boxId, mkey, userInfo);
+            model.addAttribute("isSpecial",userInfo.getIsSpecial());
             if (StringUtils.isNotBlank(decode)) {
                 model.addAttribute("decode", decode);
 
@@ -80,20 +84,22 @@ public class BoxSecretController extends BaseController {
      * @return
      */
     @RequestMapping("/saveBoxMobile")
-    public String saveBoxMobile(@RequestParam("boxId") Long boxId, @RequestParam("mobile") String mobile,
-                                @RequestParam("skey") String skey, HttpServletRequest request) {
+    @ResponseBody
+    public RespResult saveBoxMobile(@RequestParam("boxId") Long boxId, @RequestParam("mobile") String mobile,
+                                    @RequestParam("skey") String skey, HttpServletRequest request) {
         try {
             String uuid = (String)request.getSession().getAttribute("skey");
             // 更新箱子的属主手机号
             if (StringUtils.isNotBlank(uuid) && StringUtils.equals(skey, uuid)) {
                 this.boxInfoService.updateBoxMobile(boxId, mobile);
-                return "";
+                return new RespResult(RespCode.SUCCESS);
             }
         }
         catch (Exception ex) {
             logger.error("服务器鉴权");
+
         }
         // 无权更新箱子的属主手机号
-        return "";
+        return new RespResult(RespCode.FAIL);
     }
 }

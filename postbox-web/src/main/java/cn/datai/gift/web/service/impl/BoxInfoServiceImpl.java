@@ -28,7 +28,7 @@ public class BoxInfoServiceImpl implements BoxInfoService {
     public String updateForDecode(Long boxId, String mkey, UserInfo userInfo) {
         TBoxInfo box = this.tBoxInfoMapperExt.selectByPrimaryKey(boxId);
         if (box == null) {
-            return "";
+            return "没有找到对应的箱子";
         }
 
         boolean open = false;
