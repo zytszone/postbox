@@ -2,6 +2,7 @@ package cn.datai.gift.web.utils;
 
 
 
+import cn.datai.gift.utils.ByteUtils;
 import org.apache.commons.codec.binary.Base64;
 
 import java.security.InvalidKeyException;
@@ -91,7 +92,9 @@ public class DESUtil {
         }
 
         try {
-            byte[] buf = cipher.doFinal(Base64.decodeBase64(secretData));
+            byte[] data = ByteUtils.parse16(secretData);
+//            byte[] buf = cipher.doFinal(Base64.decodeBase64(secretData));
+            byte[] buf = cipher.doFinal(data);
             return new String(buf);
         } catch (IllegalBlockSizeException e) {
             e.printStackTrace();
@@ -120,11 +123,11 @@ public class DESUtil {
     }
 
     public static void main(String[] a) throws Exception {
-        String input = "cy11Xlbrmzyh:604:301:1353064296";
-        String key = "37d5aed075525d4fa0fe635231cba447";
-        String result = encrypt(input, key);
+        String input = "3F80B1EB64BC4D33";
+        String key = "zhangzhongqiang";
+        String result = decrypt(input, key);
         System.out.println(result);
-        System.out.println(decrypt("HN%20lBD%20XBLQ=", key));
+//        System.out.println(decrypt("HN%20lBD%20XBLQ=", key));
     }
 
     static class Base64Utils {
