@@ -43,7 +43,7 @@
 <form id="phoneId" style="margin-top:180px;display: none;" >
     <div class="login-con">
         <div class="form-group">
-            <input type="tel" placeholder="请输入手机号码" id="mobileNumber">
+            <input type="tel" placeholder="请输入收件人手机号码" id="mobileNumber">
             <span class="error-notic">手机号码不正确</span>
         </div>
         <div class="form-group">
@@ -53,11 +53,12 @@
         </div>
     </div>
 </form>
-<div id="decodeId" class="animate seven" style="display: none;">
-    <span></span><span></span><span></span><span></span><span></span><span></span>
-</div>
+    <div id="decodeId" class="animate seven" style="display: none;text-align: center;">
+        <span></span><span></span><span></span><span></span><span></span><span></span>
+    </div>
+    <div id="tipsId" style="font-size: 0.8rem;text-align: center;display: none;" >输入密码完成后,请关闭箱子（点击右上角关闭箱子按钮）</div>
 
-<div id="errorMsgId" class="animate seven" style="display: none;">
+<div id="errorMsgId" class="animate seven" style="font-size: 3rem;display: none;text-align: center ">
 </div>
 
 <!--page end-->
@@ -70,6 +71,7 @@
             //没有权限打开
             $("#phoneId").css("display",'none');
             $("#decodeId").css("display",'none');
+            $("#tipsId").css("display",'none');
             $("#errorMsgId").css("display",'block');
             $("#errorMsgId").html("没有权限打开");
         }else {
@@ -81,11 +83,11 @@
             $("#phoneId").css("display",'none');
             $("#errorMsgId").css("display",'none');
             $("#decodeId").css("display",'none');
-console.log("用户");
+            $("#tipsId").css("display",'none');
             if('${isSpecial}' == 'false'){
-                console.log("用户显示");
                 //普通用户
                 $("#decodeId").css("display",'block');
+                $("#tipsId").css("display",'block');
             }else{
                 //快递员
                 $("#phoneId").css("display",'block');
@@ -124,6 +126,7 @@ console.log("用户");
                         $("#phoneId").css("display",'none');
                         $("#errorMsgId").css("display",'none');
                         $("#decodeId").css("display",'block');
+                        $("#tipsId").css("display",'block');
                     }else{
                         alert("更新箱子属主失败");
                     }
