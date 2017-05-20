@@ -12,6 +12,7 @@ import cn.datai.gift.web.service.BaseInfoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.URLEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -19,6 +20,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -35,10 +39,11 @@ public class IndexController extends BaseController{
     @Autowired
     private BaseInfoService baseInfoService;
 
-    @RequestMapping(value = "/signIn")
-    @Auth(needLogin = true,weixinJsAuth = true)
-    public String toIndex(Model model){
-        return "postbox/index";
+    @RequestMapping(value = "/register")
+    @Auth(needLogin = true,weixinJsAuth = true,needPhone = false)
+    public String toIndex(Model model,String redirecturl) throws UnsupportedEncodingException {
+        model.addAttribute("redirecturl",redirecturl);
+        return "postbox/register";
     }
 
     /**
@@ -47,39 +52,56 @@ public class IndexController extends BaseController{
      * @param isSpecial true:注册成为快递员，false:注册成为普通用户
      * @return
      */
-    @Auth(needLogin = true,weixinJsAuth = true)
+    @Auth(needLogin = true,weixinJsAuth = true, needPhone = false)
     @RequestMapping(value = "/bind",method = RequestMethod.POST)
-    public String bind(@RequestParam("phone") String phone,
+    @ResponseBody
+    public RespResult bind(@RequestParam("phone") String phone,
                              @RequestParam("isSpecial") String isSpecial,
                              @ModelAttribute("userWxInfo")UserWxInfo userWxInfo,
-                             @ModelAttribute("userLoginInfo")UserLoginInfo userLoginInfo, String redirecturl, HttpServletResponse response){
+                             @ModelAttribute("userLoginInfo")UserLoginInfo userLoginInfo, @RequestParam("redirecturl") String redirecturl,HttpServletRequest request){
         try {
             RespResult respResult = checkParams(phone, isSpecial);
             if(!respResult.getCode().equals(RespCode.SUCCESS.getCode())){
-                return "错误页面，展示错误信息";
-            }
-            UserInfo userInfo = this.baseInfoService.queryUserInfoByPhone(phone);
-            if(null != userInfo){
-                return ("错误页面，该手机号已注册");
+                return new RespResult(RespCode.FAIL,"注册参数错误");
             }
 
             //绑定手机号操作
-            userInfo = this.baseInfoService.queryUserInfo(userLoginInfo.getUserInfoId());
+            UserInfo userInfo = this.baseInfoService.queryUserInfo(userLoginInfo.getUserInfoId());
             if(null == userInfo){
-                return ("错误页面，没有找到该用户");
+                return new RespResult(RespCode.FAIL,"没有找到该用户");
             }
+            if(!StringUtils.isEmpty(userInfo.getMobilePhone())){
+                return new RespResult(RespCode.FAIL,"您已绑定手机号，不能重复绑定");
+            }
+
+            UserInfo userInfo1 = this.baseInfoService.queryUserInfoByPhone(phone);
+            if(null != userInfo1){
+                return new RespResult(RespCode.FAIL,"改手机号已被绑定");
+            }
+
+
             userInfo.setMobilePhone(phone);
             userInfo.setIsSpecial(isSpecial);
 
             baseInfoService.updateUserInfo(userInfo);
 
-            return "redirect:"+redirecturl;
+            return new RespResult(RespCode.SUCCESS,redirecturl);
         } catch (Exception e) {
             e.printStackTrace();
             logger.error("注册失败，错误信息：{}",e);
-            return ("错误页面，绑定失败");
+            return new RespResult(RespCode.FAIL,"注册绑定失败");
         }
 
+    }
+
+    /**
+     * 跳转密码页
+     * @return
+     */
+    @Auth(needLogin = true,weixinJsAuth = true)
+    @RequestMapping(value = "value = /getSecret" ,method = RequestMethod.GET)
+    public String getSecret(){
+        return "postbox/secret";
     }
 
 

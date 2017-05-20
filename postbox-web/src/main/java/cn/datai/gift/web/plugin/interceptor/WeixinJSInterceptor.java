@@ -1,14 +1,12 @@
 package cn.datai.gift.web.plugin.interceptor;
 
 import cn.datai.gift.utils.WebUtil;
-import cn.datai.gift.web.contants.enums.TokenContants;
+import cn.datai.gift.web.contants.TokenContants;
 import cn.datai.gift.web.plugin.annotation.Auth;
 import cn.datai.gift.web.utils.StrUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -35,6 +33,12 @@ public class WeixinJSInterceptor extends HandlerInterceptorAdapter {
     @Value("${weixin.appID}")
     private String APPID;
 
+//    @Autowired
+//    private StringRedisTemplate stringRedisTemplate;
+/*
+    @Autowired
+    private RedisTemplate redisTemplate;*/
+
     @Override
     public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
         if (WebUtil.isAjaxRequest(request)) {
@@ -47,7 +51,7 @@ public class WeixinJSInterceptor extends HandlerInterceptorAdapter {
             }else {
                 String ua = request.getHeader("user-agent").toLowerCase();
                 if (auth.weixinJsAuth() && ua.indexOf("micromessenger") > 0) {//判断微信浏览器
-                    String jsapiTicket = TokenContants.JSAPI_TECKET;
+                    String jsapiTicket = TokenContants.JSAPI_TICKET;
                     modelAndView.addObject("weixinJsSign", this.getJsApiSign(getOriginalUrl(request), jsapiTicket, APPID));
                 }
                 super.postHandle(request, response, handler, modelAndView);

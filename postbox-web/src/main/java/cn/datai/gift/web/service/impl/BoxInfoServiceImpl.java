@@ -4,9 +4,8 @@ import cn.datai.gift.persist.mapper.TBoxInfoMapperExt;
 import cn.datai.gift.persist.po.TBoxInfo;
 import cn.datai.gift.persist.po.UserInfo;
 import cn.datai.gift.utils.SecurityUtils;
-import cn.datai.gift.web.service.BaseInfoService;
 import cn.datai.gift.web.service.BoxInfoService;
-import cn.datai.gift.web.service.UserInfoService;
+import cn.datai.gift.web.utils.DESUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,9 +14,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Calendar;
 import java.util.Date;
-
-import static cn.datai.gift.utils.SecurityUtils.decryptDES;
-import static com.sun.deploy.util.BufferUtil.TB;
 
 /**
  * Created by H.CAAHN on 2017/5/16.
@@ -32,7 +28,7 @@ public class BoxInfoServiceImpl implements BoxInfoService {
     public String updateForDecode(Long boxId, String mkey, UserInfo userInfo) {
         TBoxInfo box = this.tBoxInfoMapperExt.selectByPrimaryKey(boxId);
         if (box == null) {
-            return "";
+            return "没有找到对应的箱子";
         }
 
         boolean open = false;
@@ -86,8 +82,14 @@ public class BoxInfoServiceImpl implements BoxInfoService {
                 logger.debug("客户/快递员: {} 成功打开箱子: {}, 状态: {}", userInfo.getMobilePhone(), boxId, box.getMstatus());
             }
 
-            byte[] decode = SecurityUtils.decryptDES(mkey.getBytes(), box.getSkey().getBytes());
-            return new String(decode);
+//            byte[] decode = SecurityUtils.decryptDES(mkey.getBytes(), box.getSkey().getBytes());
+            String decode = null;
+            try {
+                decode = DESUtil.decrypt(mkey, box.getSkey());
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return decode;
         }
         else if (logger.isDebugEnabled()) {
             logger.debug("客户/快递员: {} 无权开启箱子: {}, 状态: {}", userInfo.getMobilePhone(), boxId, box.getMstatus());
