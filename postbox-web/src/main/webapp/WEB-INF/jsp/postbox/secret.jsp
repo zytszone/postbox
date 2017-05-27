@@ -15,129 +15,149 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>开箱扫描结果</title>
     <meta charset="UTF-8">
-    <meta http-equiv="Content-Type" content="text/html;charset=utf-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
-    <meta name="apple-mobile-web-app-title" content=""/>
-    <meta name="apple-mobile-web-app-capable" content="no"/>
-    <meta name="msapplication-tap-highlight" content="no">
-    <meta content="yes" name="apple-touch-fullscreen"/>
-    <meta content="telephone=no,email=no" name="format-detection"/>
-    <meta name="format-detection" content="telephone=no,email=no"/>
-    <meta name="keywords" content=""/>
-    <meta name="description" content=""/>
-    <meta name="viewport"
-          content="width=device-width,initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
-    <title>开箱密码</title>
-    <link rel="stylesheet" type="text/css" href="${staticPath}/static/css/views/register.css"/>
-    <link rel="stylesheet" type="text/css" href="${basePath}/static/css/views/password.css"/>
-
-    <script src="${basePath}/static/js/views/jquery.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
+    <link href="${basePath}static/plugins/bootstrap-3.3.5/css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="${basePath}static/plugins/bootstrap-3.3.5/css/bootstrap-theme.css" rel="stylesheet" type="text/css" />
+    <link href="${basePath}static/plugins/easydialog/easydialog.css" rel="stylesheet" type="text/css">
 </head>
-<script>
-    var staticPath = '${staticPath}';
-    var basePath = '<%=basePath %>';
-</script>
 <body>
-<!--page start-->
-<form id="phoneId" style="margin-top:180px;display: none;" >
-    <div class="login-con">
-        <div class="form-group">
-            <input type="tel" placeholder="请输入收件人手机号码" id="mobileNumber">
-            <span class="error-notic">手机号码不正确</span>
+<div class="container" style="width:98%">
+    <div class="row">
+        <legend></legend>
+        <div class="row-fluid" style="text-align:center;margin-bottom:18px;font-size: 20px;">
+            开箱扫描结果
         </div>
-        <div class="form-group">
-            <button id="btn"  type="submit" class="tran pr">
-                <a href="javascript:;" class="tran" id="register">提交</a>
-            </button>
+        <legend></legend>
+        <c:if test="${empty decode}">
+        <div class="well">
+            <div style="font-size: 18px;margin-bottom: 5px;">对不起，您没有权限打开该箱子！</div>
+            <legend></legend>
+            <div>请仔细阅读收货短信，确认箱子编号无误。如有疑问，请联系客服400-10000</div>
         </div>
-    </div>
-</form>
-    <div id="decodeId" class="animate seven" style="display: none;text-align: center;">
-        <span></span><span></span><span></span><span></span><span></span><span></span>
-    </div>
-    <div id="tipsId" style="font-size: 0.8rem;text-align: center;display: none;" >输入密码完成后,请关闭箱子（点击右上角关闭箱子按钮）</div>
+        </c:if>
+        <!-- 快递员 -->
+        <c:if test="${not empty decode && isSpecial eq true}">
+        <div class="well">
+            <div style="font-size: 18px;margin-bottom: 5px;">您的开箱密码是：<span style="color:blue;">${decode}</span></div>
+        </div>
+            <legend></legend>
+            <form id="phoneId" method="post" action="${basePath}secret/saveBoxMobile">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <span class="error-notic" style="display:none;color:red;">手机号码格式不正确</span>
+                        <div class="input-group" style="margin-bottom: 15px;">
+                            <input type="text" class="form-control" id="mobileNumber" placeholder="请输入收件人手机号码" aria-describedby="basic-addon1">
+                            <span class="input-group-btn">
+                                <button style="width:80px;margin-left: 2px;" class="btn btn-success btn-sm submit" type="button">确定</button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </c:if>
+        <!-- 普通用户 -->
+        <c:if test="${not empty decode && isSpecial eq false}">
+        <div class="well">
+            <div style="font-size: 18px;margin-bottom: 5px;">您的开箱密码是：<span style="color:blue;">${decode}</span></div>
+            <legend></legend>
+            <div>输入密码完成后,请关闭箱子（点击右上角关闭箱子按钮）</div>
+        </div>
+        </c:if>
 
-<div id="errorMsgId" class="animate seven" style="font-size: 3rem;display: none;text-align: center ">
+    </div>
 </div>
-
-<!--page end-->
-<script>
-    $(document).ready(function () {
-
-
-        var decode = '${decode}';
-        if(undefined == decode || ''==decode){
-            //没有权限打开
-            $("#phoneId").css("display",'none');
-            $("#decodeId").css("display",'none');
-            $("#tipsId").css("display",'none');
-            $("#errorMsgId").css("display",'block');
-            $("#errorMsgId").html("没有权限打开");
-        }else {
-            var number = decode;
-            var span = $('.animate span');
-            for(var i=0;i<number.length;i++){
-                span.eq(i).html(number[i]);
-            }
-            $("#phoneId").css("display",'none');
-            $("#errorMsgId").css("display",'none');
-            $("#decodeId").css("display",'none');
-            $("#tipsId").css("display",'none');
-            if('${isSpecial}' == 'false'){
-                //普通用户
-                $("#decodeId").css("display",'block');
-                $("#tipsId").css("display",'block');
-            }else{
-                //快递员
-                $("#phoneId").css("display",'block');
-            }
-        }
-
+</body>
+<script type="text/javascript" src="${basePath}static/js/views/jquery.min.js"></script>
+<script type="text/javascript" src="${basePath}static/plugins/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="${basePath}static/plugins/easydialog/easydialog.min.js"></script>
+<script type="text/javascript">
+    $(function() {
         $('#mobileNumber').on('input',function () {
             var value = $('#mobileNumber').val();
             var re = new RegExp("^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\\d{8}$");
             if (!re.test(value)){
                 $('.error-notic').show();
-                $('#btn').attr("disabled",true);
+                $('.submit').attr("disabled",true);
                 if(value==''){
                     $('.error-notic').hide();
-                    $('#btn').attr("disabled",false);
+                    $('.submit').attr("disabled",false);
                 }
             }else{
                 $('.error-notic').hide();
-                $('#btn').attr("disabled",false);
+                $('.submit').attr("disabled",false);
             }
         });
-        $('#register').on('click', function () {
+
+        $('.submit').on('click', function () {
             var phone = $("#mobileNumber").val();
             if('' == phone) {
-                alert("请输入手机号");
+                easyDialog.open({
+                    container: {
+                        header: '<div style="font-size:15px;">操作提示</div>',
+                        content: '<div style="font-size:15px;">请输入收件人手机号码</div>',
+                        yesFn: function(){
+                            easyDialog.close();
+                        },
+                        noFn: false
+                    }
+                });
                 return;
             }
-            var check = $("#check").val();
             $.ajax({
-                url: basePath + "secret/saveBoxMobile",
+                url: "${basePath}secret/saveBoxMobile",
                 data: {"mobile":phone,"boxId":'${boxId}',"skey":'${skey}'},
                 type: 'POST',
                 dataType: 'json',
+                beforeSend:function(){
+                    easyDialog.open({
+                        container: {
+                            header: '<div style="font-size:15px;">操作提示</div>',
+                            content: '<div style="font-size:15px;">服务器处理中，请稍候...</div>',
+                            yesFn: false,
+                            noFn: false
+                        }
+                    });
+                },
                 success: function (res) {
-                    if(res.code == 0){
-                        $("#phoneId").css("display",'none');
-                        $("#errorMsgId").css("display",'none');
-                        $("#decodeId").css("display",'block');
-                        $("#tipsId").css("display",'block');
-                    }else{
-                        alert("更新箱子属主失败");
-                    }
+                    easyDialog.open({
+                        container: {
+                            header: '<div style="font-size:15px;">操作提示</div>',
+                            content: '<div style="font-size:15px;">收件人手机号码更新成功，请关闭箱子！</div>',
+                            yesFn: function(){
+                                easyDialog.close();
+                            },
+                            noFn: false
+                        }
+                    });
                 },
                 error: function () {
-                    alert("请求发生异常");
+                    easyDialog.open({
+                        container: {
+                            header: '<div style="font-size:15px;">操作提示</div>',
+                            content: '<div style="font-size:15px;">请求发生异常！</div>',
+                            yesFn: function(){
+                                easyDialog.close();
+                            },
+                            noFn: false
+                        }
+                    });
                 }
             });
-        })
-
+        });
     });
+
+    function showMsg(title, msg){
+        easyDialog.open({
+            container: {
+                header: '<div style="font-size:15px;">'+title+'</div>',
+                content: '<div style="font-size:15px;">'+msg+'</div>',
+                yesFn: false,
+                noFn: false
+            }
+        });
+    }
 </script>
-</body>
 </html>
+
