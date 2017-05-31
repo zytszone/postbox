@@ -50,7 +50,7 @@
                         <div class="input-group" style="margin-bottom: 15px;">
                             <input type="text" class="form-control" id="mobileNumber" placeholder="请输入收件人手机号码" aria-describedby="basic-addon1">
                             <span class="input-group-btn">
-                                <button style="width:80px;margin-left: 2px;" class="btn btn-success btn-sm submit" type="button">确定</button>
+                                <button style="width:80px;margin-left: 2px; padding: 7px 10px;" class="btn btn-success btn-sm submit" type="button">确定</button>
                             </span>
                         </div>
                     </div>
