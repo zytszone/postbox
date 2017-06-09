@@ -6,6 +6,8 @@ import cn.datai.gift.persist.po.UserInfo;
 import cn.datai.gift.utils.SecurityUtils;
 import cn.datai.gift.web.service.BoxInfoService;
 import cn.datai.gift.web.utils.DESUtil;
+import cn.datai.gift.web.utils.sec.AESCoder;
+import cn.datai.gift.web.utils.sec.HexUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -82,10 +84,10 @@ public class BoxInfoServiceImpl implements BoxInfoService {
                 logger.debug("客户/快递员: {} 成功打开箱子: {}, 状态: {}", userInfo.getMobilePhone(), boxId, box.getMstatus());
             }
 
-//            byte[] decode = SecurityUtils.decryptDES(mkey.getBytes(), box.getSkey().getBytes());
             String decode = null;
             try {
-                decode = DESUtil.decrypt(mkey, box.getSkey());
+                byte[] bytes = AESCoder.ecbDec(HexUtil.hexToBytes(mkey), HexUtil.hexToBytes(box.getSkey()));
+                decode = new String(decode);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -104,5 +106,16 @@ public class BoxInfoServiceImpl implements BoxInfoService {
         box.setMobileno(mobileno);
         box.setMstatus("F");
         this.tBoxInfoMapperExt.updateByPrimaryKeySelective(box);
+    }
+
+    public static void main(String[] args) {
+        String decode = null;
+        try {
+            byte[] bytes = AESCoder.ecbDec(HexUtil.hexToBytes("974738AE4B2C9501D38D9B039DBE2A49"), HexUtil.hexToBytes("32B043A0D66210377B2CA2A0B10DB974"));
+            decode = new String(bytes);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println(decode);
     }
 }
