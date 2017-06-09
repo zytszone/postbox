@@ -51,7 +51,7 @@
             <div class="input-group">
                 <input type="text" class="form-control" placeholder="请输入手机验证码" id="mobileCheck" aria-describedby="basic-addon3">
                 <span class="input-group-btn">
-                    <button style="width:80px;margin-left: 2px;" class="btn btn-default btn-sm" type="button">发送验证码</button>
+                    <button style="width:80px;margin-left: 2px; padding: 7px 10px;" class="btn btn-default btn-sm" type="button">发送验证码</button>
                 </span>
             </div>
             <br/>
