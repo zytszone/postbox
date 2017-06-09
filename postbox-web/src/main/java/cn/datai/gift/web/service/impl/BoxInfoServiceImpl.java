@@ -87,7 +87,7 @@ public class BoxInfoServiceImpl implements BoxInfoService {
             String decode = null;
             try {
                 byte[] bytes = AESCoder.ecbDec(HexUtil.hexToBytes(mkey), HexUtil.hexToBytes(box.getSkey()));
-                decode = new String(decode);
+                decode = new String(decode).substring(0, 6);
             } catch (Exception e) {
                 e.printStackTrace();
             }
