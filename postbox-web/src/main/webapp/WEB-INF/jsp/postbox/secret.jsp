@@ -76,7 +76,7 @@
     $(function() {
         $('#mobileNumber').on('input',function () {
             var value = $('#mobileNumber').val();
-            var re = new RegExp("^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9]))\\d{8}$");
+            var re = new RegExp("^((13[0-9])|(14[5|7])|(15([0-3]|[5-9]))|(18[0,5-9])|17[0-9])\\d{8}$");
             if (!re.test(value)){
                 $('.error-notic').show();
                 $('.submit').attr("disabled",true);
