@@ -62,7 +62,7 @@
         <div class="well">
             <div style="font-size: 18px;margin-bottom: 5px;">您的开箱密码是：<span style="color:blue;">${decode}</span></div>
             <legend></legend>
-            <div>输入密码完成后,请关闭箱子（点击右上角关闭箱子按钮）</div>
+            <div>输入密码，箱子打开后取走快递，然后请关闭箱子！</div>
         </div>
         </c:if>
 
