@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+	<classPathEntry
+			location="D:\DEV\JetBrainsToolBox\config\jdbc-drivers\MySQL Connector\J\5.1.40\mysql-connector-java-5.1.40-bin.jar" />
+
+
+	<context id="managementTables" targetRuntime="MyBatis3" defaultModelType="flat">
+		<plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin" />
+		<!--<plugin type="org.mybatis.generator.plugins.SerializablePlugin" />-->
+		<plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin" />
+		<plugin type="org.mybatis.generator.plugins.ToStringPlugin" />
+		<commentGenerator>
+			<property name="suppressAllComments" value="false" />
+			<property name="suppressDate" value="false" />
+			<property name="addRemarkComments" value="true"/>
+			<property name="dateFormat" value="true"/>
+		</commentGenerator>
+
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+						connectionURL="jdbc:mysql://192.168.10.134:3306/postbox_v2" userId="root" password="123456" />
+
+		<javaTypeResolver>
+			<property name="forceBigDecimals" value="false" />
+		</javaTypeResolver>
+
+		<!-- generate Model -->
+		<javaModelGenerator targetPackage="cn.datai.gift.persist.po" targetProject="E:\Workspaces\intellij\postbox\postbox-persist\src\main\java">
+			<property name="enableSubPackages" value="true" />
+			<property name="trimStrings" value="true" />
+			<property name="rootInterface" value="java.io.Serializable"/>
+		</javaModelGenerator>
+
+		<!-- generate xml -->
+		<sqlMapGenerator targetPackage="persist.sqlmap" targetProject="E:\Workspaces\intellij\postbox\postbox-persist\src\main\resources">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+
+		<!-- generate Mapper -->
+		<javaClientGenerator type="XMLMAPPER" targetPackage="cn.datai.gift.persist.mapper"  targetProject="E:\Workspaces\intellij\postbox\postbox-persist\src\main\java">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+
+
+
+		<table schema="" tableName="t_box_group">
+			<generatedKey column="BOX_GROUP_ID" sqlStatement="JDBC" identity="true"/>
+		</table>
+		<table schema="" tableName="t_box_info">
+			<generatedKey column="BOX_INFO_ID" sqlStatement="JDBC" identity="true"/>
+		</table>
+		<table schema="" tableName="t_box_log">
+		</table>
+		<table schema="" tableName="t_customer_info">
+			<generatedKey column="CUSTOMER_INFO_ID" sqlStatement="JDBC" identity="true"/>
+		</table>
+		<table schema="" tableName="t_express_take_info">
+		</table>
+		<table schema="" tableName="t_expressman_info">
+			<generatedKey column="EXPRESSMAN_INFO_ID" sqlStatement="JDBC" identity="true"/>
+		</table>
+		<table schema="" tableName="t_repair_record">
+			<generatedKey column="REPAIR_RECORD_ID" sqlStatement="JDBC" identity="true"/>
+		</table>
+		<table schema="" tableName="t_repairer_info">
+			<generatedKey column="REPAIRER_INFO_ID" sqlStatement="JDBC" identity="true"/>
+		</table>
+		<table schema="" tableName="USER_WX_INFO">
+		</table>
+
+		<table schema="" tableName="USER_WX_RELT">
+		</table>
+	</context>
+</generatorConfiguration>

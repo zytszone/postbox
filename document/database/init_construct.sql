@@ -14,6 +14,10 @@ drop table if exists T_REPAIRER_INFO;
 
 drop table if exists T_REPAIR_RECORD;
 
+drop table if exists user_wx_info;
+
+drop table if exists user_wx_relt;
+
 /*==============================================================*/
 /* Table: T_BOX_GROUP                                           */
 /*==============================================================*/
@@ -172,3 +176,38 @@ create table T_REPAIR_RECORD
 );
 
 alter table T_REPAIR_RECORD comment '报修申请';
+
+/*==============================================================*/
+/* Table: user_wx_info                                          */
+/*==============================================================*/
+create table user_wx_info
+(
+  openid               varchar(64) not null comment '微信用户的唯一标识',
+  appid                varchar(64) not null comment '微信公众号或应用id',
+  nickname             varchar(256) comment '用户昵称',
+  sex                  varchar(10) comment '用户的性别，值为1时是男性，值为2时是女性，值为0时是未知',
+  province             varchar(30) comment '用户个人资料填写的省份',
+  city                 varchar(30) comment '普通用户个人资料填写的城市',
+  country              varchar(30) comment '国家，如中国为CN',
+  headimgurl           varchar(512) comment '用户头像，最后一个数值代表正方形头像大小（有0、46、64、96、132数值可选，0代表640*640正方形头像），用户没有头像时该项为空。若用户更换头像，原有头像URL将失效。',
+  privilege            varchar(256) comment '用户特权信息，json 数组，如微信沃卡用户为（chinaunicom）',
+  unionid              varchar(64) not null comment '只有在用户将公众号绑定到微信开放平台帐号后，才会出现该字段。',
+  primary key (openid, unionid)
+);
+
+alter table user_wx_info comment '用户微信信息';
+
+/*==============================================================*/
+/* Table: user_wx_relt                                          */
+/*==============================================================*/
+create table user_wx_relt
+(
+  unionid              varchar(64) not null comment '只有在用户将公众号绑定到微信开放平台帐号后，才会出现该字段。',
+  CUSTOMER_INFO_ID     bigint(20) not null comment '客户ID号',
+  create_time          datetime comment '创建时间',
+  remark               varchar(512) comment '注释',
+  primary key (unionid),
+  unique key AK_Key_2 (CUSTOMER_INFO_ID)
+);
+
+alter table user_wx_relt comment '微信用户与基本用户关联信息';
