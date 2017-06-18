@@ -8,35 +8,35 @@ import java.util.List;
 public class TBoxInfoExample {
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: T_BOX_INFO
+     * 映射数据库: t_box_info
      * @author MyBatis Generator
      */
     protected String orderByClause;
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: T_BOX_INFO
+     * 映射数据库: t_box_info
      * @author MyBatis Generator
      */
     protected Page page;
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: T_BOX_INFO
+     * 映射数据库: t_box_info
      * @author MyBatis Generator
      */
     protected boolean distinct;
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: T_BOX_INFO
+     * 映射数据库: t_box_info
      * @author MyBatis Generator
      */
     protected List<Criteria> oredCriteria;
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: T_BOX_INFO
+     * 映射数据库: t_box_info
      * @author MyBatis Generator
      */
     public TBoxInfoExample() {
@@ -45,7 +45,7 @@ public class TBoxInfoExample {
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: T_BOX_INFO
+     * 映射数据库: t_box_info
      * @author MyBatis Generator
      */
     public void setOrderByClause(String orderByClause) {
@@ -54,7 +54,7 @@ public class TBoxInfoExample {
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: T_BOX_INFO
+     * 映射数据库: t_box_info
      * @author MyBatis Generator
      */
     public String getOrderByClause() {
@@ -63,7 +63,7 @@ public class TBoxInfoExample {
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: T_BOX_INFO
+     * 映射数据库: t_box_info
      * @author MyBatis Generator
      */
     public void setPage(Page page) {
@@ -72,7 +72,7 @@ public class TBoxInfoExample {
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: T_BOX_INFO
+     * 映射数据库: t_box_info
      * @author MyBatis Generator
      */
     public Page getPage() {
@@ -81,7 +81,7 @@ public class TBoxInfoExample {
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: T_BOX_INFO
+     * 映射数据库: t_box_info
      * @author MyBatis Generator
      */
     public void setDistinct(boolean distinct) {
@@ -90,7 +90,7 @@ public class TBoxInfoExample {
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: T_BOX_INFO
+     * 映射数据库: t_box_info
      * @author MyBatis Generator
      */
     public boolean isDistinct() {
@@ -99,7 +99,7 @@ public class TBoxInfoExample {
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: T_BOX_INFO
+     * 映射数据库: t_box_info
      * @author MyBatis Generator
      */
     public List<Criteria> getOredCriteria() {
@@ -108,7 +108,7 @@ public class TBoxInfoExample {
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: T_BOX_INFO
+     * 映射数据库: t_box_info
      * @author MyBatis Generator
      */
     public void or(Criteria criteria) {
@@ -117,7 +117,7 @@ public class TBoxInfoExample {
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: T_BOX_INFO
+     * 映射数据库: t_box_info
      * @author MyBatis Generator
      */
     public Criteria or() {
@@ -128,7 +128,7 @@ public class TBoxInfoExample {
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: T_BOX_INFO
+     * 映射数据库: t_box_info
      * @author MyBatis Generator
      */
     public Criteria createCriteria() {
@@ -141,7 +141,7 @@ public class TBoxInfoExample {
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: T_BOX_INFO
+     * 映射数据库: t_box_info
      * @author MyBatis Generator
      */
     protected Criteria createCriteriaInternal() {
@@ -151,7 +151,7 @@ public class TBoxInfoExample {
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: T_BOX_INFO
+     * 映射数据库: t_box_info
      * @author MyBatis Generator
      */
     public void clear() {
@@ -162,7 +162,7 @@ public class TBoxInfoExample {
 
     /**
      * 本类由Mybatis Generator自动生成
-     * 映射数据库: T_BOX_INFO
+     * 映射数据库: t_box_info
      * @author MyBatis Generator
      */
     protected abstract static class GeneratedCriteria {
@@ -206,273 +206,743 @@ public class TBoxInfoExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andIdIsNull() {
-            addCriterion("ID is null");
+        public Criteria andBoxInfoIdIsNull() {
+            addCriterion("BOX_INFO_ID is null");
             return (Criteria) this;
         }
 
-        public Criteria andIdIsNotNull() {
-            addCriterion("ID is not null");
+        public Criteria andBoxInfoIdIsNotNull() {
+            addCriterion("BOX_INFO_ID is not null");
             return (Criteria) this;
         }
 
-        public Criteria andIdEqualTo(Long value) {
-            addCriterion("ID =", value, "id");
+        public Criteria andBoxInfoIdEqualTo(Long value) {
+            addCriterion("BOX_INFO_ID =", value, "boxInfoId");
             return (Criteria) this;
         }
 
-        public Criteria andIdNotEqualTo(Long value) {
-            addCriterion("ID <>", value, "id");
+        public Criteria andBoxInfoIdNotEqualTo(Long value) {
+            addCriterion("BOX_INFO_ID <>", value, "boxInfoId");
             return (Criteria) this;
         }
 
-        public Criteria andIdGreaterThan(Long value) {
-            addCriterion("ID >", value, "id");
+        public Criteria andBoxInfoIdGreaterThan(Long value) {
+            addCriterion("BOX_INFO_ID >", value, "boxInfoId");
             return (Criteria) this;
         }
 
-        public Criteria andIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("ID >=", value, "id");
+        public Criteria andBoxInfoIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("BOX_INFO_ID >=", value, "boxInfoId");
             return (Criteria) this;
         }
 
-        public Criteria andIdLessThan(Long value) {
-            addCriterion("ID <", value, "id");
+        public Criteria andBoxInfoIdLessThan(Long value) {
+            addCriterion("BOX_INFO_ID <", value, "boxInfoId");
             return (Criteria) this;
         }
 
-        public Criteria andIdLessThanOrEqualTo(Long value) {
-            addCriterion("ID <=", value, "id");
+        public Criteria andBoxInfoIdLessThanOrEqualTo(Long value) {
+            addCriterion("BOX_INFO_ID <=", value, "boxInfoId");
             return (Criteria) this;
         }
 
-        public Criteria andIdIn(List<Long> values) {
-            addCriterion("ID in", values, "id");
+        public Criteria andBoxInfoIdIn(List<Long> values) {
+            addCriterion("BOX_INFO_ID in", values, "boxInfoId");
             return (Criteria) this;
         }
 
-        public Criteria andIdNotIn(List<Long> values) {
-            addCriterion("ID not in", values, "id");
+        public Criteria andBoxInfoIdNotIn(List<Long> values) {
+            addCriterion("BOX_INFO_ID not in", values, "boxInfoId");
             return (Criteria) this;
         }
 
-        public Criteria andIdBetween(Long value1, Long value2) {
-            addCriterion("ID between", value1, value2, "id");
+        public Criteria andBoxInfoIdBetween(Long value1, Long value2) {
+            addCriterion("BOX_INFO_ID between", value1, value2, "boxInfoId");
             return (Criteria) this;
         }
 
-        public Criteria andIdNotBetween(Long value1, Long value2) {
-            addCriterion("ID not between", value1, value2, "id");
+        public Criteria andBoxInfoIdNotBetween(Long value1, Long value2) {
+            addCriterion("BOX_INFO_ID not between", value1, value2, "boxInfoId");
             return (Criteria) this;
         }
 
-        public Criteria andSkeyIsNull() {
-            addCriterion("SKEY is null");
+        public Criteria andBoxNameIsNull() {
+            addCriterion("BOX_NAME is null");
             return (Criteria) this;
         }
 
-        public Criteria andSkeyIsNotNull() {
-            addCriterion("SKEY is not null");
+        public Criteria andBoxNameIsNotNull() {
+            addCriterion("BOX_NAME is not null");
             return (Criteria) this;
         }
 
-        public Criteria andSkeyEqualTo(String value) {
-            addCriterion("SKEY =", value, "skey");
+        public Criteria andBoxNameEqualTo(String value) {
+            addCriterion("BOX_NAME =", value, "boxName");
             return (Criteria) this;
         }
 
-        public Criteria andSkeyNotEqualTo(String value) {
-            addCriterion("SKEY <>", value, "skey");
+        public Criteria andBoxNameNotEqualTo(String value) {
+            addCriterion("BOX_NAME <>", value, "boxName");
             return (Criteria) this;
         }
 
-        public Criteria andSkeyGreaterThan(String value) {
-            addCriterion("SKEY >", value, "skey");
+        public Criteria andBoxNameGreaterThan(String value) {
+            addCriterion("BOX_NAME >", value, "boxName");
             return (Criteria) this;
         }
 
-        public Criteria andSkeyGreaterThanOrEqualTo(String value) {
-            addCriterion("SKEY >=", value, "skey");
+        public Criteria andBoxNameGreaterThanOrEqualTo(String value) {
+            addCriterion("BOX_NAME >=", value, "boxName");
             return (Criteria) this;
         }
 
-        public Criteria andSkeyLessThan(String value) {
-            addCriterion("SKEY <", value, "skey");
+        public Criteria andBoxNameLessThan(String value) {
+            addCriterion("BOX_NAME <", value, "boxName");
             return (Criteria) this;
         }
 
-        public Criteria andSkeyLessThanOrEqualTo(String value) {
-            addCriterion("SKEY <=", value, "skey");
+        public Criteria andBoxNameLessThanOrEqualTo(String value) {
+            addCriterion("BOX_NAME <=", value, "boxName");
             return (Criteria) this;
         }
 
-        public Criteria andSkeyLike(String value) {
-            addCriterion("SKEY like", value, "skey");
+        public Criteria andBoxNameLike(String value) {
+            addCriterion("BOX_NAME like", value, "boxName");
             return (Criteria) this;
         }
 
-        public Criteria andSkeyNotLike(String value) {
-            addCriterion("SKEY not like", value, "skey");
+        public Criteria andBoxNameNotLike(String value) {
+            addCriterion("BOX_NAME not like", value, "boxName");
             return (Criteria) this;
         }
 
-        public Criteria andSkeyIn(List<String> values) {
-            addCriterion("SKEY in", values, "skey");
+        public Criteria andBoxNameIn(List<String> values) {
+            addCriterion("BOX_NAME in", values, "boxName");
             return (Criteria) this;
         }
 
-        public Criteria andSkeyNotIn(List<String> values) {
-            addCriterion("SKEY not in", values, "skey");
+        public Criteria andBoxNameNotIn(List<String> values) {
+            addCriterion("BOX_NAME not in", values, "boxName");
             return (Criteria) this;
         }
 
-        public Criteria andSkeyBetween(String value1, String value2) {
-            addCriterion("SKEY between", value1, value2, "skey");
+        public Criteria andBoxNameBetween(String value1, String value2) {
+            addCriterion("BOX_NAME between", value1, value2, "boxName");
             return (Criteria) this;
         }
 
-        public Criteria andSkeyNotBetween(String value1, String value2) {
-            addCriterion("SKEY not between", value1, value2, "skey");
+        public Criteria andBoxNameNotBetween(String value1, String value2) {
+            addCriterion("BOX_NAME not between", value1, value2, "boxName");
             return (Criteria) this;
         }
 
-        public Criteria andMstatusIsNull() {
-            addCriterion("MSTATUS is null");
+        public Criteria andBoxCodeIsNull() {
+            addCriterion("BOX_CODE is null");
             return (Criteria) this;
         }
 
-        public Criteria andMstatusIsNotNull() {
-            addCriterion("MSTATUS is not null");
+        public Criteria andBoxCodeIsNotNull() {
+            addCriterion("BOX_CODE is not null");
             return (Criteria) this;
         }
 
-        public Criteria andMstatusEqualTo(String value) {
-            addCriterion("MSTATUS =", value, "mstatus");
+        public Criteria andBoxCodeEqualTo(String value) {
+            addCriterion("BOX_CODE =", value, "boxCode");
             return (Criteria) this;
         }
 
-        public Criteria andMstatusNotEqualTo(String value) {
-            addCriterion("MSTATUS <>", value, "mstatus");
+        public Criteria andBoxCodeNotEqualTo(String value) {
+            addCriterion("BOX_CODE <>", value, "boxCode");
             return (Criteria) this;
         }
 
-        public Criteria andMstatusGreaterThan(String value) {
-            addCriterion("MSTATUS >", value, "mstatus");
+        public Criteria andBoxCodeGreaterThan(String value) {
+            addCriterion("BOX_CODE >", value, "boxCode");
             return (Criteria) this;
         }
 
-        public Criteria andMstatusGreaterThanOrEqualTo(String value) {
-            addCriterion("MSTATUS >=", value, "mstatus");
+        public Criteria andBoxCodeGreaterThanOrEqualTo(String value) {
+            addCriterion("BOX_CODE >=", value, "boxCode");
             return (Criteria) this;
         }
 
-        public Criteria andMstatusLessThan(String value) {
-            addCriterion("MSTATUS <", value, "mstatus");
+        public Criteria andBoxCodeLessThan(String value) {
+            addCriterion("BOX_CODE <", value, "boxCode");
             return (Criteria) this;
         }
 
-        public Criteria andMstatusLessThanOrEqualTo(String value) {
-            addCriterion("MSTATUS <=", value, "mstatus");
+        public Criteria andBoxCodeLessThanOrEqualTo(String value) {
+            addCriterion("BOX_CODE <=", value, "boxCode");
             return (Criteria) this;
         }
 
-        public Criteria andMstatusLike(String value) {
-            addCriterion("MSTATUS like", value, "mstatus");
+        public Criteria andBoxCodeLike(String value) {
+            addCriterion("BOX_CODE like", value, "boxCode");
             return (Criteria) this;
         }
 
-        public Criteria andMstatusNotLike(String value) {
-            addCriterion("MSTATUS not like", value, "mstatus");
+        public Criteria andBoxCodeNotLike(String value) {
+            addCriterion("BOX_CODE not like", value, "boxCode");
             return (Criteria) this;
         }
 
-        public Criteria andMstatusIn(List<String> values) {
-            addCriterion("MSTATUS in", values, "mstatus");
+        public Criteria andBoxCodeIn(List<String> values) {
+            addCriterion("BOX_CODE in", values, "boxCode");
             return (Criteria) this;
         }
 
-        public Criteria andMstatusNotIn(List<String> values) {
-            addCriterion("MSTATUS not in", values, "mstatus");
+        public Criteria andBoxCodeNotIn(List<String> values) {
+            addCriterion("BOX_CODE not in", values, "boxCode");
             return (Criteria) this;
         }
 
-        public Criteria andMstatusBetween(String value1, String value2) {
-            addCriterion("MSTATUS between", value1, value2, "mstatus");
+        public Criteria andBoxCodeBetween(String value1, String value2) {
+            addCriterion("BOX_CODE between", value1, value2, "boxCode");
             return (Criteria) this;
         }
 
-        public Criteria andMstatusNotBetween(String value1, String value2) {
-            addCriterion("MSTATUS not between", value1, value2, "mstatus");
+        public Criteria andBoxCodeNotBetween(String value1, String value2) {
+            addCriterion("BOX_CODE not between", value1, value2, "boxCode");
             return (Criteria) this;
         }
 
-        public Criteria andMobilenoIsNull() {
-            addCriterion("MOBILENO is null");
+        public Criteria andBoxUniqueCodeIsNull() {
+            addCriterion("BOX_UNIQUE_CODE is null");
             return (Criteria) this;
         }
 
-        public Criteria andMobilenoIsNotNull() {
-            addCriterion("MOBILENO is not null");
+        public Criteria andBoxUniqueCodeIsNotNull() {
+            addCriterion("BOX_UNIQUE_CODE is not null");
             return (Criteria) this;
         }
 
-        public Criteria andMobilenoEqualTo(String value) {
-            addCriterion("MOBILENO =", value, "mobileno");
+        public Criteria andBoxUniqueCodeEqualTo(String value) {
+            addCriterion("BOX_UNIQUE_CODE =", value, "boxUniqueCode");
             return (Criteria) this;
         }
 
-        public Criteria andMobilenoNotEqualTo(String value) {
-            addCriterion("MOBILENO <>", value, "mobileno");
+        public Criteria andBoxUniqueCodeNotEqualTo(String value) {
+            addCriterion("BOX_UNIQUE_CODE <>", value, "boxUniqueCode");
             return (Criteria) this;
         }
 
-        public Criteria andMobilenoGreaterThan(String value) {
-            addCriterion("MOBILENO >", value, "mobileno");
+        public Criteria andBoxUniqueCodeGreaterThan(String value) {
+            addCriterion("BOX_UNIQUE_CODE >", value, "boxUniqueCode");
             return (Criteria) this;
         }
 
-        public Criteria andMobilenoGreaterThanOrEqualTo(String value) {
-            addCriterion("MOBILENO >=", value, "mobileno");
+        public Criteria andBoxUniqueCodeGreaterThanOrEqualTo(String value) {
+            addCriterion("BOX_UNIQUE_CODE >=", value, "boxUniqueCode");
             return (Criteria) this;
         }
 
-        public Criteria andMobilenoLessThan(String value) {
-            addCriterion("MOBILENO <", value, "mobileno");
+        public Criteria andBoxUniqueCodeLessThan(String value) {
+            addCriterion("BOX_UNIQUE_CODE <", value, "boxUniqueCode");
             return (Criteria) this;
         }
 
-        public Criteria andMobilenoLessThanOrEqualTo(String value) {
-            addCriterion("MOBILENO <=", value, "mobileno");
+        public Criteria andBoxUniqueCodeLessThanOrEqualTo(String value) {
+            addCriterion("BOX_UNIQUE_CODE <=", value, "boxUniqueCode");
             return (Criteria) this;
         }
 
-        public Criteria andMobilenoLike(String value) {
-            addCriterion("MOBILENO like", value, "mobileno");
+        public Criteria andBoxUniqueCodeLike(String value) {
+            addCriterion("BOX_UNIQUE_CODE like", value, "boxUniqueCode");
             return (Criteria) this;
         }
 
-        public Criteria andMobilenoNotLike(String value) {
-            addCriterion("MOBILENO not like", value, "mobileno");
+        public Criteria andBoxUniqueCodeNotLike(String value) {
+            addCriterion("BOX_UNIQUE_CODE not like", value, "boxUniqueCode");
             return (Criteria) this;
         }
 
-        public Criteria andMobilenoIn(List<String> values) {
-            addCriterion("MOBILENO in", values, "mobileno");
+        public Criteria andBoxUniqueCodeIn(List<String> values) {
+            addCriterion("BOX_UNIQUE_CODE in", values, "boxUniqueCode");
             return (Criteria) this;
         }
 
-        public Criteria andMobilenoNotIn(List<String> values) {
-            addCriterion("MOBILENO not in", values, "mobileno");
+        public Criteria andBoxUniqueCodeNotIn(List<String> values) {
+            addCriterion("BOX_UNIQUE_CODE not in", values, "boxUniqueCode");
             return (Criteria) this;
         }
 
-        public Criteria andMobilenoBetween(String value1, String value2) {
-            addCriterion("MOBILENO between", value1, value2, "mobileno");
+        public Criteria andBoxUniqueCodeBetween(String value1, String value2) {
+            addCriterion("BOX_UNIQUE_CODE between", value1, value2, "boxUniqueCode");
             return (Criteria) this;
         }
 
-        public Criteria andMobilenoNotBetween(String value1, String value2) {
-            addCriterion("MOBILENO not between", value1, value2, "mobileno");
+        public Criteria andBoxUniqueCodeNotBetween(String value1, String value2) {
+            addCriterion("BOX_UNIQUE_CODE not between", value1, value2, "boxUniqueCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andBoxGroupIdIsNull() {
+            addCriterion("BOX_GROUP_ID is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBoxGroupIdIsNotNull() {
+            addCriterion("BOX_GROUP_ID is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andBoxGroupIdEqualTo(Long value) {
+            addCriterion("BOX_GROUP_ID =", value, "boxGroupId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBoxGroupIdNotEqualTo(Long value) {
+            addCriterion("BOX_GROUP_ID <>", value, "boxGroupId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBoxGroupIdGreaterThan(Long value) {
+            addCriterion("BOX_GROUP_ID >", value, "boxGroupId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBoxGroupIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("BOX_GROUP_ID >=", value, "boxGroupId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBoxGroupIdLessThan(Long value) {
+            addCriterion("BOX_GROUP_ID <", value, "boxGroupId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBoxGroupIdLessThanOrEqualTo(Long value) {
+            addCriterion("BOX_GROUP_ID <=", value, "boxGroupId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBoxGroupIdIn(List<Long> values) {
+            addCriterion("BOX_GROUP_ID in", values, "boxGroupId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBoxGroupIdNotIn(List<Long> values) {
+            addCriterion("BOX_GROUP_ID not in", values, "boxGroupId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBoxGroupIdBetween(Long value1, Long value2) {
+            addCriterion("BOX_GROUP_ID between", value1, value2, "boxGroupId");
+            return (Criteria) this;
+        }
+
+        public Criteria andBoxGroupIdNotBetween(Long value1, Long value2) {
+            addCriterion("BOX_GROUP_ID not between", value1, value2, "boxGroupId");
+            return (Criteria) this;
+        }
+
+        public Criteria andRepairerInfoIdIsNull() {
+            addCriterion("REPAIRER_INFO_ID is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRepairerInfoIdIsNotNull() {
+            addCriterion("REPAIRER_INFO_ID is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRepairerInfoIdEqualTo(Long value) {
+            addCriterion("REPAIRER_INFO_ID =", value, "repairerInfoId");
+            return (Criteria) this;
+        }
+
+        public Criteria andRepairerInfoIdNotEqualTo(Long value) {
+            addCriterion("REPAIRER_INFO_ID <>", value, "repairerInfoId");
+            return (Criteria) this;
+        }
+
+        public Criteria andRepairerInfoIdGreaterThan(Long value) {
+            addCriterion("REPAIRER_INFO_ID >", value, "repairerInfoId");
+            return (Criteria) this;
+        }
+
+        public Criteria andRepairerInfoIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("REPAIRER_INFO_ID >=", value, "repairerInfoId");
+            return (Criteria) this;
+        }
+
+        public Criteria andRepairerInfoIdLessThan(Long value) {
+            addCriterion("REPAIRER_INFO_ID <", value, "repairerInfoId");
+            return (Criteria) this;
+        }
+
+        public Criteria andRepairerInfoIdLessThanOrEqualTo(Long value) {
+            addCriterion("REPAIRER_INFO_ID <=", value, "repairerInfoId");
+            return (Criteria) this;
+        }
+
+        public Criteria andRepairerInfoIdIn(List<Long> values) {
+            addCriterion("REPAIRER_INFO_ID in", values, "repairerInfoId");
+            return (Criteria) this;
+        }
+
+        public Criteria andRepairerInfoIdNotIn(List<Long> values) {
+            addCriterion("REPAIRER_INFO_ID not in", values, "repairerInfoId");
+            return (Criteria) this;
+        }
+
+        public Criteria andRepairerInfoIdBetween(Long value1, Long value2) {
+            addCriterion("REPAIRER_INFO_ID between", value1, value2, "repairerInfoId");
+            return (Criteria) this;
+        }
+
+        public Criteria andRepairerInfoIdNotBetween(Long value1, Long value2) {
+            addCriterion("REPAIRER_INFO_ID not between", value1, value2, "repairerInfoId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSecKeyIsNull() {
+            addCriterion("SEC_KEY is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSecKeyIsNotNull() {
+            addCriterion("SEC_KEY is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSecKeyEqualTo(String value) {
+            addCriterion("SEC_KEY =", value, "secKey");
+            return (Criteria) this;
+        }
+
+        public Criteria andSecKeyNotEqualTo(String value) {
+            addCriterion("SEC_KEY <>", value, "secKey");
+            return (Criteria) this;
+        }
+
+        public Criteria andSecKeyGreaterThan(String value) {
+            addCriterion("SEC_KEY >", value, "secKey");
+            return (Criteria) this;
+        }
+
+        public Criteria andSecKeyGreaterThanOrEqualTo(String value) {
+            addCriterion("SEC_KEY >=", value, "secKey");
+            return (Criteria) this;
+        }
+
+        public Criteria andSecKeyLessThan(String value) {
+            addCriterion("SEC_KEY <", value, "secKey");
+            return (Criteria) this;
+        }
+
+        public Criteria andSecKeyLessThanOrEqualTo(String value) {
+            addCriterion("SEC_KEY <=", value, "secKey");
+            return (Criteria) this;
+        }
+
+        public Criteria andSecKeyLike(String value) {
+            addCriterion("SEC_KEY like", value, "secKey");
+            return (Criteria) this;
+        }
+
+        public Criteria andSecKeyNotLike(String value) {
+            addCriterion("SEC_KEY not like", value, "secKey");
+            return (Criteria) this;
+        }
+
+        public Criteria andSecKeyIn(List<String> values) {
+            addCriterion("SEC_KEY in", values, "secKey");
+            return (Criteria) this;
+        }
+
+        public Criteria andSecKeyNotIn(List<String> values) {
+            addCriterion("SEC_KEY not in", values, "secKey");
+            return (Criteria) this;
+        }
+
+        public Criteria andSecKeyBetween(String value1, String value2) {
+            addCriterion("SEC_KEY between", value1, value2, "secKey");
+            return (Criteria) this;
+        }
+
+        public Criteria andSecKeyNotBetween(String value1, String value2) {
+            addCriterion("SEC_KEY not between", value1, value2, "secKey");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusIsNull() {
+            addCriterion("STATUS is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusIsNotNull() {
+            addCriterion("STATUS is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusEqualTo(String value) {
+            addCriterion("STATUS =", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotEqualTo(String value) {
+            addCriterion("STATUS <>", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusGreaterThan(String value) {
+            addCriterion("STATUS >", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusGreaterThanOrEqualTo(String value) {
+            addCriterion("STATUS >=", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusLessThan(String value) {
+            addCriterion("STATUS <", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusLessThanOrEqualTo(String value) {
+            addCriterion("STATUS <=", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusLike(String value) {
+            addCriterion("STATUS like", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotLike(String value) {
+            addCriterion("STATUS not like", value, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusIn(List<String> values) {
+            addCriterion("STATUS in", values, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotIn(List<String> values) {
+            addCriterion("STATUS not in", values, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusBetween(String value1, String value2) {
+            addCriterion("STATUS between", value1, value2, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusNotBetween(String value1, String value2) {
+            addCriterion("STATUS not between", value1, value2, "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressStatusIsNull() {
+            addCriterion("EXPRESS_STATUS is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressStatusIsNotNull() {
+            addCriterion("EXPRESS_STATUS is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressStatusEqualTo(String value) {
+            addCriterion("EXPRESS_STATUS =", value, "expressStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressStatusNotEqualTo(String value) {
+            addCriterion("EXPRESS_STATUS <>", value, "expressStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressStatusGreaterThan(String value) {
+            addCriterion("EXPRESS_STATUS >", value, "expressStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressStatusGreaterThanOrEqualTo(String value) {
+            addCriterion("EXPRESS_STATUS >=", value, "expressStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressStatusLessThan(String value) {
+            addCriterion("EXPRESS_STATUS <", value, "expressStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressStatusLessThanOrEqualTo(String value) {
+            addCriterion("EXPRESS_STATUS <=", value, "expressStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressStatusLike(String value) {
+            addCriterion("EXPRESS_STATUS like", value, "expressStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressStatusNotLike(String value) {
+            addCriterion("EXPRESS_STATUS not like", value, "expressStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressStatusIn(List<String> values) {
+            addCriterion("EXPRESS_STATUS in", values, "expressStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressStatusNotIn(List<String> values) {
+            addCriterion("EXPRESS_STATUS not in", values, "expressStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressStatusBetween(String value1, String value2) {
+            addCriterion("EXPRESS_STATUS between", value1, value2, "expressStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressStatusNotBetween(String value1, String value2) {
+            addCriterion("EXPRESS_STATUS not between", value1, value2, "expressStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andMobilePhoneIsNull() {
+            addCriterion("MOBILE_PHONE is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMobilePhoneIsNotNull() {
+            addCriterion("MOBILE_PHONE is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMobilePhoneEqualTo(String value) {
+            addCriterion("MOBILE_PHONE =", value, "mobilePhone");
+            return (Criteria) this;
+        }
+
+        public Criteria andMobilePhoneNotEqualTo(String value) {
+            addCriterion("MOBILE_PHONE <>", value, "mobilePhone");
+            return (Criteria) this;
+        }
+
+        public Criteria andMobilePhoneGreaterThan(String value) {
+            addCriterion("MOBILE_PHONE >", value, "mobilePhone");
+            return (Criteria) this;
+        }
+
+        public Criteria andMobilePhoneGreaterThanOrEqualTo(String value) {
+            addCriterion("MOBILE_PHONE >=", value, "mobilePhone");
+            return (Criteria) this;
+        }
+
+        public Criteria andMobilePhoneLessThan(String value) {
+            addCriterion("MOBILE_PHONE <", value, "mobilePhone");
+            return (Criteria) this;
+        }
+
+        public Criteria andMobilePhoneLessThanOrEqualTo(String value) {
+            addCriterion("MOBILE_PHONE <=", value, "mobilePhone");
+            return (Criteria) this;
+        }
+
+        public Criteria andMobilePhoneLike(String value) {
+            addCriterion("MOBILE_PHONE like", value, "mobilePhone");
+            return (Criteria) this;
+        }
+
+        public Criteria andMobilePhoneNotLike(String value) {
+            addCriterion("MOBILE_PHONE not like", value, "mobilePhone");
+            return (Criteria) this;
+        }
+
+        public Criteria andMobilePhoneIn(List<String> values) {
+            addCriterion("MOBILE_PHONE in", values, "mobilePhone");
+            return (Criteria) this;
+        }
+
+        public Criteria andMobilePhoneNotIn(List<String> values) {
+            addCriterion("MOBILE_PHONE not in", values, "mobilePhone");
+            return (Criteria) this;
+        }
+
+        public Criteria andMobilePhoneBetween(String value1, String value2) {
+            addCriterion("MOBILE_PHONE between", value1, value2, "mobilePhone");
+            return (Criteria) this;
+        }
+
+        public Criteria andMobilePhoneNotBetween(String value1, String value2) {
+            addCriterion("MOBILE_PHONE not between", value1, value2, "mobilePhone");
+            return (Criteria) this;
+        }
+
+        public Criteria andProxyCustomerInfoIdIsNull() {
+            addCriterion("PROXY_CUSTOMER_INFO_ID is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProxyCustomerInfoIdIsNotNull() {
+            addCriterion("PROXY_CUSTOMER_INFO_ID is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProxyCustomerInfoIdEqualTo(String value) {
+            addCriterion("PROXY_CUSTOMER_INFO_ID =", value, "proxyCustomerInfoId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProxyCustomerInfoIdNotEqualTo(String value) {
+            addCriterion("PROXY_CUSTOMER_INFO_ID <>", value, "proxyCustomerInfoId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProxyCustomerInfoIdGreaterThan(String value) {
+            addCriterion("PROXY_CUSTOMER_INFO_ID >", value, "proxyCustomerInfoId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProxyCustomerInfoIdGreaterThanOrEqualTo(String value) {
+            addCriterion("PROXY_CUSTOMER_INFO_ID >=", value, "proxyCustomerInfoId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProxyCustomerInfoIdLessThan(String value) {
+            addCriterion("PROXY_CUSTOMER_INFO_ID <", value, "proxyCustomerInfoId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProxyCustomerInfoIdLessThanOrEqualTo(String value) {
+            addCriterion("PROXY_CUSTOMER_INFO_ID <=", value, "proxyCustomerInfoId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProxyCustomerInfoIdLike(String value) {
+            addCriterion("PROXY_CUSTOMER_INFO_ID like", value, "proxyCustomerInfoId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProxyCustomerInfoIdNotLike(String value) {
+            addCriterion("PROXY_CUSTOMER_INFO_ID not like", value, "proxyCustomerInfoId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProxyCustomerInfoIdIn(List<String> values) {
+            addCriterion("PROXY_CUSTOMER_INFO_ID in", values, "proxyCustomerInfoId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProxyCustomerInfoIdNotIn(List<String> values) {
+            addCriterion("PROXY_CUSTOMER_INFO_ID not in", values, "proxyCustomerInfoId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProxyCustomerInfoIdBetween(String value1, String value2) {
+            addCriterion("PROXY_CUSTOMER_INFO_ID between", value1, value2, "proxyCustomerInfoId");
+            return (Criteria) this;
+        }
+
+        public Criteria andProxyCustomerInfoIdNotBetween(String value1, String value2) {
+            addCriterion("PROXY_CUSTOMER_INFO_ID not between", value1, value2, "proxyCustomerInfoId");
             return (Criteria) this;
         }
 
@@ -536,6 +1006,66 @@ public class TBoxInfoExample {
             return (Criteria) this;
         }
 
+        public Criteria andChecknumIsNull() {
+            addCriterion("CHECKNUM is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andChecknumIsNotNull() {
+            addCriterion("CHECKNUM is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andChecknumEqualTo(Integer value) {
+            addCriterion("CHECKNUM =", value, "checknum");
+            return (Criteria) this;
+        }
+
+        public Criteria andChecknumNotEqualTo(Integer value) {
+            addCriterion("CHECKNUM <>", value, "checknum");
+            return (Criteria) this;
+        }
+
+        public Criteria andChecknumGreaterThan(Integer value) {
+            addCriterion("CHECKNUM >", value, "checknum");
+            return (Criteria) this;
+        }
+
+        public Criteria andChecknumGreaterThanOrEqualTo(Integer value) {
+            addCriterion("CHECKNUM >=", value, "checknum");
+            return (Criteria) this;
+        }
+
+        public Criteria andChecknumLessThan(Integer value) {
+            addCriterion("CHECKNUM <", value, "checknum");
+            return (Criteria) this;
+        }
+
+        public Criteria andChecknumLessThanOrEqualTo(Integer value) {
+            addCriterion("CHECKNUM <=", value, "checknum");
+            return (Criteria) this;
+        }
+
+        public Criteria andChecknumIn(List<Integer> values) {
+            addCriterion("CHECKNUM in", values, "checknum");
+            return (Criteria) this;
+        }
+
+        public Criteria andChecknumNotIn(List<Integer> values) {
+            addCriterion("CHECKNUM not in", values, "checknum");
+            return (Criteria) this;
+        }
+
+        public Criteria andChecknumBetween(Integer value1, Integer value2) {
+            addCriterion("CHECKNUM between", value1, value2, "checknum");
+            return (Criteria) this;
+        }
+
+        public Criteria andChecknumNotBetween(Integer value1, Integer value2) {
+            addCriterion("CHECKNUM not between", value1, value2, "checknum");
+            return (Criteria) this;
+        }
+
         public Criteria andCreatetimeIsNull() {
             addCriterion("CREATETIME is null");
             return (Criteria) this;
@@ -596,25 +1126,50 @@ public class TBoxInfoExample {
             return (Criteria) this;
         }
 
-        public Criteria andSkeyLikeInsensitive(String value) {
-            addCriterion("upper(SKEY) like", value.toUpperCase(), "skey");
+        public Criteria andBoxNameLikeInsensitive(String value) {
+            addCriterion("upper(BOX_NAME) like", value.toUpperCase(), "boxName");
             return (Criteria) this;
         }
 
-        public Criteria andMstatusLikeInsensitive(String value) {
-            addCriterion("upper(MSTATUS) like", value.toUpperCase(), "mstatus");
+        public Criteria andBoxCodeLikeInsensitive(String value) {
+            addCriterion("upper(BOX_CODE) like", value.toUpperCase(), "boxCode");
             return (Criteria) this;
         }
 
-        public Criteria andMobilenoLikeInsensitive(String value) {
-            addCriterion("upper(MOBILENO) like", value.toUpperCase(), "mobileno");
+        public Criteria andBoxUniqueCodeLikeInsensitive(String value) {
+            addCriterion("upper(BOX_UNIQUE_CODE) like", value.toUpperCase(), "boxUniqueCode");
+            return (Criteria) this;
+        }
+
+        public Criteria andSecKeyLikeInsensitive(String value) {
+            addCriterion("upper(SEC_KEY) like", value.toUpperCase(), "secKey");
+            return (Criteria) this;
+        }
+
+        public Criteria andStatusLikeInsensitive(String value) {
+            addCriterion("upper(STATUS) like", value.toUpperCase(), "status");
+            return (Criteria) this;
+        }
+
+        public Criteria andExpressStatusLikeInsensitive(String value) {
+            addCriterion("upper(EXPRESS_STATUS) like", value.toUpperCase(), "expressStatus");
+            return (Criteria) this;
+        }
+
+        public Criteria andMobilePhoneLikeInsensitive(String value) {
+            addCriterion("upper(MOBILE_PHONE) like", value.toUpperCase(), "mobilePhone");
+            return (Criteria) this;
+        }
+
+        public Criteria andProxyCustomerInfoIdLikeInsensitive(String value) {
+            addCriterion("upper(PROXY_CUSTOMER_INFO_ID) like", value.toUpperCase(), "proxyCustomerInfoId");
             return (Criteria) this;
         }
     }
 
     /**
      * This class was generated by MyBatis Generator.
-     * This class corresponds to the database table T_BOX_INFO
+     * This class corresponds to the database table t_box_info
      * @author do_not_delete_during_merge MyBatis Generator
      */
     public static class Criteria extends GeneratedCriteria {
@@ -626,7 +1181,7 @@ public class TBoxInfoExample {
 
     /**
      * 本类由Mybatis Generator自动生成
-     * 映射数据库: T_BOX_INFO
+     * 映射数据库: t_box_info
      * @author MyBatis Generator
      */
     public static class Criterion {

@@ -6,68 +6,68 @@ public class UserWxInfo implements Serializable {
     public static final long serialVersionUID = -1002294301L;
 
     /**
-     * 微信用户的唯一标识: USER_WX_INFO.OPENID
+     * 微信用户的唯一标识: user_wx_info.openid
      * @author MyBatis Generator
      */
     private String openid;
 
     /**
-     * 只有在用户将公众号绑定到微信开放平台帐号后，才会出现该字段。: USER_WX_INFO.UNIONID
+     * 只有在用户将公众号绑定到微信开放平台帐号后，才会出现该字段。: user_wx_info.unionid
      * @author MyBatis Generator
      */
     private String unionid;
 
     /**
-     * 微信公众号或应用id: USER_WX_INFO.APPID
+     * 微信公众号或应用id: user_wx_info.appid
      * @author MyBatis Generator
      */
     private String appid;
 
     /**
-     * 用户昵称: USER_WX_INFO.NICKNAME
+     * 用户昵称: user_wx_info.nickname
      * @author MyBatis Generator
      */
     private String nickname;
 
     /**
-     * 用户的性别，值为1时是男性，值为2时是女性，值为0时是未知: USER_WX_INFO.SEX
+     * 用户的性别，值为1时是男性，值为2时是女性，值为0时是未知: user_wx_info.sex
      * @author MyBatis Generator
      */
     private String sex;
 
     /**
-     * 用户个人资料填写的省份: USER_WX_INFO.PROVINCE
+     * 用户个人资料填写的省份: user_wx_info.province
      * @author MyBatis Generator
      */
     private String province;
 
     /**
-     * 普通用户个人资料填写的城市: USER_WX_INFO.CITY
+     * 普通用户个人资料填写的城市: user_wx_info.city
      * @author MyBatis Generator
      */
     private String city;
 
     /**
-     * 国家，如中国为CN: USER_WX_INFO.COUNTRY
+     * 国家，如中国为CN: user_wx_info.country
      * @author MyBatis Generator
      */
     private String country;
 
     /**
-     * 用户头像，最后一个数值代表正方形头像大小（有0、46、64、96、132数值可选，0代表640*640正方形头像），用户没有头像时该项为空。若用户更换头像，原有头像URL将失效。: USER_WX_INFO.HEADIMGURL
+     * 用户头像，最后一个数值代表正方形头像大小（有0、46、64、96、132数值可选，0代表640*640正方形头像），用户没有头像时该项为空。若用户更换头像，原有头像URL将失效。: user_wx_info.headimgurl
      * @author MyBatis Generator
      */
     private String headimgurl;
 
     /**
-     * 用户特权信息，json 数组，如微信沃卡用户为（chinaunicom）: USER_WX_INFO.PRIVILEGE
+     * 用户特权信息，json 数组，如微信沃卡用户为（chinaunicom）: user_wx_info.privilege
      * @author MyBatis Generator
      */
     private String privilege;
 
     /**
-     * 获取微信用户的唯一标识: USER_WX_INFO.OPENID
-     * @return 微信用户的唯一标识: USER_WX_INFO.OPENID
+     * 获取微信用户的唯一标识: user_wx_info.openid
+     * @return 微信用户的唯一标识: user_wx_info.openid
      * @author MyBatis Generator
      */
     public String getOpenid() {
@@ -75,8 +75,8 @@ public class UserWxInfo implements Serializable {
     }
 
     /**
-     * 设置微信用户的唯一标识: USER_WX_INFO.OPENID
-     * @param openid 映射数据库字段: USER_WX_INFO.OPENID
+     * 设置微信用户的唯一标识: user_wx_info.openid
+     * @param openid 映射数据库字段: user_wx_info.openid
      * @author MyBatis Generator
      */
     public void setOpenid(String openid) {
@@ -84,8 +84,8 @@ public class UserWxInfo implements Serializable {
     }
 
     /**
-     * 获取只有在用户将公众号绑定到微信开放平台帐号后，才会出现该字段。: USER_WX_INFO.UNIONID
-     * @return 只有在用户将公众号绑定到微信开放平台帐号后，才会出现该字段。: USER_WX_INFO.UNIONID
+     * 获取只有在用户将公众号绑定到微信开放平台帐号后，才会出现该字段。: user_wx_info.unionid
+     * @return 只有在用户将公众号绑定到微信开放平台帐号后，才会出现该字段。: user_wx_info.unionid
      * @author MyBatis Generator
      */
     public String getUnionid() {
@@ -93,8 +93,8 @@ public class UserWxInfo implements Serializable {
     }
 
     /**
-     * 设置只有在用户将公众号绑定到微信开放平台帐号后，才会出现该字段。: USER_WX_INFO.UNIONID
-     * @param unionid 映射数据库字段: USER_WX_INFO.UNIONID
+     * 设置只有在用户将公众号绑定到微信开放平台帐号后，才会出现该字段。: user_wx_info.unionid
+     * @param unionid 映射数据库字段: user_wx_info.unionid
      * @author MyBatis Generator
      */
     public void setUnionid(String unionid) {
@@ -102,8 +102,8 @@ public class UserWxInfo implements Serializable {
     }
 
     /**
-     * 获取微信公众号或应用id: USER_WX_INFO.APPID
-     * @return 微信公众号或应用id: USER_WX_INFO.APPID
+     * 获取微信公众号或应用id: user_wx_info.appid
+     * @return 微信公众号或应用id: user_wx_info.appid
      * @author MyBatis Generator
      */
     public String getAppid() {
@@ -111,8 +111,8 @@ public class UserWxInfo implements Serializable {
     }
 
     /**
-     * 设置微信公众号或应用id: USER_WX_INFO.APPID
-     * @param appid 映射数据库字段: USER_WX_INFO.APPID
+     * 设置微信公众号或应用id: user_wx_info.appid
+     * @param appid 映射数据库字段: user_wx_info.appid
      * @author MyBatis Generator
      */
     public void setAppid(String appid) {
@@ -120,8 +120,8 @@ public class UserWxInfo implements Serializable {
     }
 
     /**
-     * 获取用户昵称: USER_WX_INFO.NICKNAME
-     * @return 用户昵称: USER_WX_INFO.NICKNAME
+     * 获取用户昵称: user_wx_info.nickname
+     * @return 用户昵称: user_wx_info.nickname
      * @author MyBatis Generator
      */
     public String getNickname() {
@@ -129,8 +129,8 @@ public class UserWxInfo implements Serializable {
     }
 
     /**
-     * 设置用户昵称: USER_WX_INFO.NICKNAME
-     * @param nickname 映射数据库字段: USER_WX_INFO.NICKNAME
+     * 设置用户昵称: user_wx_info.nickname
+     * @param nickname 映射数据库字段: user_wx_info.nickname
      * @author MyBatis Generator
      */
     public void setNickname(String nickname) {
@@ -138,8 +138,8 @@ public class UserWxInfo implements Serializable {
     }
 
     /**
-     * 获取用户的性别，值为1时是男性，值为2时是女性，值为0时是未知: USER_WX_INFO.SEX
-     * @return 用户的性别，值为1时是男性，值为2时是女性，值为0时是未知: USER_WX_INFO.SEX
+     * 获取用户的性别，值为1时是男性，值为2时是女性，值为0时是未知: user_wx_info.sex
+     * @return 用户的性别，值为1时是男性，值为2时是女性，值为0时是未知: user_wx_info.sex
      * @author MyBatis Generator
      */
     public String getSex() {
@@ -147,8 +147,8 @@ public class UserWxInfo implements Serializable {
     }
 
     /**
-     * 设置用户的性别，值为1时是男性，值为2时是女性，值为0时是未知: USER_WX_INFO.SEX
-     * @param sex 映射数据库字段: USER_WX_INFO.SEX
+     * 设置用户的性别，值为1时是男性，值为2时是女性，值为0时是未知: user_wx_info.sex
+     * @param sex 映射数据库字段: user_wx_info.sex
      * @author MyBatis Generator
      */
     public void setSex(String sex) {
@@ -156,8 +156,8 @@ public class UserWxInfo implements Serializable {
     }
 
     /**
-     * 获取用户个人资料填写的省份: USER_WX_INFO.PROVINCE
-     * @return 用户个人资料填写的省份: USER_WX_INFO.PROVINCE
+     * 获取用户个人资料填写的省份: user_wx_info.province
+     * @return 用户个人资料填写的省份: user_wx_info.province
      * @author MyBatis Generator
      */
     public String getProvince() {
@@ -165,8 +165,8 @@ public class UserWxInfo implements Serializable {
     }
 
     /**
-     * 设置用户个人资料填写的省份: USER_WX_INFO.PROVINCE
-     * @param province 映射数据库字段: USER_WX_INFO.PROVINCE
+     * 设置用户个人资料填写的省份: user_wx_info.province
+     * @param province 映射数据库字段: user_wx_info.province
      * @author MyBatis Generator
      */
     public void setProvince(String province) {
@@ -174,8 +174,8 @@ public class UserWxInfo implements Serializable {
     }
 
     /**
-     * 获取普通用户个人资料填写的城市: USER_WX_INFO.CITY
-     * @return 普通用户个人资料填写的城市: USER_WX_INFO.CITY
+     * 获取普通用户个人资料填写的城市: user_wx_info.city
+     * @return 普通用户个人资料填写的城市: user_wx_info.city
      * @author MyBatis Generator
      */
     public String getCity() {
@@ -183,8 +183,8 @@ public class UserWxInfo implements Serializable {
     }
 
     /**
-     * 设置普通用户个人资料填写的城市: USER_WX_INFO.CITY
-     * @param city 映射数据库字段: USER_WX_INFO.CITY
+     * 设置普通用户个人资料填写的城市: user_wx_info.city
+     * @param city 映射数据库字段: user_wx_info.city
      * @author MyBatis Generator
      */
     public void setCity(String city) {
@@ -192,8 +192,8 @@ public class UserWxInfo implements Serializable {
     }
 
     /**
-     * 获取国家，如中国为CN: USER_WX_INFO.COUNTRY
-     * @return 国家，如中国为CN: USER_WX_INFO.COUNTRY
+     * 获取国家，如中国为CN: user_wx_info.country
+     * @return 国家，如中国为CN: user_wx_info.country
      * @author MyBatis Generator
      */
     public String getCountry() {
@@ -201,8 +201,8 @@ public class UserWxInfo implements Serializable {
     }
 
     /**
-     * 设置国家，如中国为CN: USER_WX_INFO.COUNTRY
-     * @param country 映射数据库字段: USER_WX_INFO.COUNTRY
+     * 设置国家，如中国为CN: user_wx_info.country
+     * @param country 映射数据库字段: user_wx_info.country
      * @author MyBatis Generator
      */
     public void setCountry(String country) {
@@ -210,8 +210,8 @@ public class UserWxInfo implements Serializable {
     }
 
     /**
-     * 获取用户头像，最后一个数值代表正方形头像大小（有0、46、64、96、132数值可选，0代表640*640正方形头像），用户没有头像时该项为空。若用户更换头像，原有头像URL将失效。: USER_WX_INFO.HEADIMGURL
-     * @return 用户头像，最后一个数值代表正方形头像大小（有0、46、64、96、132数值可选，0代表640*640正方形头像），用户没有头像时该项为空。若用户更换头像，原有头像URL将失效。: USER_WX_INFO.HEADIMGURL
+     * 获取用户头像，最后一个数值代表正方形头像大小（有0、46、64、96、132数值可选，0代表640*640正方形头像），用户没有头像时该项为空。若用户更换头像，原有头像URL将失效。: user_wx_info.headimgurl
+     * @return 用户头像，最后一个数值代表正方形头像大小（有0、46、64、96、132数值可选，0代表640*640正方形头像），用户没有头像时该项为空。若用户更换头像，原有头像URL将失效。: user_wx_info.headimgurl
      * @author MyBatis Generator
      */
     public String getHeadimgurl() {
@@ -219,8 +219,8 @@ public class UserWxInfo implements Serializable {
     }
 
     /**
-     * 设置用户头像，最后一个数值代表正方形头像大小（有0、46、64、96、132数值可选，0代表640*640正方形头像），用户没有头像时该项为空。若用户更换头像，原有头像URL将失效。: USER_WX_INFO.HEADIMGURL
-     * @param headimgurl 映射数据库字段: USER_WX_INFO.HEADIMGURL
+     * 设置用户头像，最后一个数值代表正方形头像大小（有0、46、64、96、132数值可选，0代表640*640正方形头像），用户没有头像时该项为空。若用户更换头像，原有头像URL将失效。: user_wx_info.headimgurl
+     * @param headimgurl 映射数据库字段: user_wx_info.headimgurl
      * @author MyBatis Generator
      */
     public void setHeadimgurl(String headimgurl) {
@@ -228,8 +228,8 @@ public class UserWxInfo implements Serializable {
     }
 
     /**
-     * 获取用户特权信息，json 数组，如微信沃卡用户为（chinaunicom）: USER_WX_INFO.PRIVILEGE
-     * @return 用户特权信息，json 数组，如微信沃卡用户为（chinaunicom）: USER_WX_INFO.PRIVILEGE
+     * 获取用户特权信息，json 数组，如微信沃卡用户为（chinaunicom）: user_wx_info.privilege
+     * @return 用户特权信息，json 数组，如微信沃卡用户为（chinaunicom）: user_wx_info.privilege
      * @author MyBatis Generator
      */
     public String getPrivilege() {
@@ -237,8 +237,8 @@ public class UserWxInfo implements Serializable {
     }
 
     /**
-     * 设置用户特权信息，json 数组，如微信沃卡用户为（chinaunicom）: USER_WX_INFO.PRIVILEGE
-     * @param privilege 映射数据库字段: USER_WX_INFO.PRIVILEGE
+     * 设置用户特权信息，json 数组，如微信沃卡用户为（chinaunicom）: user_wx_info.privilege
+     * @param privilege 映射数据库字段: user_wx_info.privilege
      * @author MyBatis Generator
      */
     public void setPrivilege(String privilege) {
@@ -247,7 +247,7 @@ public class UserWxInfo implements Serializable {
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: USER_WX_INFO
+     * 映射数据库: user_wx_info
      * @author MyBatis Generator
      */
     @Override
@@ -276,7 +276,7 @@ public class UserWxInfo implements Serializable {
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: USER_WX_INFO
+     * 映射数据库: user_wx_info
      * @author MyBatis Generator
      */
     @Override
@@ -298,7 +298,7 @@ public class UserWxInfo implements Serializable {
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: USER_WX_INFO
+     * 映射数据库: user_wx_info
      * @author MyBatis Generator
      */
     @Override

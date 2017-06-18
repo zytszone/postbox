@@ -8,77 +8,77 @@ import org.apache.ibatis.annotations.Param;
 public interface UserWxReltMapper {
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: USER_WX_RELT
+     * 映射数据库: user_wx_relt
      * @author MyBatis Generator
      */
     int countByExample(UserWxReltExample example);
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: USER_WX_RELT
+     * 映射数据库: user_wx_relt
      * @author MyBatis Generator
      */
     int deleteByExample(UserWxReltExample example);
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: USER_WX_RELT
+     * 映射数据库: user_wx_relt
      * @author MyBatis Generator
      */
-    int deleteByPrimaryKey(@Param("userInfoId") Long userInfoId, @Param("unionid") String unionid);
+    int deleteByPrimaryKey(String unionid);
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: USER_WX_RELT
+     * 映射数据库: user_wx_relt
      * @author MyBatis Generator
      */
     int insert(UserWxRelt record);
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: USER_WX_RELT
+     * 映射数据库: user_wx_relt
      * @author MyBatis Generator
      */
     int insertSelective(UserWxRelt record);
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: USER_WX_RELT
+     * 映射数据库: user_wx_relt
      * @author MyBatis Generator
      */
     List<UserWxRelt> selectByExample(UserWxReltExample example);
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: USER_WX_RELT
+     * 映射数据库: user_wx_relt
      * @author MyBatis Generator
      */
-    UserWxRelt selectByPrimaryKey(@Param("userInfoId") Long userInfoId, @Param("unionid") String unionid);
+    UserWxRelt selectByPrimaryKey(String unionid);
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: USER_WX_RELT
+     * 映射数据库: user_wx_relt
      * @author MyBatis Generator
      */
     int updateByExampleSelective(@Param("record") UserWxRelt record, @Param("example") UserWxReltExample example);
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: USER_WX_RELT
+     * 映射数据库: user_wx_relt
      * @author MyBatis Generator
      */
     int updateByExample(@Param("record") UserWxRelt record, @Param("example") UserWxReltExample example);
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: USER_WX_RELT
+     * 映射数据库: user_wx_relt
      * @author MyBatis Generator
      */
     int updateByPrimaryKeySelective(UserWxRelt record);
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: USER_WX_RELT
+     * 映射数据库: user_wx_relt
      * @author MyBatis Generator
      */
     int updateByPrimaryKey(UserWxRelt record);

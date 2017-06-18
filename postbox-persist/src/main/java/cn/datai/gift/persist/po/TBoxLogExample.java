@@ -2,50 +2,49 @@ package cn.datai.gift.persist.po;
 
 import cn.datai.gift.persist.vo.Page;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-public class UserWxReltExample {
+public class TBoxLogExample {
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: user_wx_relt
+     * 映射数据库: t_box_log
      * @author MyBatis Generator
      */
     protected String orderByClause;
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: user_wx_relt
+     * 映射数据库: t_box_log
      * @author MyBatis Generator
      */
     protected Page page;
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: user_wx_relt
+     * 映射数据库: t_box_log
      * @author MyBatis Generator
      */
     protected boolean distinct;
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: user_wx_relt
+     * 映射数据库: t_box_log
      * @author MyBatis Generator
      */
     protected List<Criteria> oredCriteria;
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: user_wx_relt
+     * 映射数据库: t_box_log
      * @author MyBatis Generator
      */
-    public UserWxReltExample() {
+    public TBoxLogExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: user_wx_relt
+     * 映射数据库: t_box_log
      * @author MyBatis Generator
      */
     public void setOrderByClause(String orderByClause) {
@@ -54,7 +53,7 @@ public class UserWxReltExample {
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: user_wx_relt
+     * 映射数据库: t_box_log
      * @author MyBatis Generator
      */
     public String getOrderByClause() {
@@ -63,7 +62,7 @@ public class UserWxReltExample {
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: user_wx_relt
+     * 映射数据库: t_box_log
      * @author MyBatis Generator
      */
     public void setPage(Page page) {
@@ -72,7 +71,7 @@ public class UserWxReltExample {
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: user_wx_relt
+     * 映射数据库: t_box_log
      * @author MyBatis Generator
      */
     public Page getPage() {
@@ -81,7 +80,7 @@ public class UserWxReltExample {
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: user_wx_relt
+     * 映射数据库: t_box_log
      * @author MyBatis Generator
      */
     public void setDistinct(boolean distinct) {
@@ -90,7 +89,7 @@ public class UserWxReltExample {
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: user_wx_relt
+     * 映射数据库: t_box_log
      * @author MyBatis Generator
      */
     public boolean isDistinct() {
@@ -99,7 +98,7 @@ public class UserWxReltExample {
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: user_wx_relt
+     * 映射数据库: t_box_log
      * @author MyBatis Generator
      */
     public List<Criteria> getOredCriteria() {
@@ -108,7 +107,7 @@ public class UserWxReltExample {
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: user_wx_relt
+     * 映射数据库: t_box_log
      * @author MyBatis Generator
      */
     public void or(Criteria criteria) {
@@ -117,7 +116,7 @@ public class UserWxReltExample {
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: user_wx_relt
+     * 映射数据库: t_box_log
      * @author MyBatis Generator
      */
     public Criteria or() {
@@ -128,7 +127,7 @@ public class UserWxReltExample {
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: user_wx_relt
+     * 映射数据库: t_box_log
      * @author MyBatis Generator
      */
     public Criteria createCriteria() {
@@ -141,7 +140,7 @@ public class UserWxReltExample {
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: user_wx_relt
+     * 映射数据库: t_box_log
      * @author MyBatis Generator
      */
     protected Criteria createCriteriaInternal() {
@@ -151,7 +150,7 @@ public class UserWxReltExample {
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: user_wx_relt
+     * 映射数据库: t_box_log
      * @author MyBatis Generator
      */
     public void clear() {
@@ -162,7 +161,7 @@ public class UserWxReltExample {
 
     /**
      * 本类由Mybatis Generator自动生成
-     * 映射数据库: user_wx_relt
+     * 映射数据库: t_box_log
      * @author MyBatis Generator
      */
     protected abstract static class GeneratedCriteria {
@@ -206,280 +205,325 @@ public class UserWxReltExample {
             criteria.add(new Criterion(condition, value1, value2));
         }
 
-        public Criteria andUnionidIsNull() {
-            addCriterion("unionid is null");
+        public Criteria andBoxLogIdIsNull() {
+            addCriterion("BOX_LOG_ID is null");
             return (Criteria) this;
         }
 
-        public Criteria andUnionidIsNotNull() {
-            addCriterion("unionid is not null");
+        public Criteria andBoxLogIdIsNotNull() {
+            addCriterion("BOX_LOG_ID is not null");
             return (Criteria) this;
         }
 
-        public Criteria andUnionidEqualTo(String value) {
-            addCriterion("unionid =", value, "unionid");
+        public Criteria andBoxLogIdEqualTo(Long value) {
+            addCriterion("BOX_LOG_ID =", value, "boxLogId");
             return (Criteria) this;
         }
 
-        public Criteria andUnionidNotEqualTo(String value) {
-            addCriterion("unionid <>", value, "unionid");
+        public Criteria andBoxLogIdNotEqualTo(Long value) {
+            addCriterion("BOX_LOG_ID <>", value, "boxLogId");
             return (Criteria) this;
         }
 
-        public Criteria andUnionidGreaterThan(String value) {
-            addCriterion("unionid >", value, "unionid");
+        public Criteria andBoxLogIdGreaterThan(Long value) {
+            addCriterion("BOX_LOG_ID >", value, "boxLogId");
             return (Criteria) this;
         }
 
-        public Criteria andUnionidGreaterThanOrEqualTo(String value) {
-            addCriterion("unionid >=", value, "unionid");
+        public Criteria andBoxLogIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("BOX_LOG_ID >=", value, "boxLogId");
             return (Criteria) this;
         }
 
-        public Criteria andUnionidLessThan(String value) {
-            addCriterion("unionid <", value, "unionid");
+        public Criteria andBoxLogIdLessThan(Long value) {
+            addCriterion("BOX_LOG_ID <", value, "boxLogId");
             return (Criteria) this;
         }
 
-        public Criteria andUnionidLessThanOrEqualTo(String value) {
-            addCriterion("unionid <=", value, "unionid");
+        public Criteria andBoxLogIdLessThanOrEqualTo(Long value) {
+            addCriterion("BOX_LOG_ID <=", value, "boxLogId");
             return (Criteria) this;
         }
 
-        public Criteria andUnionidLike(String value) {
-            addCriterion("unionid like", value, "unionid");
+        public Criteria andBoxLogIdIn(List<Long> values) {
+            addCriterion("BOX_LOG_ID in", values, "boxLogId");
             return (Criteria) this;
         }
 
-        public Criteria andUnionidNotLike(String value) {
-            addCriterion("unionid not like", value, "unionid");
+        public Criteria andBoxLogIdNotIn(List<Long> values) {
+            addCriterion("BOX_LOG_ID not in", values, "boxLogId");
             return (Criteria) this;
         }
 
-        public Criteria andUnionidIn(List<String> values) {
-            addCriterion("unionid in", values, "unionid");
+        public Criteria andBoxLogIdBetween(Long value1, Long value2) {
+            addCriterion("BOX_LOG_ID between", value1, value2, "boxLogId");
             return (Criteria) this;
         }
 
-        public Criteria andUnionidNotIn(List<String> values) {
-            addCriterion("unionid not in", values, "unionid");
+        public Criteria andBoxLogIdNotBetween(Long value1, Long value2) {
+            addCriterion("BOX_LOG_ID not between", value1, value2, "boxLogId");
             return (Criteria) this;
         }
 
-        public Criteria andUnionidBetween(String value1, String value2) {
-            addCriterion("unionid between", value1, value2, "unionid");
+        public Criteria andRecordIdIsNull() {
+            addCriterion("RECORD_ID is null");
             return (Criteria) this;
         }
 
-        public Criteria andUnionidNotBetween(String value1, String value2) {
-            addCriterion("unionid not between", value1, value2, "unionid");
+        public Criteria andRecordIdIsNotNull() {
+            addCriterion("RECORD_ID is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCustomerInfoIdIsNull() {
-            addCriterion("CUSTOMER_INFO_ID is null");
+        public Criteria andRecordIdEqualTo(Long value) {
+            addCriterion("RECORD_ID =", value, "recordId");
             return (Criteria) this;
         }
 
-        public Criteria andCustomerInfoIdIsNotNull() {
-            addCriterion("CUSTOMER_INFO_ID is not null");
+        public Criteria andRecordIdNotEqualTo(Long value) {
+            addCriterion("RECORD_ID <>", value, "recordId");
             return (Criteria) this;
         }
 
-        public Criteria andCustomerInfoIdEqualTo(Long value) {
-            addCriterion("CUSTOMER_INFO_ID =", value, "customerInfoId");
+        public Criteria andRecordIdGreaterThan(Long value) {
+            addCriterion("RECORD_ID >", value, "recordId");
             return (Criteria) this;
         }
 
-        public Criteria andCustomerInfoIdNotEqualTo(Long value) {
-            addCriterion("CUSTOMER_INFO_ID <>", value, "customerInfoId");
+        public Criteria andRecordIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("RECORD_ID >=", value, "recordId");
             return (Criteria) this;
         }
 
-        public Criteria andCustomerInfoIdGreaterThan(Long value) {
-            addCriterion("CUSTOMER_INFO_ID >", value, "customerInfoId");
+        public Criteria andRecordIdLessThan(Long value) {
+            addCriterion("RECORD_ID <", value, "recordId");
             return (Criteria) this;
         }
 
-        public Criteria andCustomerInfoIdGreaterThanOrEqualTo(Long value) {
-            addCriterion("CUSTOMER_INFO_ID >=", value, "customerInfoId");
+        public Criteria andRecordIdLessThanOrEqualTo(Long value) {
+            addCriterion("RECORD_ID <=", value, "recordId");
             return (Criteria) this;
         }
 
-        public Criteria andCustomerInfoIdLessThan(Long value) {
-            addCriterion("CUSTOMER_INFO_ID <", value, "customerInfoId");
+        public Criteria andRecordIdIn(List<Long> values) {
+            addCriterion("RECORD_ID in", values, "recordId");
             return (Criteria) this;
         }
 
-        public Criteria andCustomerInfoIdLessThanOrEqualTo(Long value) {
-            addCriterion("CUSTOMER_INFO_ID <=", value, "customerInfoId");
+        public Criteria andRecordIdNotIn(List<Long> values) {
+            addCriterion("RECORD_ID not in", values, "recordId");
             return (Criteria) this;
         }
 
-        public Criteria andCustomerInfoIdIn(List<Long> values) {
-            addCriterion("CUSTOMER_INFO_ID in", values, "customerInfoId");
+        public Criteria andRecordIdBetween(Long value1, Long value2) {
+            addCriterion("RECORD_ID between", value1, value2, "recordId");
             return (Criteria) this;
         }
 
-        public Criteria andCustomerInfoIdNotIn(List<Long> values) {
-            addCriterion("CUSTOMER_INFO_ID not in", values, "customerInfoId");
+        public Criteria andRecordIdNotBetween(Long value1, Long value2) {
+            addCriterion("RECORD_ID not between", value1, value2, "recordId");
             return (Criteria) this;
         }
 
-        public Criteria andCustomerInfoIdBetween(Long value1, Long value2) {
-            addCriterion("CUSTOMER_INFO_ID between", value1, value2, "customerInfoId");
+        public Criteria andBoxInfoIdIsNull() {
+            addCriterion("BOX_INFO_ID is null");
             return (Criteria) this;
         }
 
-        public Criteria andCustomerInfoIdNotBetween(Long value1, Long value2) {
-            addCriterion("CUSTOMER_INFO_ID not between", value1, value2, "customerInfoId");
+        public Criteria andBoxInfoIdIsNotNull() {
+            addCriterion("BOX_INFO_ID is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeIsNull() {
-            addCriterion("create_time is null");
+        public Criteria andBoxInfoIdEqualTo(Long value) {
+            addCriterion("BOX_INFO_ID =", value, "boxInfoId");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeIsNotNull() {
-            addCriterion("create_time is not null");
+        public Criteria andBoxInfoIdNotEqualTo(Long value) {
+            addCriterion("BOX_INFO_ID <>", value, "boxInfoId");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeEqualTo(Date value) {
-            addCriterion("create_time =", value, "createTime");
+        public Criteria andBoxInfoIdGreaterThan(Long value) {
+            addCriterion("BOX_INFO_ID >", value, "boxInfoId");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeNotEqualTo(Date value) {
-            addCriterion("create_time <>", value, "createTime");
+        public Criteria andBoxInfoIdGreaterThanOrEqualTo(Long value) {
+            addCriterion("BOX_INFO_ID >=", value, "boxInfoId");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeGreaterThan(Date value) {
-            addCriterion("create_time >", value, "createTime");
+        public Criteria andBoxInfoIdLessThan(Long value) {
+            addCriterion("BOX_INFO_ID <", value, "boxInfoId");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeGreaterThanOrEqualTo(Date value) {
-            addCriterion("create_time >=", value, "createTime");
+        public Criteria andBoxInfoIdLessThanOrEqualTo(Long value) {
+            addCriterion("BOX_INFO_ID <=", value, "boxInfoId");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeLessThan(Date value) {
-            addCriterion("create_time <", value, "createTime");
+        public Criteria andBoxInfoIdIn(List<Long> values) {
+            addCriterion("BOX_INFO_ID in", values, "boxInfoId");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeLessThanOrEqualTo(Date value) {
-            addCriterion("create_time <=", value, "createTime");
+        public Criteria andBoxInfoIdNotIn(List<Long> values) {
+            addCriterion("BOX_INFO_ID not in", values, "boxInfoId");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeIn(List<Date> values) {
-            addCriterion("create_time in", values, "createTime");
+        public Criteria andBoxInfoIdBetween(Long value1, Long value2) {
+            addCriterion("BOX_INFO_ID between", value1, value2, "boxInfoId");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeNotIn(List<Date> values) {
-            addCriterion("create_time not in", values, "createTime");
+        public Criteria andBoxInfoIdNotBetween(Long value1, Long value2) {
+            addCriterion("BOX_INFO_ID not between", value1, value2, "boxInfoId");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeBetween(Date value1, Date value2) {
-            addCriterion("create_time between", value1, value2, "createTime");
+        public Criteria andErrorCountIsNull() {
+            addCriterion("ERROR_COUNT is null");
             return (Criteria) this;
         }
 
-        public Criteria andCreateTimeNotBetween(Date value1, Date value2) {
-            addCriterion("create_time not between", value1, value2, "createTime");
+        public Criteria andErrorCountIsNotNull() {
+            addCriterion("ERROR_COUNT is not null");
             return (Criteria) this;
         }
 
-        public Criteria andRemarkIsNull() {
-            addCriterion("remark is null");
+        public Criteria andErrorCountEqualTo(Integer value) {
+            addCriterion("ERROR_COUNT =", value, "errorCount");
             return (Criteria) this;
         }
 
-        public Criteria andRemarkIsNotNull() {
-            addCriterion("remark is not null");
+        public Criteria andErrorCountNotEqualTo(Integer value) {
+            addCriterion("ERROR_COUNT <>", value, "errorCount");
             return (Criteria) this;
         }
 
-        public Criteria andRemarkEqualTo(String value) {
-            addCriterion("remark =", value, "remark");
+        public Criteria andErrorCountGreaterThan(Integer value) {
+            addCriterion("ERROR_COUNT >", value, "errorCount");
             return (Criteria) this;
         }
 
-        public Criteria andRemarkNotEqualTo(String value) {
-            addCriterion("remark <>", value, "remark");
+        public Criteria andErrorCountGreaterThanOrEqualTo(Integer value) {
+            addCriterion("ERROR_COUNT >=", value, "errorCount");
             return (Criteria) this;
         }
 
-        public Criteria andRemarkGreaterThan(String value) {
-            addCriterion("remark >", value, "remark");
+        public Criteria andErrorCountLessThan(Integer value) {
+            addCriterion("ERROR_COUNT <", value, "errorCount");
             return (Criteria) this;
         }
 
-        public Criteria andRemarkGreaterThanOrEqualTo(String value) {
-            addCriterion("remark >=", value, "remark");
+        public Criteria andErrorCountLessThanOrEqualTo(Integer value) {
+            addCriterion("ERROR_COUNT <=", value, "errorCount");
             return (Criteria) this;
         }
 
-        public Criteria andRemarkLessThan(String value) {
-            addCriterion("remark <", value, "remark");
+        public Criteria andErrorCountIn(List<Integer> values) {
+            addCriterion("ERROR_COUNT in", values, "errorCount");
             return (Criteria) this;
         }
 
-        public Criteria andRemarkLessThanOrEqualTo(String value) {
-            addCriterion("remark <=", value, "remark");
+        public Criteria andErrorCountNotIn(List<Integer> values) {
+            addCriterion("ERROR_COUNT not in", values, "errorCount");
             return (Criteria) this;
         }
 
-        public Criteria andRemarkLike(String value) {
-            addCriterion("remark like", value, "remark");
+        public Criteria andErrorCountBetween(Integer value1, Integer value2) {
+            addCriterion("ERROR_COUNT between", value1, value2, "errorCount");
             return (Criteria) this;
         }
 
-        public Criteria andRemarkNotLike(String value) {
-            addCriterion("remark not like", value, "remark");
+        public Criteria andErrorCountNotBetween(Integer value1, Integer value2) {
+            addCriterion("ERROR_COUNT not between", value1, value2, "errorCount");
             return (Criteria) this;
         }
 
-        public Criteria andRemarkIn(List<String> values) {
-            addCriterion("remark in", values, "remark");
+        public Criteria andEntertimeIsNull() {
+            addCriterion("ENTERTIME is null");
             return (Criteria) this;
         }
 
-        public Criteria andRemarkNotIn(List<String> values) {
-            addCriterion("remark not in", values, "remark");
+        public Criteria andEntertimeIsNotNull() {
+            addCriterion("ENTERTIME is not null");
             return (Criteria) this;
         }
 
-        public Criteria andRemarkBetween(String value1, String value2) {
-            addCriterion("remark between", value1, value2, "remark");
+        public Criteria andEntertimeEqualTo(String value) {
+            addCriterion("ENTERTIME =", value, "entertime");
             return (Criteria) this;
         }
 
-        public Criteria andRemarkNotBetween(String value1, String value2) {
-            addCriterion("remark not between", value1, value2, "remark");
+        public Criteria andEntertimeNotEqualTo(String value) {
+            addCriterion("ENTERTIME <>", value, "entertime");
             return (Criteria) this;
         }
 
-        public Criteria andUnionidLikeInsensitive(String value) {
-            addCriterion("upper(unionid) like", value.toUpperCase(), "unionid");
+        public Criteria andEntertimeGreaterThan(String value) {
+            addCriterion("ENTERTIME >", value, "entertime");
             return (Criteria) this;
         }
 
-        public Criteria andRemarkLikeInsensitive(String value) {
-            addCriterion("upper(remark) like", value.toUpperCase(), "remark");
+        public Criteria andEntertimeGreaterThanOrEqualTo(String value) {
+            addCriterion("ENTERTIME >=", value, "entertime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEntertimeLessThan(String value) {
+            addCriterion("ENTERTIME <", value, "entertime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEntertimeLessThanOrEqualTo(String value) {
+            addCriterion("ENTERTIME <=", value, "entertime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEntertimeLike(String value) {
+            addCriterion("ENTERTIME like", value, "entertime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEntertimeNotLike(String value) {
+            addCriterion("ENTERTIME not like", value, "entertime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEntertimeIn(List<String> values) {
+            addCriterion("ENTERTIME in", values, "entertime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEntertimeNotIn(List<String> values) {
+            addCriterion("ENTERTIME not in", values, "entertime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEntertimeBetween(String value1, String value2) {
+            addCriterion("ENTERTIME between", value1, value2, "entertime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEntertimeNotBetween(String value1, String value2) {
+            addCriterion("ENTERTIME not between", value1, value2, "entertime");
+            return (Criteria) this;
+        }
+
+        public Criteria andEntertimeLikeInsensitive(String value) {
+            addCriterion("upper(ENTERTIME) like", value.toUpperCase(), "entertime");
             return (Criteria) this;
         }
     }
 
     /**
      * This class was generated by MyBatis Generator.
-     * This class corresponds to the database table user_wx_relt
+     * This class corresponds to the database table t_box_log
      * @author do_not_delete_during_merge MyBatis Generator
      */
     public static class Criteria extends GeneratedCriteria {
@@ -491,7 +535,7 @@ public class UserWxReltExample {
 
     /**
      * 本类由Mybatis Generator自动生成
-     * 映射数据库: user_wx_relt
+     * 映射数据库: t_box_log
      * @author MyBatis Generator
      */
     public static class Criterion {

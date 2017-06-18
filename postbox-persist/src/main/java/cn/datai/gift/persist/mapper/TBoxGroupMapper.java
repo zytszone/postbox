@@ -1,85 +1,85 @@
 package cn.datai.gift.persist.mapper;
 
-import cn.datai.gift.persist.po.TBoxInfo;
-import cn.datai.gift.persist.po.TBoxInfoExample;
+import cn.datai.gift.persist.po.TBoxGroup;
+import cn.datai.gift.persist.po.TBoxGroupExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-public interface TBoxInfoMapper {
+public interface TBoxGroupMapper {
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: t_box_info
+     * 映射数据库: t_box_group
      * @author MyBatis Generator
      */
-    int countByExample(TBoxInfoExample example);
+    int countByExample(TBoxGroupExample example);
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: t_box_info
+     * 映射数据库: t_box_group
      * @author MyBatis Generator
      */
-    int deleteByExample(TBoxInfoExample example);
+    int deleteByExample(TBoxGroupExample example);
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: t_box_info
+     * 映射数据库: t_box_group
      * @author MyBatis Generator
      */
-    int deleteByPrimaryKey(Long boxInfoId);
+    int deleteByPrimaryKey(Long boxGroupId);
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: t_box_info
+     * 映射数据库: t_box_group
      * @author MyBatis Generator
      */
-    int insert(TBoxInfo record);
+    int insert(TBoxGroup record);
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: t_box_info
+     * 映射数据库: t_box_group
      * @author MyBatis Generator
      */
-    int insertSelective(TBoxInfo record);
+    int insertSelective(TBoxGroup record);
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: t_box_info
+     * 映射数据库: t_box_group
      * @author MyBatis Generator
      */
-    List<TBoxInfo> selectByExample(TBoxInfoExample example);
+    List<TBoxGroup> selectByExample(TBoxGroupExample example);
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: t_box_info
+     * 映射数据库: t_box_group
      * @author MyBatis Generator
      */
-    TBoxInfo selectByPrimaryKey(Long boxInfoId);
+    TBoxGroup selectByPrimaryKey(Long boxGroupId);
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: t_box_info
+     * 映射数据库: t_box_group
      * @author MyBatis Generator
      */
-    int updateByExampleSelective(@Param("record") TBoxInfo record, @Param("example") TBoxInfoExample example);
+    int updateByExampleSelective(@Param("record") TBoxGroup record, @Param("example") TBoxGroupExample example);
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: t_box_info
+     * 映射数据库: t_box_group
      * @author MyBatis Generator
      */
-    int updateByExample(@Param("record") TBoxInfo record, @Param("example") TBoxInfoExample example);
+    int updateByExample(@Param("record") TBoxGroup record, @Param("example") TBoxGroupExample example);
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: t_box_info
+     * 映射数据库: t_box_group
      * @author MyBatis Generator
      */
-    int updateByPrimaryKeySelective(TBoxInfo record);
+    int updateByPrimaryKeySelective(TBoxGroup record);
 
     /**
      * 本段代码由Mybatis Generator自动生成.
-     * 映射数据库: t_box_info
+     * 映射数据库: t_box_group
      * @author MyBatis Generator
      */
-    int updateByPrimaryKey(TBoxInfo record);
+    int updateByPrimaryKey(TBoxGroup record);
 }
