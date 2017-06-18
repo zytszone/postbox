@@ -19,31 +19,33 @@ public class MenuManager {
      * @return
      */
     public static Menu getMenu() {
-//        CommonButton btn11 = new CommonButton(CommonConstants.OPEN_BOX_NAME,CommonConstants.CLICK_TYPE, CommonConstants.OPEN_BOX_NAME_KEY,"");
-//
-//        CommonButton btn12 = new CommonButton(CommonConstants.QUOTES_MAKET_NAME,CommonConstants.VIEW_TYPE,"",CommonConstants.QUOTES_MAKET_URL);
-        
+
+        CommonButton btn21 = new CommonButton(CommonConstants.EXPRESS_DELIVERY_NAME,CommonConstants.VIEW_TYPE,"",CommonConstants.EXPRESS_DELIVERY_URL);
+        CommonButton btn22 = new CommonButton(CommonConstants.FOR_ME_LEAD_NAME,CommonConstants.CLICK_TYPE,CommonConstants.FOR_ME_LEAD_KEY,"");
+        CommonButton btn23 = new CommonButton(CommonConstants.REPAIR_NAME,CommonConstants.CLICK_TYPE,CommonConstants.REPAIR_KEY,"");
+
+        CommonButton btn31 = new CommonButton(CommonConstants.REPORT_REPAIR_NAME,CommonConstants.CLICK_TYPE,CommonConstants.REPORT_REPAIR_KEY,"");
+        CommonButton btn32 = new CommonButton(CommonConstants.HELP_FOR_USE_NAME,CommonConstants.CLICK_TYPE,CommonConstants.HELP_FOR_USE_KEY,"");
+
         /**
-         * 微信：  mainBtn1,mainBtn2 底部的两个一级菜单。
+         * 微信：  mainBtn1,mainBtn2 ,mainBtn3 底部的3个一级菜单。
          */
-        
-//        ComplexButton mainBtn1 = new ComplexButton();
-//        mainBtn1.setName(CommonConstants.PUER_QUOTES_NAME);
-//        mainBtn1.setSub_button(new CommonButton[] { btn11, btn12});
 
-//        CommonButton mainBtn2 = new CommonButton(CommonConstants.SELF_SOTCK_NAME,CommonConstants.VIEW_TYPE,"",CommonConstants.SELF_SOTCK_URL);
+        CommonButton mainBtn1 = new CommonButton(CommonConstants.OPEN_BOX_NAME,CommonConstants.CLICK_TYPE, CommonConstants.OPEN_BOX_KEY,"");
 
-        CommonButton mainBtn1 = new CommonButton(CommonConstants.OPEN_BOX_NAME,CommonConstants.CLICK_TYPE, CommonConstants.OPEN_BOX_NAME_KEY,"");
+        ComplexButton mainBtn2 = new ComplexButton();
+        mainBtn2.setName(CommonConstants.MY_EXPRESS_NAME);
+        mainBtn2.setSub_button(new CommonButton[] { btn21, btn22,btn23});
 
-        CommonButton mainBtn2 = new CommonButton(CommonConstants.OTHER_SERVER_NAME,CommonConstants.CLICK_TYPE,CommonConstants.OTHER_SERVER_NAME_KEY,"");
+        ComplexButton mainBtn3 = new ComplexButton();
+        mainBtn2.setName(CommonConstants.MY_CENTER_NAME);
+        mainBtn2.setSub_button(new CommonButton[] { btn31, btn32});
 
-
-        
         /**
          * 封装整个菜单
          */
         Menu menu = new Menu();
-        menu.setButton(new Button[] { mainBtn1, mainBtn2});
+        menu.setButton(new Button[] { mainBtn1, mainBtn2,mainBtn3});
 
         return menu;
     }
