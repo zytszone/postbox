@@ -1,6 +1,7 @@
 package cn.datai.gift.web.service;
 
 import cn.datai.gift.persist.po.TCustomerInfo;
+import cn.datai.gift.persist.po.TExpressmanInfo;
 import cn.datai.gift.persist.po.UserWxInfo;
 import cn.datai.gift.persist.po.UserWxRelt;
 
@@ -87,6 +88,13 @@ public interface BaseInfoService {
      * @return
      */
     TCustomerInfo queryTCustomerInfoIdByPhone(String phone);
+
+    /**
+     * 根据用户Id查询该用户是不是快递员
+     * @param customerInfoId
+     * @return
+     */
+    TExpressmanInfo queryTExpressmanInfoByCustomerInfoId(Long customerInfoId);
 
 
 }

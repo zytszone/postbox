@@ -1,6 +1,7 @@
 package cn.datai.gift.web.service.impl;
 
 import cn.datai.gift.persist.mapper.TCustomerInfoMapperExt;
+import cn.datai.gift.persist.mapper.TExpressmanInfoMapperExt;
 import cn.datai.gift.persist.mapper.UserWxInfoMapperExt;
 import cn.datai.gift.persist.mapper.UserWxReltMapperExt;
 import cn.datai.gift.persist.po.*;
@@ -28,6 +29,9 @@ public class BaseInfoServiceImpl implements BaseInfoService {
 
     @Autowired
     private UserWxReltMapperExt userWxReltMapperExt;
+
+    @Autowired
+    private TExpressmanInfoMapperExt tExpressmanInfoMapperExt;
 
 
     /**
@@ -176,6 +180,24 @@ public class BaseInfoServiceImpl implements BaseInfoService {
             return null;
         }
         return tCustomerInfoList.get(0);
+    }
+
+    /**
+     * 根据用户Id查询该用户是不是快递员
+     *
+     * @param customerInfoId
+     * @return
+     */
+    @Override
+    public TExpressmanInfo queryTExpressmanInfoByCustomerInfoId(Long customerInfoId) {
+
+        TExpressmanInfoExample example = new TExpressmanInfoExample();
+        example.createCriteria().andCustomerInfoIdEqualTo(customerInfoId);
+        List<TExpressmanInfo> list = tExpressmanInfoMapperExt.selectByExample(example);
+        if(null != list && !list.isEmpty() && list.size() == 1){
+            return list.get(0);
+        }
+        return null;
     }
 
 }
