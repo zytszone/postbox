@@ -7,8 +7,8 @@ package cn.datai.gift.web.contants;
 public interface TemplateConstants {
 
     /**
-     * 涨跌幅提醒 temId
+     * 模板Id
      */
-   String CHANGEPX_TEM_ID = "ms9bpvOJWEiLpzW-ze9hy4xtk1qZXfn8Zcc-kbVIocM";
+   String TEM_ID = "TJx8AA48IAd6gmTW97Mq-5SE2lp3G0SvGpBLOK6-c9g";
 
 }

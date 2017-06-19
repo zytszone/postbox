@@ -1,5 +1,6 @@
 package cn.datai.gift.web.controller;
 
+import cn.datai.gift.web.contants.TemplateConstants;
 import cn.datai.gift.web.contants.TokenContants;
 import cn.datai.gift.web.model.createMenu.MenuManager;
 import cn.datai.gift.web.model.queryMenus.ComplexMenus;
@@ -83,16 +84,16 @@ public class PublicSignalController {
         // 随机数
         String nonce = request.getParameter("nonce");
         if (CheckUtil.checkSignature(TOKEN, signature, timestamp, nonce)) {
-//            // 调用核心业务类接收消息、处理消息
+            // 调用核心业务类接收消息、处理消息
 //            String respMessage = null;
 //            try {
-//                //respMessage = processReqest.process(request,response);
+//                respMessage = processReqest.process(request,response);
 //            } catch (Exception e) {
 //                e.printStackTrace();
 //            }
-////            PrintWriter out = response.getWriter();
-////            out.print(respMessage);
-////            out.close();
+//            PrintWriter out = response.getWriter();
+//            out.print(respMessage);
+//            out.close();
 
 
             String responseMessage = wechatService.processRequest(accessToken,request);
@@ -113,43 +114,40 @@ public class PublicSignalController {
     public void testTemplateMessage(PrintWriter out, HttpServletRequest request, HttpServletResponse response) {
 
         String accessToken = TokenContants.WEIXIN_TOKEN;
-
         WxTemplate wechatTemplate = new WxTemplate();
-        wechatTemplate.setTemplate_id("2Tx6mp1K__hzlypsxxQyodVssJFrWuqIOA8R3Am541k");
-        wechatTemplate.setTouser("o8K3yvlGTSbRX2Nyeg6vexTr_ulw");
-        wechatTemplate.setUrl("http://www.baidu.com");
-        wechatTemplate.setTopcolor("#CD00CD");
+        wechatTemplate.setTemplate_id(TemplateConstants.TEM_ID);
+        wechatTemplate.setTouser("olWxVwxa8OI5X1O1FLyRcKsF-bOs");
+        wechatTemplate.setUrl("http://baidu.com");
+        wechatTemplate.setTopcolor("#173177");
 
         Map<String,TemplateData> m = new HashMap<>();
 
         TemplateData first = new TemplateData();
-        first.setValue("您好，您已成功进行会员卡充值");
-        first.setColor("#FF0000");
+
+        first.setValue("xxx");
+        first.setColor("#173177");
         m.put("first", first);
 
-        TemplateData accountType = new TemplateData();
-        accountType.setValue("会员卡号");
-        accountType.setColor("#A2CD5A");
-        m.put("accountType", accountType);
+//                    大于0    #bd4745        小于0  #26b463
 
-        TemplateData account = new TemplateData();
-        account.setValue("56645324252");
-        account.setColor("#CD8500");
-        m.put("account", account);
+        TemplateData keyword1 = new TemplateData();
+        keyword1.setValue("xxxxxxx");
+        keyword1.setColor("#173177");
+        m.put("keyword1", keyword1);
 
-        TemplateData amount = new TemplateData();
-        amount.setValue("100元");
-        amount.setColor("#8E388E");
-        m.put("amount", amount);
+        TemplateData keyword2 = new TemplateData();
+        keyword2.setValue("xxxxxx");
+        keyword2.setColor("#173177");
+        m.put("keyword2", keyword2);
 
-        TemplateData result = new TemplateData();
-        result.setValue("充值成功");
-        result.setColor("#CD3700");
-        m.put("result", result);
+        TemplateData keyword3 = new TemplateData();
+        keyword3.setValue("xxxxxx");
+        keyword3.setColor("#173177");
+        m.put("keyword3", keyword3);
 
         TemplateData remark = new TemplateData();
-        remark.setValue("备注：如有疑问，请致电139xxxxxxxx联系我们");
-        remark.setColor("#EBEBEB");
+        remark.setValue("点击查看最新实时行情");
+        remark.setColor("#173177");
         m.put("remark", remark);
         wechatTemplate.setData(m);
 

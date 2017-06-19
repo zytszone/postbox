@@ -51,40 +51,36 @@ public class WechatServiceImpl implements WechatService {
             case WechatMessageUtil.MESSAGE_TEXT:
                 String content = map.get("Content");
                 try {
-                    //// TODO: 2017/5/26
-                    String str = "";
-                    CommodityPriceVo commodityPriceVo = JSONObject.parseObject(str,CommodityPriceVo.class);
-
 
                     WxTemplate wechatTemplate = new WxTemplate();
-                    wechatTemplate.setTemplate_id(TemplateConstants.CHANGEPX_TEM_ID);
+                    wechatTemplate.setTemplate_id(TemplateConstants.TEM_ID);
                     wechatTemplate.setTouser(fromUserName);
-                    wechatTemplate.setUrl("http://price.jsdttec.com/quotesserver/quotation?comCode="+content);
+                    wechatTemplate.setUrl("http://baidu.com");
                     wechatTemplate.setTopcolor("#173177");
 
                     Map<String,TemplateData> m = new HashMap<>();
 
                     TemplateData first = new TemplateData();
 
-                    first.setValue(QuoteStatusEnum.getStatusName(commodityPriceVo.getTradeStatus()));
+                    first.setValue("xxx");
                     first.setColor("#173177");
                     m.put("first", first);
 
 //                    大于0    #bd4745        小于0  #26b463
 
                     TemplateData keyword1 = new TemplateData();
-                    keyword1.setValue(commodityPriceVo.getProdName());
+                    keyword1.setValue("xxxxxxx");
                     keyword1.setColor("#173177");
                     m.put("keyword1", keyword1);
 
                     TemplateData keyword2 = new TemplateData();
-                    keyword2.setValue(getSubString(commodityPriceVo.getLastPx()));
-                    keyword2.setColor(getColorString(commodityPriceVo.getPxChangeRate()));
+                    keyword2.setValue("xxxxxx");
+                    keyword2.setColor("#173177");
                     m.put("keyword2", keyword2);
 
                     TemplateData keyword3 = new TemplateData();
-                    keyword3.setValue(getSubString(commodityPriceVo.getPxChangeRate())+"%");
-                    keyword3.setColor(getColorString(commodityPriceVo.getPxChangeRate()));
+                    keyword3.setValue("xxxxxx");
+                    keyword3.setColor("#173177");
                     m.put("keyword3", keyword3);
 
                     TemplateData remark = new TemplateData();
@@ -134,7 +130,7 @@ public class WechatServiceImpl implements WechatService {
 
                 allMessage.setMsgType(WechatMessageUtil.MESSAGE_TEXT);
                 responseMessage = WechatMessageUtil.simpleobject2xml(allMessage);
-                logger.error("\n回复的消息内容为：{}", JSONObject.toJSONString(responseMessage));
+                logger.info("回复的消息内容为：{}", JSONObject.toJSONString(responseMessage));
 
             //// TODO: 2017/3/22
 
@@ -184,29 +180,4 @@ public class WechatServiceImpl implements WechatService {
         }
         return null;
     }
-
-    private String getSubString(String str){
-        if(StringUtils.isEmpty(str)){
-            return "";
-        }
-        int endIndex = str.indexOf(".");
-        return str.substring(0,endIndex+3);
-    }
-
-    private String getColorString(String str){
-        if(StringUtils.isEmpty(str)){
-            return "";
-        }
-        if("0.000".equals(str)){
-            return "#173177";
-        }
-        String first =  str.substring(0,1);
-        if("-".equals(first)){
-            return "#26b463";
-        }else{
-            return "#bd4745";
-        }
-
-    }
-
 }
