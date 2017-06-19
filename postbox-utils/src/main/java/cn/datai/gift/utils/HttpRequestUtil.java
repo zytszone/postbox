@@ -3,17 +3,23 @@ package cn.datai.gift.utils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.HttpStatus;
+import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.conn.ssl.SSLConnectionSocketFactory;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.util.EntityUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.security.KeyManagementException;
@@ -29,6 +35,8 @@ import java.util.Map.Entry;
  * 
  */
 public class HttpRequestUtil {
+	private static final Logger logger = LoggerFactory.getLogger(HttpRequestUtil.class);
+
 	/**
 	 * get请求
 	 * 
@@ -69,6 +77,58 @@ public class HttpRequestUtil {
 		}
 		return sb.toString();
 
+	}
+
+	public static String get(String url, Map<String, String> headers, Map<String, String> params, String charset) {
+		CloseableHttpClient httpclient = HttpClients.createDefault();
+		StringBuffer buffer = null;
+
+		if (params != null && !params.isEmpty()) {
+			buffer = new StringBuffer();
+			for (Map.Entry<String, String> entry : params.entrySet()) {
+				try {
+					buffer.append("&").append(entry.getKey()).append("=")
+							.append(entry.getValue());
+				}
+				catch (Exception e) {
+				}
+			}
+		}
+		HttpGet httpGet = null;
+		CloseableHttpResponse response = null;
+		try {
+			if (buffer != null && buffer.length() > 0) {
+				httpGet = new HttpGet(url + buffer.toString().replaceFirst("&", "?"));
+			}
+			else {
+				httpGet = new HttpGet(url);
+			}
+			if (headers != null && !headers.isEmpty()) {
+				for (Map.Entry<String, String> e : headers.entrySet()) {
+					httpGet.addHeader(e.getKey(), e.getValue());
+				}
+			}
+			response = httpclient.execute(httpGet);
+			if (response.getStatusLine().getStatusCode() == HttpStatus.SC_OK) {
+				return EntityUtils.toString(response.getEntity(), charset);
+			}
+			return response.getStatusLine().getStatusCode() + "";
+		}
+		catch (Exception e) {
+			logger.error("HTTP Client [Get] Error", e);
+			return e.getLocalizedMessage();
+		}
+		finally {
+			if (httpGet != null)
+				httpGet.abort();
+			if (response != null) {
+				try {
+					response.close();
+				}
+				catch (IOException e) {
+				}
+			}
+		}
 	}
 
 	/**
