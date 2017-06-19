@@ -10,7 +10,6 @@ import cn.datai.gift.utils.enums.RespCode;
 import cn.datai.gift.web.enums.BoxExpressStatus;
 import cn.datai.gift.web.plugin.annotation.Auth;
 import cn.datai.gift.web.plugin.vo.UserLoginInfo;
-import cn.datai.gift.web.service.BaseInfoService;
 import cn.datai.gift.web.service.BoxInfoService;
 import cn.datai.gift.web.service.CustomerInfoService;
 import cn.datai.gift.web.service.ExpressmanInfoService;
