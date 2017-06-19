@@ -2,9 +2,9 @@ package cn.datai.gift.web.service.impl;
 
 import cn.datai.gift.persist.mapper.TBoxInfoMapperExt;
 import cn.datai.gift.persist.po.TBoxInfo;
+import cn.datai.gift.persist.po.TBoxInfoExample;
 import cn.datai.gift.persist.po.TCustomerInfo;
 import cn.datai.gift.persist.po.TExpressmanInfo;
-import cn.datai.gift.persist.po.UserInfo;
 import cn.datai.gift.utils.SecurityUtils;
 import cn.datai.gift.utils.Strings;
 import cn.datai.gift.web.enums.BoxExpressStatus;
@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by H.CAAHN on 2017/5/16.
@@ -32,6 +33,21 @@ public class BoxInfoServiceImpl implements BoxInfoService {
     private static final Logger logger = LoggerFactory.getLogger(BoxInfoServiceImpl.class);
 
     private static final boolean debugEnable = logger.isDebugEnabled();
+
+    @Override
+    public TBoxInfo queryById(Long id) {
+        return this.tBoxInfoMapperExt.selectByPrimaryKey(id);
+    }
+
+    @Override
+    public List<TBoxInfo> queryByMobilePhone(String mobilePhone) {
+        TBoxInfoExample example = new TBoxInfoExample();
+        TBoxInfoExample.Criteria criteria = example.createCriteria();
+        criteria.andExpressStatusEqualTo(BoxExpressStatus.FULL.name());
+        criteria.andMobilePhoneEqualTo(mobilePhone);
+
+        return this.tBoxInfoMapperExt.selectByExample(example);
+    }
 
     @Override
     public String updateAsNormalUserForDecode(TBoxInfo boxInfo, String mkey, TCustomerInfo customerInfo) {
@@ -100,11 +116,6 @@ public class BoxInfoServiceImpl implements BoxInfoService {
             decode = this.decode(mkey, boxInfo.getSecKey());
         }
         return decode;
-    }
-
-    @Override
-    public TBoxInfo queryById(Long id) {
-        return this.tBoxInfoMapperExt.selectByPrimaryKey(id);
     }
 
     @Override

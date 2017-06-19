@@ -3,8 +3,9 @@ package cn.datai.gift.web.service;
 import cn.datai.gift.persist.po.TBoxInfo;
 import cn.datai.gift.persist.po.TCustomerInfo;
 import cn.datai.gift.persist.po.TExpressmanInfo;
-import cn.datai.gift.persist.po.UserInfo;
 import cn.datai.gift.utils.RespResult;
+
+import java.util.List;
 
 /**
  * Created by H.CAAHN on 2017/5/16.
@@ -16,6 +17,13 @@ public interface BoxInfoService {
      * @return
      */
     TBoxInfo queryById(Long id);
+
+    /**
+     * 根据客户手机号码查询当前客户待领的快递箱子信息
+     * @param mobilePhone
+     * @return
+     */
+    List<TBoxInfo> queryByMobilePhone(String mobilePhone);
 
     /**
      * 普通用户打开箱子<br/>
