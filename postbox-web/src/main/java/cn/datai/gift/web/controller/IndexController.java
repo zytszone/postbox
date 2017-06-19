@@ -8,6 +8,7 @@ import cn.datai.gift.utils.enums.RespCode;
 import cn.datai.gift.web.plugin.annotation.Auth;
 import cn.datai.gift.web.plugin.vo.UserLoginInfo;
 import cn.datai.gift.web.service.BaseInfoService;
+import cn.datai.gift.web.service.SmsSenderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +18,10 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 import java.util.Date;
+import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -33,6 +36,9 @@ public class IndexController extends BaseController{
 
     @Autowired
     private BaseInfoService baseInfoService;
+
+    @Autowired
+    private SmsSenderService smsSenderService;
 
     @RequestMapping(value = "/register")
     @Auth(needLogin = true,weixinJsAuth = true,needPhone = false)
@@ -95,6 +101,29 @@ public class IndexController extends BaseController{
     }
 
     /**
+     * 发送验证码
+     * @param mobile
+     * @return
+     */
+    @RequestMapping(value = "/smsSend",method = RequestMethod.POST)
+    @Auth(needLogin = true,weixinJsAuth = true)
+    public RespResult smsSend(String mobile,@ModelAttribute("customerInfoId") Long customerInfoId){
+        try {
+            if(!isMobileNO(mobile)){
+                return new RespResult(RespCode.FAIL,"手机号输入错误");
+            }
+            String code = getRandomCode();
+            boolean result = smsSenderService.sendCaptcha(mobile,code);
+
+            return new RespResult(RespCode.SUCCESS,"发送成功");
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.error("发送短信失败，错误信息：{}",mobile);
+            return new RespResult(RespCode.FAIL,"发送短息验证码失败");
+        }
+    }
+
+    /**
      * 跳转扫码页面
      * @return
      */
@@ -144,6 +173,20 @@ public class IndexController extends BaseController{
         Pattern p = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9])|(17[0-9]))\\d{8}$");
         Matcher m = p.matcher(mobiles);
         return m.matches();
+    }
+    /**
+     * 获取6位随机数字字符串
+     * @return
+     */
+    private static String getRandomCode(){
+        String str="0123456789";
+        StringBuilder sb=new StringBuilder(6);
+        for(int i=0;i<6;i++)
+        {
+            char ch=str.charAt(new Random().nextInt(str.length()));
+            sb.append(ch);
+        }
+        return sb.toString();
     }
 
 
