@@ -31,15 +31,15 @@ public class MenuManager {
          * 微信：  mainBtn1,mainBtn2 ,mainBtn3 底部的3个一级菜单。
          */
 
-        CommonButton mainBtn1 = new CommonButton(CommonConstants.OPEN_BOX_NAME,CommonConstants.CLICK_TYPE, CommonConstants.OPEN_BOX_KEY,"");
+        CommonButton mainBtn1 = new CommonButton(CommonConstants.OPEN_BOX_NAME,CommonConstants.VIEW_TYPE, "",CommonConstants.OPEN_BOX_URL);
 
         ComplexButton mainBtn2 = new ComplexButton();
         mainBtn2.setName(CommonConstants.MY_EXPRESS_NAME);
         mainBtn2.setSub_button(new CommonButton[] { btn21, btn22,btn23});
 
         ComplexButton mainBtn3 = new ComplexButton();
-        mainBtn2.setName(CommonConstants.MY_CENTER_NAME);
-        mainBtn2.setSub_button(new CommonButton[] { btn31, btn32});
+        mainBtn3.setName(CommonConstants.MY_CENTER_NAME);
+        mainBtn3.setSub_button(new CommonButton[] { btn31, btn32});
 
         /**
          * 封装整个菜单

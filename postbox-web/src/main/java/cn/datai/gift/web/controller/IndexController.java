@@ -95,11 +95,22 @@ public class IndexController extends BaseController{
     }
 
     /**
-     * 跳转密码页
+     * 跳转扫码页面
      * @return
      */
     @Auth(needLogin = true,weixinJsAuth = true)
-    @RequestMapping(value = "value = /getSecret" ,method = RequestMethod.GET)
+    @RequestMapping(value = "/scanqrcode" ,method = RequestMethod.GET)
+    public String scanqrcode(){
+        return "postbox/scanqrcode";
+    }
+
+
+    /**
+     * 跳转密码
+     * @return
+     */
+    @Auth(needLogin = true,weixinJsAuth = true)
+    @RequestMapping(value = "/getSecret" ,method = RequestMethod.GET)
     public String getSecret(){
         return "postbox/secret";
     }

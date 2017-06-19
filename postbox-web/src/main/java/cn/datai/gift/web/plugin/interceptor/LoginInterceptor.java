@@ -65,14 +65,15 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 
         HandlerMethod handlerMethod = (HandlerMethod)handler;
         Auth auth = handlerMethod.getMethodAnnotation(Auth.class);
+        return true;
 
         //没有注解或者不需要用户授权登录
-        if(null == auth || !auth.needLogin()){
-            return true;
-        }
+//        if(null == auth || !auth.needLogin()){
+//            return true;
+//        }
 
         //有注解需要验证是否需要用户授权
-        return wechatAuthHandler(auth,request,response);
+//        return wechatAuthHandler(auth,request,response);
     }
 
     /**
@@ -333,11 +334,12 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
             userLoginInfo.setUserInfoId(userInfo.getUserInfoId());//用户Id
         }else{
             //关系存在
-            UserInfo userInfo = baseInfoService.queryUserInfo(userWxRelt.getUserInfoId());
-
-            userLoginInfo.setPhone(userInfo.getMobilePhone());
-            userLoginInfo.setIsSpecial(userInfo.getIsSpecial());
-            userLoginInfo.setUserInfoId(userInfo.getUserInfoId());//用户Id
+            // TODO: 2017/6/18  
+//            UserInfo userInfo = baseInfoService.queryUserInfo(userWxRelt.getUserInfoId());
+//
+//            userLoginInfo.setPhone(userInfo.getMobilePhone());
+//            userLoginInfo.setIsSpecial(userInfo.getIsSpecial());
+//            userLoginInfo.setUserInfoId(userInfo.getUserInfoId());//用户Id
             session.setAttribute(SessionAttrs.USER_LOGIN_INFO, userLoginInfo);
         }
 
@@ -384,9 +386,10 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 
     private static UserWxRelt assemblyUserWxRelt(String unionId, Long userInfoId){
         UserWxRelt userWxRelt = new UserWxRelt();
-        userWxRelt.setUnionid(unionId);
-        userWxRelt.setUserInfoId(userInfoId);
-        userWxRelt.setCreateTime(new Date());
+        // TODO: 2017/6/18
+//        userWxRelt.setUnionid(unionId);
+//        userWxRelt.setUserInfoId(userInfoId);
+//        userWxRelt.setCreateTime(new Date());
         return userWxRelt;
     }
 
