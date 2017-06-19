@@ -1,7 +1,5 @@
 package cn.datai.gift.web.controller;
 
-import cn.datai.gift.persist.po.TCustomerInfo;
-import cn.datai.gift.persist.po.TExpressmanInfo;
 import cn.datai.gift.persist.po.TBoxInfo;
 import cn.datai.gift.persist.po.TCustomerInfo;
 import cn.datai.gift.persist.po.TExpressmanInfo;
@@ -10,6 +8,7 @@ import cn.datai.gift.utils.enums.RespCode;
 import cn.datai.gift.web.enums.BoxExpressStatus;
 import cn.datai.gift.web.plugin.annotation.Auth;
 import cn.datai.gift.web.plugin.vo.UserLoginInfo;
+import cn.datai.gift.web.service.BaseInfoService;
 import cn.datai.gift.web.service.BoxInfoService;
 import cn.datai.gift.web.service.CustomerInfoService;
 import cn.datai.gift.web.service.ExpressmanInfoService;
@@ -54,11 +53,9 @@ public class BoxSecretController extends BaseController {
     public String decode(Model model, @RequestParam("boxId") Long boxId, @RequestParam("mkey") String mkey,
                          HttpServletRequest request, @ModelAttribute("userLoginInfo") UserLoginInfo userLoginInfo) {
         try {
-            TCustomerInfo customerInfo = customerInfoService.queryById(userLoginInfo.getUserInfoId());
-            TCustomerInfo tCustomerInfo = baseInfoService.queryTCustomerInfoById(userLoginInfo.getCustomerInfoId());
+            TCustomerInfo customerInfo = customerInfoService.queryById(userLoginInfo.getCustomerInfoId());
             // 如果用户未注册，则跳转到注册页面
             if (customerInfo == null) {
-            if (tCustomerInfo == null) {
                 return "postbox/register";
             }
 
@@ -81,18 +78,9 @@ public class BoxSecretController extends BaseController {
                 }
             }
 
-            String decode = this.boxInfoService.updateForDecode(boxId, mkey, tCustomerInfo);
-
-            //通过用户ID查询该用户是不是快递员
-            TExpressmanInfo tExpressmanInfo = baseInfoService.queryTExpressmanInfoByCustomerInfoId(userLoginInfo.getCustomerInfoId());
-            String isSpecial = null == tExpressmanInfo ? "false" : "true";
-            model.addAttribute("isSpecial",isSpecial);
             if (StringUtils.isNotBlank(decode)) {
                 model.addAttribute("decode", decode);
                 if (exp != null) {
-
-                // 快递员
-                if ("true".equalsIgnoreCase(isSpecial)) {
                     String uuid = UUID.randomUUID().toString();
                     model.addAttribute("boxId", boxId);
                     model.addAttribute("isSpecial", "true");
