@@ -74,6 +74,11 @@ public class WechatMessageUtil {
     public static final String MESSAGE_EVENT_VIEW = "VIEW";
 
     /**
+     *扫码
+     */
+    public static final String MESSAGE_EVENT_SCAN = "SCAN";
+
+    /**
      * 将xml转化为Map集合
      *
      * @param request

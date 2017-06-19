@@ -125,8 +125,11 @@ public class WechatServiceImpl implements WechatService {
 //                            break;
                     }
 
-                }
-                else{
+                }else if(WechatMessageUtil.MESSAGE_EVENT_CLICK.equals(event)){
+
+                }else if(WechatMessageUtil.MESSAGE_EVENT_VIEW.equals(event)){
+                    break;
+                }else{
                     allMessage.setContent("推送点击事件，还需先查询出所有自定义菜单的相关信息，然后根据消息类型和事件类型以及事件key值做出不同的响应现在（现已经查询出所有菜单的信息，只连接上业务场景进行模板消息推送）！！");
                 }
 
