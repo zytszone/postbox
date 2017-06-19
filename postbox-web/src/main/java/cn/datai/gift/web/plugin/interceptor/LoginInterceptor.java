@@ -2,6 +2,7 @@ package cn.datai.gift.web.plugin.interceptor;
 
 
 import cn.datai.gift.persist.po.TCustomerInfo;
+import cn.datai.gift.persist.po.TExpressmanInfo;
 import cn.datai.gift.persist.po.UserWxInfo;
 import cn.datai.gift.persist.po.UserWxRelt;
 import cn.datai.gift.utils.RespResult;
@@ -330,15 +331,18 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
             //微信用户信与基本用户信息关联信息
             baseInfoService.insertUserWxRelt(this.assemblyUserWxRelt(weixinUserInfo.getUnionid(),customerInfo.getCustomerInfoId()));//用户与微信关系表
 
-            userLoginInfo.setUserInfoId(customerInfo.getCustomerInfoId());//用户Id
+            userLoginInfo.setCustomerInfoId(customerInfo.getCustomerInfoId());//用户Id
         }else{
             //关系存在
             TCustomerInfo tCustomerInfo = baseInfoService.queryTCustomerInfo(userWxRelt.getCustomerInfoId());
 
             userLoginInfo.setPhone(tCustomerInfo.getMobilePhone());
             //判断是不是快递员
-//            userLoginInfo.setIsSpecial(tCustomerInfo.getIsSpecial());
-            userLoginInfo.setUserInfoId(tCustomerInfo.getCustomerInfoId());//用户Id
+            TExpressmanInfo tExpressmanInfo = baseInfoService.queryTExpressmanInfoByCustomerInfoId(tCustomerInfo.getCustomerInfoId());
+            if(null != tExpressmanInfo){
+                userLoginInfo.setIsSpecial("true");
+            }
+            userLoginInfo.setCustomerInfoId(tCustomerInfo.getCustomerInfoId());//用户Id
             session.setAttribute(SessionAttrs.USER_LOGIN_INFO, userLoginInfo);
         }
 

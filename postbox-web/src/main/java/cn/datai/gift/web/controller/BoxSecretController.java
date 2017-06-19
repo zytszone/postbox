@@ -1,5 +1,7 @@
 package cn.datai.gift.web.controller;
 
+import cn.datai.gift.persist.po.TCustomerInfo;
+import cn.datai.gift.persist.po.TExpressmanInfo;
 import cn.datai.gift.persist.po.TBoxInfo;
 import cn.datai.gift.persist.po.TCustomerInfo;
 import cn.datai.gift.persist.po.TExpressmanInfo;
@@ -54,8 +56,10 @@ public class BoxSecretController extends BaseController {
                          HttpServletRequest request, @ModelAttribute("userLoginInfo") UserLoginInfo userLoginInfo) {
         try {
             TCustomerInfo customerInfo = customerInfoService.queryById(userLoginInfo.getUserInfoId());
+            TCustomerInfo tCustomerInfo = baseInfoService.queryTCustomerInfoById(userLoginInfo.getCustomerInfoId());
             // 如果用户未注册，则跳转到注册页面
             if (customerInfo == null) {
+            if (tCustomerInfo == null) {
                 return "postbox/register";
             }
 
@@ -78,9 +82,18 @@ public class BoxSecretController extends BaseController {
                 }
             }
 
+            String decode = this.boxInfoService.updateForDecode(boxId, mkey, tCustomerInfo);
+
+            //通过用户ID查询该用户是不是快递员
+            TExpressmanInfo tExpressmanInfo = baseInfoService.queryTExpressmanInfoByCustomerInfoId(userLoginInfo.getCustomerInfoId());
+            String isSpecial = null == tExpressmanInfo ? "false" : "true";
+            model.addAttribute("isSpecial",isSpecial);
             if (StringUtils.isNotBlank(decode)) {
                 model.addAttribute("decode", decode);
                 if (exp != null) {
+
+                // 快递员
+                if ("true".equalsIgnoreCase(isSpecial)) {
                     String uuid = UUID.randomUUID().toString();
                     model.addAttribute("boxId", boxId);
                     model.addAttribute("isSpecial", "true");

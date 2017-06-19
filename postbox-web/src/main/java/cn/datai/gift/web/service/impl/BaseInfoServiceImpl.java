@@ -200,4 +200,14 @@ public class BaseInfoServiceImpl implements BaseInfoService {
         return null;
     }
 
+    /**
+     * 插入快递员信息
+     *
+     * @param tExpressmanInfo
+     */
+    @Override
+    public void insertTExpressmanInfo(TExpressmanInfo tExpressmanInfo) {
+        tExpressmanInfoMapperExt.insertSelective(tExpressmanInfo);
+    }
+
 }

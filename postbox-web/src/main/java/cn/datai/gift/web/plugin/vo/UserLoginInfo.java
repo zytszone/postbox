@@ -20,7 +20,7 @@ public class UserLoginInfo implements Serializable {
     /**
      * 用户信息Id
      */
-    private Long userInfoId;
+    private Long customerInfoId;
 
     /**
      * 微信unionId
@@ -69,12 +69,12 @@ public class UserLoginInfo implements Serializable {
         this.weixinOpenId = weixinOpenId;
     }
 
-    public Long getUserInfoId() {
-        return userInfoId;
+    public Long getCustomerInfoId() {
+        return customerInfoId;
     }
 
-    public void setUserInfoId(Long userInfoId) {
-        this.userInfoId = userInfoId;
+    public void setCustomerInfoId(Long customerInfoId) {
+        this.customerInfoId = customerInfoId;
     }
 
     public String getUnionId() {
@@ -90,8 +90,10 @@ public class UserLoginInfo implements Serializable {
         return "UserLoginInfo{" +
                 "appId='" + appId + '\'' +
                 ", weixinOpenId='" + weixinOpenId + '\'' +
-                ", userInfoId=" + userInfoId +
+                ", customerInfoId=" + customerInfoId +
                 ", unionId='" + unionId + '\'' +
+                ", phone='" + phone + '\'' +
+                ", isSpecial='" + isSpecial + '\'' +
                 '}';
     }
 }

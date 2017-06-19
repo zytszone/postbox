@@ -96,5 +96,11 @@ public interface BaseInfoService {
      */
     TExpressmanInfo queryTExpressmanInfoByCustomerInfoId(Long customerInfoId);
 
+    /**
+     * 插入快递员信息
+     * @param tExpressmanInfo
+     */
+    void insertTExpressmanInfo(TExpressmanInfo tExpressmanInfo);
+
 
 }

@@ -1,50 +1,28 @@
 package cn.datai.gift.web.service;
 
-import cn.datai.gift.persist.po.TBoxInfo;
 import cn.datai.gift.persist.po.TCustomerInfo;
-import cn.datai.gift.persist.po.TExpressmanInfo;
-import cn.datai.gift.persist.po.UserInfo;
-import cn.datai.gift.utils.RespResult;
 
 /**
  * Created by H.CAAHN on 2017/5/16.
  */
 public interface BoxInfoService {
     /**
-     * 根据ID查找箱子
-     * @param id
-     * @return
-     */
-    TBoxInfo queryById(Long id);
-
-    /**
-     * 普通用户打开箱子<br/>
      * 程序逻辑：<br/>
-     * 1、如果箱子是空的，则判断箱子手机号是否与当前用户匹配，且上次开箱时间在10分钟之内，则允许打开箱子；<br/>
-     * 2、如果箱子有货物，且当前操作人是普通用户，则判断箱子手机号是否与当前用户匹配，如匹配，则允许打开箱子
-     * @param boxInfo
-     * @param mkey
-     * @param customerInfo
-     * @return
-     */
-    String updateAsNormalUserForDecode(TBoxInfo boxInfo, String mkey, TCustomerInfo customerInfo);
-
-    /**
-     * 快递员打开箱子<br/>
-     * 程序逻辑：<br/>
-     * 1、如果箱子是空的，则允许打开箱子<br/>
-     * 2、如果箱子非空，则不允许打开(暂时使用该逻辑)
-     * @param boxInfo
-     * @param mkey
-     * @param expressman
-     * @return
-     */
-    String updateAsExpressmanForDecode(TBoxInfo boxInfo, String mkey, TExpressmanInfo expressman);
-
-    /**
-     * 更新箱子的收件人手机号
+     * 1、如果箱子是空的，且当前操作人是快递员，则允许打开箱子；<br/>
+     * 2、如果箱子是空的，且当前操作人是普通用户，则判断箱子手机号是否与当前用户匹配，且上次开箱时间在10分钟之内，则允许打开箱子；<br/>
+     * 3、如果箱子有货物，且当前操作人是快递员，则让操作人按照普通用户来操作（快递员也可以拿自己的快递）；<br/>
+     * 4、如果箱子有货物，且当前操作人是普通用户，则判断箱子手机号是否与当前用户匹配，如匹配，则允许打开箱子
      * @param boxId
-     * @param mobile
+     * @param mkey
+     * @param tCustomerInfo
+     * @return
      */
-    void updateBoxMobilePhone(Long boxId, String mobile);
+    String updateForDecode(Long boxId, String mkey, TCustomerInfo tCustomerInfo) throws Exception;
+
+    /**
+     * 更新箱子的属主手机号
+     * @param boxId
+     * @param mobileno
+     */
+    void updateBoxMobile(Long boxId, String mobileno);
 }

@@ -1,6 +1,7 @@
 package cn.datai.gift.web.controller;
 
 
+import cn.datai.gift.persist.po.TCustomerInfo;
 import cn.datai.gift.persist.po.UserWxInfo;
 import cn.datai.gift.web.contants.SessionAttrs;
 import cn.datai.gift.web.plugin.vo.UserLoginInfo;
@@ -33,22 +34,22 @@ public class BaseController {
         httpSession.setAttribute(SessionAttrs.USER_WX_INFO, userWxInfo);
     }
 
-    @ModelAttribute("userInfoId")
+    @ModelAttribute("customerInfoId")
     public long getUserInfoId(HttpSession httpSession) {
         UserLoginInfo userLoginInfo = (UserLoginInfo) httpSession.getAttribute(SessionAttrs.USER_LOGIN_INFO);
         if (userLoginInfo == null) {
             return 0L;
         }
-        return userLoginInfo.getUserInfoId();
+        return userLoginInfo.getCustomerInfoId();
     }
 
-    @ModelAttribute("userInfo")
-    public UserInfo getUserInfo(HttpSession httpSession) {
+    @ModelAttribute("customerInfo")
+    public TCustomerInfo getTCustomerInfo(HttpSession httpSession) {
         UserLoginInfo userLoginInfo = (UserLoginInfo) httpSession.getAttribute(SessionAttrs.USER_LOGIN_INFO);
         if (userLoginInfo == null) {
             return null;
         }
-        return baseInfoService.queryUserInfo(userLoginInfo.getUserInfoId());
+        return baseInfoService.queryTCustomerInfo(userLoginInfo.getCustomerInfoId());
     }
 
     @ModelAttribute("userWxInfo")

@@ -1,5 +1,7 @@
 package cn.datai.gift.web.controller;
 
+import cn.datai.gift.persist.po.TCustomerInfo;
+import cn.datai.gift.persist.po.TExpressmanInfo;
 import cn.datai.gift.persist.po.UserWxInfo;
 import cn.datai.gift.utils.RespResult;
 import cn.datai.gift.utils.enums.RespCode;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
+import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -58,24 +61,29 @@ public class IndexController extends BaseController{
             }
 
             //绑定手机号操作
-            UserInfo userInfo = this.baseInfoService.queryUserInfo(userLoginInfo.getUserInfoId());
-            if(null == userInfo){
+            TCustomerInfo tCustomerInfo = this.baseInfoService.queryTCustomerInfo(userLoginInfo.getCustomerInfoId());
+            if(null == tCustomerInfo){
                 return new RespResult(RespCode.FAIL,"没有找到该用户");
             }
-            if(!StringUtils.isEmpty(userInfo.getMobilePhone())){
+            if(!StringUtils.isEmpty(tCustomerInfo.getMobilePhone())){
                 return new RespResult(RespCode.FAIL,"您已绑定手机号，不能重复绑定");
             }
 
-            UserInfo userInfo1 = this.baseInfoService.queryUserInfoByPhone(phone);
-            if(null != userInfo1){
+            TCustomerInfo tCustomerInfo1 = this.baseInfoService.queryTCustomerInfoIdByPhone(phone);
+            if(null != tCustomerInfo1){
                 return new RespResult(RespCode.FAIL,"改手机号已被绑定");
             }
 
 
-            userInfo.setMobilePhone(phone);
-            userInfo.setIsSpecial(isSpecial);
+            tCustomerInfo.setMobilePhone(phone);
 
-            baseInfoService.updateUserInfo(userInfo);
+            //快递员信息表中插入数据
+            TExpressmanInfo tExpressmanInfo = new TExpressmanInfo();
+            tExpressmanInfo.setCustomerInfoId(tCustomerInfo.getCustomerInfoId());
+            tExpressmanInfo.setApplytime(new Date());
+            tExpressmanInfo.setStatus("NORMAL");
+
+            baseInfoService.updateTCustomerInfo(tCustomerInfo);
 
             return new RespResult(RespCode.SUCCESS,redirecturl);
         } catch (Exception e) {
