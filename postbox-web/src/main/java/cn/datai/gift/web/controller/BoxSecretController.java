@@ -1,11 +1,17 @@
 package cn.datai.gift.web.controller;
 
+import cn.datai.gift.persist.po.TBoxInfo;
+import cn.datai.gift.persist.po.TCustomerInfo;
+import cn.datai.gift.persist.po.TExpressmanInfo;
 import cn.datai.gift.utils.RespResult;
 import cn.datai.gift.utils.enums.RespCode;
+import cn.datai.gift.web.enums.BoxExpressStatus;
 import cn.datai.gift.web.plugin.annotation.Auth;
 import cn.datai.gift.web.plugin.vo.UserLoginInfo;
 import cn.datai.gift.web.service.BaseInfoService;
 import cn.datai.gift.web.service.BoxInfoService;
+import cn.datai.gift.web.service.CustomerInfoService;
+import cn.datai.gift.web.service.ExpressmanInfoService;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,7 +34,10 @@ public class BoxSecretController extends BaseController {
     private static final Logger logger = LoggerFactory.getLogger(BoxSecretController.class);
 
     @Autowired
-    private BaseInfoService baseInfoService;
+    private CustomerInfoService customerInfoService;
+
+    @Autowired
+    private ExpressmanInfoService expressmanInfoService;
 
     @Autowired
     private BoxInfoService boxInfoService;
@@ -44,22 +53,37 @@ public class BoxSecretController extends BaseController {
     public String decode(Model model, @RequestParam("boxId") Long boxId, @RequestParam("mkey") String mkey,
                          HttpServletRequest request, @ModelAttribute("userLoginInfo") UserLoginInfo userLoginInfo) {
         try {
-            UserInfo userInfo = baseInfoService.queryUserInfoByUserId(userLoginInfo.getUserInfoId());
+            TCustomerInfo customerInfo = customerInfoService.queryById(userLoginInfo.getUserInfoId());
             // 如果用户未注册，则跳转到注册页面
-            if (userInfo == null) {
+            if (customerInfo == null) {
                 return "postbox/register";
             }
 
-            String decode = this.boxInfoService.updateForDecode(boxId, mkey, userInfo);
-            model.addAttribute("isSpecial",userInfo.getIsSpecial());
+            // 检查箱子是否存在
+            TBoxInfo box = this.boxInfoService.queryById(boxId);
+            if (box == null) {
+                logger.warn("没有找到指定的箱子：{}", boxId);
+                return "postbox/secret";
+            }
+
+            // 尝试作为普通用户打开箱子
+            TExpressmanInfo exp = null;
+            String decode = this.boxInfoService.updateAsNormalUserForDecode(box, mkey, customerInfo);
+
+            // 若此时无法解码，且箱子为空，则尝试作为快递员打开箱子
+            if (StringUtils.isBlank(decode) && BoxExpressStatus.EMPTY.name().equalsIgnoreCase(box.getExpressStatus())) {
+                exp = expressmanInfoService.queryByCustomerInfoId(customerInfo.getCustomerInfoId());
+                if (exp != null) {
+                    decode = boxInfoService.updateAsExpressmanForDecode(box, mkey, exp);
+                }
+            }
+
             if (StringUtils.isNotBlank(decode)) {
                 model.addAttribute("decode", decode);
-
-                // 快递员
-                if ("true".equalsIgnoreCase(userInfo.getIsSpecial())) {
+                if (exp != null) {
                     String uuid = UUID.randomUUID().toString();
-                    model.addAttribute("skey", uuid);
                     model.addAttribute("boxId", boxId);
+                    model.addAttribute("isSpecial", "true");
                     request.getSession().setAttribute("skey", uuid);
                 }
                 return "postbox/secret";
@@ -72,7 +96,7 @@ public class BoxSecretController extends BaseController {
     }
 
     /**
-     * 更新箱子的属主手机号
+     * 更新箱子的收件人手机号
      * @param boxId
      * @param mobile
      * @param skey
@@ -87,13 +111,12 @@ public class BoxSecretController extends BaseController {
             String uuid = (String)request.getSession().getAttribute("skey");
             // 更新箱子的属主手机号
             if (StringUtils.isNotBlank(uuid) && StringUtils.equals(skey, uuid)) {
-                this.boxInfoService.updateBoxMobile(boxId, mobile);
+                this.boxInfoService.updateBoxMobilePhone(boxId, mobile);
                 return new RespResult(RespCode.SUCCESS);
             }
         }
         catch (Exception ex) {
-            logger.error("服务器鉴权");
-
+            logger.error("更新箱子的收件人手机号失败", ex);
         }
         // 无权更新箱子的属主手机号
         return new RespResult(RespCode.FAIL);
