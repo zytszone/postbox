@@ -1,6 +1,5 @@
 package cn.datai.gift.web.service.impl;
 
-import cn.datai.gift.web.contants.CommonConstants;
 import cn.datai.gift.web.contants.TemplateConstants;
 import cn.datai.gift.web.enums.QuoteStatusEnum;
 import cn.datai.gift.web.model.message.AllMessage;
