@@ -1,8 +1,5 @@
 package cn.datai.gift.web.service;
 
-import cn.datai.gift.persist.po.UserInfo;
-import cn.datai.gift.utils.RespResult;
-
 /**
  * Created by H.CAAHN on 2017/5/16.
  */

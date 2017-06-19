@@ -1,6 +1,6 @@
 package cn.datai.gift.web.service;
 
-import cn.datai.gift.persist.po.UserInfo;
+import cn.datai.gift.persist.po.TCustomerInfo;
 import cn.datai.gift.persist.po.UserWxInfo;
 import cn.datai.gift.persist.po.UserWxRelt;
 
@@ -17,9 +17,9 @@ public interface BaseInfoService {
 
     /**
      * 插入 用户基本信息
-     * @param userInfo
+     * @param tCustomerInfo
      */
-    void insertUserInfo(UserInfo userInfo);
+    void insertTCustomerInfo(TCustomerInfo tCustomerInfo);
 
     /**
      *通过openId查询 用户微信信息
@@ -31,10 +31,10 @@ public interface BaseInfoService {
 
     /**
      * 通过用户Id查询   用户基本信息
-     * @param userInfoId
+     * @param customerInfoId
      * @return
      */
-    UserInfo queryUserInfo(Long userInfoId);
+    TCustomerInfo queryTCustomerInfo(Long customerInfoId);
 
     /**
      * 更新 用户微信信息
@@ -44,23 +44,23 @@ public interface BaseInfoService {
 
     /**
      * 更新  用户基本信息
-     * @param userInfo
+     * @param tCustomerInfo
      */
-    void updateUserInfo(UserInfo userInfo);
+    void updateTCustomerInfo(TCustomerInfo tCustomerInfo);
 
     /**
      * 通过用户unionId查询 用户基本信息
      * @param unionId
      * @return
      */
-    UserInfo queryUserInfoByUnionId(String unionId);
+    TCustomerInfo queryTCustomerInfoIdByUnionId(String unionId);
 
     /**
      * 通过用户userId查询 用户基本信息
-     * @param userId
+     * @param customerInfoId
      * @return
      */
-    UserInfo queryUserInfoByUserId(Long userId);
+    TCustomerInfo queryTCustomerInfoById(Long customerInfoId);
 
     /**
      * 数据库插入（或更新）用户微信信息,插入微信用户与基本用户关联信息，插入用户基本信息
@@ -86,7 +86,7 @@ public interface BaseInfoService {
      * @param phone
      * @return
      */
-    UserInfo queryUserInfoByPhone(String phone);
+    TCustomerInfo queryTCustomerInfoIdByPhone(String phone);
 
 
 }

@@ -1,10 +1,8 @@
 package cn.datai.gift.web.controller;
 
 
-import cn.datai.gift.persist.po.UserInfo;
 import cn.datai.gift.persist.po.UserWxInfo;
 import cn.datai.gift.web.contants.SessionAttrs;
-import cn.datai.gift.web.plugin.annotation.Auth;
 import cn.datai.gift.web.plugin.vo.UserLoginInfo;
 import cn.datai.gift.web.service.BaseInfoService;
 import org.springframework.beans.factory.annotation.Autowired;

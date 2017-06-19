@@ -1,7 +1,7 @@
 package cn.datai.gift.web.plugin.interceptor;
 
 
-import cn.datai.gift.persist.po.UserInfo;
+import cn.datai.gift.persist.po.TCustomerInfo;
 import cn.datai.gift.persist.po.UserWxInfo;
 import cn.datai.gift.persist.po.UserWxRelt;
 import cn.datai.gift.utils.RespResult;
@@ -65,15 +65,14 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
 
         HandlerMethod handlerMethod = (HandlerMethod)handler;
         Auth auth = handlerMethod.getMethodAnnotation(Auth.class);
-        return true;
 
         //没有注解或者不需要用户授权登录
-//        if(null == auth || !auth.needLogin()){
-//            return true;
-//        }
+        if(null == auth || !auth.needLogin()){
+            return true;
+        }
 
-        //有注解需要验证是否需要用户授权
-//        return wechatAuthHandler(auth,request,response);
+//        有注解需要验证是否需要用户授权
+        return wechatAuthHandler(auth,request,response);
     }
 
     /**
@@ -325,21 +324,21 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
             //用户和微信不存在关系说明该用户还没有注册
 
             //开始注册
-            UserInfo userInfo = userWxInfo2UserInfo(weixinUserInfo);
-            baseInfoService.insertUserInfo(userInfo);//用户
+            TCustomerInfo customerInfo = userWxInfo2TCustomerInfo(weixinUserInfo);
+            baseInfoService.insertTCustomerInfo(customerInfo);//用户
 
             //微信用户信与基本用户信息关联信息
-            baseInfoService.insertUserWxRelt(this.assemblyUserWxRelt(weixinUserInfo.getUnionid(),userInfo.getUserInfoId()));//用户与微信关系表
+            baseInfoService.insertUserWxRelt(this.assemblyUserWxRelt(weixinUserInfo.getUnionid(),customerInfo.getCustomerInfoId()));//用户与微信关系表
 
-            userLoginInfo.setUserInfoId(userInfo.getUserInfoId());//用户Id
+            userLoginInfo.setUserInfoId(customerInfo.getCustomerInfoId());//用户Id
         }else{
             //关系存在
-            // TODO: 2017/6/18  
-//            UserInfo userInfo = baseInfoService.queryUserInfo(userWxRelt.getUserInfoId());
-//
-//            userLoginInfo.setPhone(userInfo.getMobilePhone());
-//            userLoginInfo.setIsSpecial(userInfo.getIsSpecial());
-//            userLoginInfo.setUserInfoId(userInfo.getUserInfoId());//用户Id
+            TCustomerInfo tCustomerInfo = baseInfoService.queryTCustomerInfo(userWxRelt.getCustomerInfoId());
+
+            userLoginInfo.setPhone(tCustomerInfo.getMobilePhone());
+            //判断是不是快递员
+//            userLoginInfo.setIsSpecial(tCustomerInfo.getIsSpecial());
+            userLoginInfo.setUserInfoId(tCustomerInfo.getCustomerInfoId());//用户Id
             session.setAttribute(SessionAttrs.USER_LOGIN_INFO, userLoginInfo);
         }
 
@@ -371,25 +370,24 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
      * @param userWxInfo
      * @return
      */
-    private static UserInfo userWxInfo2UserInfo(UserWxInfo userWxInfo){
-        UserInfo userInfo = new UserInfo();
+    private static TCustomerInfo userWxInfo2TCustomerInfo(UserWxInfo userWxInfo){
+        TCustomerInfo userInfo = new TCustomerInfo();
         userInfo.setCountry(userWxInfo.getCountry());
         userInfo.setProvince(userWxInfo.getProvince());
         userInfo.setCity(userWxInfo.getCity());
-        userInfo.setNickname(userWxInfo.getNickname());
         userInfo.setSex(userWxInfo.getSex());
         userInfo.setHeadImgPath(userWxInfo.getUnionid()+ PhotoContants.FILENAME_SUFFIX);//只保存用户头像名称（unionId.jpg）
         userInfo.setRegisterTime(new Date());
+        userInfo.setStatus("NORMAL");
         //...
         return userInfo;
     }
 
     private static UserWxRelt assemblyUserWxRelt(String unionId, Long userInfoId){
         UserWxRelt userWxRelt = new UserWxRelt();
-        // TODO: 2017/6/18
-//        userWxRelt.setUnionid(unionId);
-//        userWxRelt.setUserInfoId(userInfoId);
-//        userWxRelt.setCreateTime(new Date());
+        userWxRelt.setUnionid(unionId);
+        userWxRelt.setCustomerInfoId(userInfoId);
+        userWxRelt.setCreateTime(new Date());
         return userWxRelt;
     }
 

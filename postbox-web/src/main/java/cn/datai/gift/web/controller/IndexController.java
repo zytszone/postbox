@@ -1,29 +1,21 @@
 package cn.datai.gift.web.controller;
 
-import cn.datai.gift.persist.po.UserInfo;
 import cn.datai.gift.persist.po.UserWxInfo;
-import cn.datai.gift.persist.po.UserWxRelt;
 import cn.datai.gift.utils.RespResult;
 import cn.datai.gift.utils.enums.RespCode;
-import cn.datai.gift.web.contants.PhotoContants;
 import cn.datai.gift.web.plugin.annotation.Auth;
 import cn.datai.gift.web.plugin.vo.UserLoginInfo;
 import cn.datai.gift.web.service.BaseInfoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.URLEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.net.URLEncoder;
-import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

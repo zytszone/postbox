@@ -1,17 +1,15 @@
 package cn.datai.gift.web.service.impl;
 
-import cn.datai.gift.persist.mapper.UserInfoMapperExt;
+import cn.datai.gift.persist.mapper.TCustomerInfoMapperExt;
 import cn.datai.gift.persist.mapper.UserWxInfoMapperExt;
 import cn.datai.gift.persist.mapper.UserWxReltMapperExt;
 import cn.datai.gift.persist.po.*;
-import cn.datai.gift.web.contants.PhotoContants;
 import cn.datai.gift.web.service.BaseInfoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -23,7 +21,7 @@ public class BaseInfoServiceImpl implements BaseInfoService {
     private static final Logger LOGGER = LoggerFactory.getLogger(BaseInfoServiceImpl.class);
 
     @Autowired
-    private UserInfoMapperExt userInfoMapperExt;
+    private TCustomerInfoMapperExt tCustomerInfoMapperExt;
 
     @Autowired
     private UserWxInfoMapperExt userWxInfoMapperExt;
@@ -45,11 +43,11 @@ public class BaseInfoServiceImpl implements BaseInfoService {
     /**
      * 插入 用户基本信息
      *
-     * @param userInfo
+     * @param
      */
     @Override
-    public void insertUserInfo(UserInfo userInfo) {
-        userInfoMapperExt.insertSelective(userInfo);
+    public void insertTCustomerInfo(TCustomerInfo tCustomerInfo) {
+        tCustomerInfoMapperExt.insertSelective(tCustomerInfo);
     }
 
     /**
@@ -67,12 +65,12 @@ public class BaseInfoServiceImpl implements BaseInfoService {
     /**
      * 通过用户Id查询   用户基本信息
      *
-     * @param userInfoId
+     * @param cusotmerInfoId
      * @return
      */
     @Override
-    public UserInfo queryUserInfo(Long userInfoId) {
-        return userInfoMapperExt.selectByPrimaryKey(userInfoId);
+    public TCustomerInfo queryTCustomerInfo(Long cusotmerInfoId) {
+        return tCustomerInfoMapperExt.selectByPrimaryKey(cusotmerInfoId);
     }
 
     /**
@@ -88,11 +86,11 @@ public class BaseInfoServiceImpl implements BaseInfoService {
     /**
      * 更新  用户基本信息
      *
-     * @param userInfo
+     * @param tCustomerInfo
      */
     @Override
-    public void updateUserInfo(UserInfo userInfo) {
-        userInfoMapperExt.updateByPrimaryKeySelective(userInfo);
+    public void updateTCustomerInfo(TCustomerInfo tCustomerInfo) {
+        tCustomerInfoMapperExt.updateByPrimaryKeySelective(tCustomerInfo);
     }
 
     /**
@@ -102,19 +100,19 @@ public class BaseInfoServiceImpl implements BaseInfoService {
      * @return
      */
     @Override
-    public UserInfo queryUserInfoByUnionId(String unionId) {
+    public TCustomerInfo queryTCustomerInfoIdByUnionId(String unionId) {
         return null;
     }
 
     /**
      * 通过用户userId查询 用户基本信息
      *
-     * @param userId
+     * @param customerInfoId
      * @return
      */
     @Override
-    public UserInfo queryUserInfoByUserId(Long userId) {
-        return userInfoMapperExt.selectByPrimaryKey(userId);
+    public TCustomerInfo queryTCustomerInfoById(Long customerInfoId) {
+        return tCustomerInfoMapperExt.selectByPrimaryKey(customerInfoId);
     }
 
     /**
@@ -170,14 +168,14 @@ public class BaseInfoServiceImpl implements BaseInfoService {
      * @return
      */
     @Override
-    public UserInfo queryUserInfoByPhone(String phone) {
-        UserInfoExample userInfoExample = new UserInfoExample();
-        userInfoExample.createCriteria().andMobilePhoneEqualTo(phone);
-        List<UserInfo> userInfoList = this.userInfoMapperExt.selectByExample(userInfoExample);
-        if(null == userInfoList || userInfoList.isEmpty()){
+    public TCustomerInfo queryTCustomerInfoIdByPhone(String phone) {
+        TCustomerInfoExample example = new TCustomerInfoExample();
+        example.createCriteria().andMobilePhoneEqualTo(phone);
+        List<TCustomerInfo> tCustomerInfoList = this.tCustomerInfoMapperExt.selectByExample(example);
+        if(null == tCustomerInfoList || tCustomerInfoList.isEmpty()){
             return null;
         }
-        return userInfoList.get(0);
+        return tCustomerInfoList.get(0);
     }
 
 }

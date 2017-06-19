@@ -1,8 +1,5 @@
 package cn.datai.gift.web.service.impl;
 
-import cn.datai.gift.persist.mapper.UserInfoMapperExt;
-import cn.datai.gift.persist.po.UserInfo;
-import cn.datai.gift.persist.po.UserInfoExample;
 import cn.datai.gift.web.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

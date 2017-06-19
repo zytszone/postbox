@@ -1,6 +1,5 @@
 package cn.datai.gift.web.controller;
 
-import cn.datai.gift.persist.po.UserInfo;
 import cn.datai.gift.utils.RespResult;
 import cn.datai.gift.utils.enums.RespCode;
 import cn.datai.gift.web.plugin.annotation.Auth;
