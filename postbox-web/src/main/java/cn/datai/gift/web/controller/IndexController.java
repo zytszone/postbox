@@ -97,6 +97,7 @@ public class IndexController extends BaseController{
                 tExpressmanInfo.setCustomerInfoId(tCustomerInfo.getCustomerInfoId());
                 tExpressmanInfo.setApplytime(new Date());
                 tExpressmanInfo.setStatus("NORMAL");
+                this.baseInfoService.insertTExpressmanInfo(tExpressmanInfo);
             }
 
             baseInfoService.updateTCustomerInfo(tCustomerInfo);
