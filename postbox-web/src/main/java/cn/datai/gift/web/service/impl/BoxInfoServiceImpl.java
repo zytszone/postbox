@@ -80,6 +80,7 @@ public class BoxInfoServiceImpl implements BoxInfoService {
                 boxInfo.setOpentime(new Date());
                 boxInfo.setExpressStatus(BoxExpressStatus.EMPTY.name());
                 this.tBoxInfoMapperExt.updateByPrimaryKeySelective(boxInfo);
+                open = true;
                 if (debugEnable) {
                     logger.debug("箱子非空，且箱子和用户手机号相同，允许打开");
                 }
