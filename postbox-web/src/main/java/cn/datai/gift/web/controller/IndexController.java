@@ -91,11 +91,13 @@ public class IndexController extends BaseController{
 
             tCustomerInfo.setMobilePhone(phone);
 
-            //快递员信息表中插入数据
-            TExpressmanInfo tExpressmanInfo = new TExpressmanInfo();
-            tExpressmanInfo.setCustomerInfoId(tCustomerInfo.getCustomerInfoId());
-            tExpressmanInfo.setApplytime(new Date());
-            tExpressmanInfo.setStatus("NORMAL");
+            if("true".equals(isSpecial)){
+                //快递员信息表中插入数据
+                TExpressmanInfo tExpressmanInfo = new TExpressmanInfo();
+                tExpressmanInfo.setCustomerInfoId(tCustomerInfo.getCustomerInfoId());
+                tExpressmanInfo.setApplytime(new Date());
+                tExpressmanInfo.setStatus("NORMAL");
+            }
 
             baseInfoService.updateTCustomerInfo(tCustomerInfo);
 
@@ -114,8 +116,9 @@ public class IndexController extends BaseController{
      * @return
      */
     @RequestMapping(value = "/smsSend",method = RequestMethod.POST)
-    @Auth(needLogin = true,weixinJsAuth = true)
-    public RespResult smsSend(String mobile,@ModelAttribute("userLoginInfo") UserLoginInfo userLoginInfo){
+    @Auth(needLogin = true,weixinJsAuth = true,needPhone = false)
+    @ResponseBody
+    public RespResult smsSend(@RequestParam("mobile") String mobile,@ModelAttribute("userLoginInfo") UserLoginInfo userLoginInfo){
         try {
             if(!isMobileNO(mobile)){
                 return new RespResult(RespCode.FAIL,"手机号输入错误");
