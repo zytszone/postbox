@@ -58,7 +58,7 @@
             </form>
         </c:if>
         <!-- 普通用户 -->
-        <c:if test="${not empty decode && isSpecial eq false}">
+        <c:if test="${not empty decode && isSpecial ne true}">
         <div class="well">
             <div style="font-size: 18px;margin-bottom: 5px;">您的开箱密码是：<span style="color:blue;">${decode}</span></div>
             <legend></legend>
