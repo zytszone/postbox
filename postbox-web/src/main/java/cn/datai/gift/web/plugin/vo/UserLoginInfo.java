@@ -37,6 +37,20 @@ public class UserLoginInfo implements Serializable {
      */
     private String isSpecial;
 
+    /**
+     * 验证码信息
+     */
+    private MobileCode mobileCode;
+
+
+    public MobileCode getMobileCode() {
+        return mobileCode;
+    }
+
+    public void setMobileCode(MobileCode mobileCode) {
+        this.mobileCode = mobileCode;
+    }
+
     public String getIsSpecial() {
         return isSpecial;
     }
@@ -94,6 +108,7 @@ public class UserLoginInfo implements Serializable {
                 ", unionId='" + unionId + '\'' +
                 ", phone='" + phone + '\'' +
                 ", isSpecial='" + isSpecial + '\'' +
+                ", mobileCode=" + mobileCode +
                 '}';
     }
 }

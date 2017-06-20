@@ -51,7 +51,7 @@
             <div class="input-group">
                 <input type="text" class="form-control" placeholder="请输入手机验证码" id="mobileCheck" aria-describedby="basic-addon3">
                 <span class="input-group-btn">
-                    <button style="width:80px;margin-left: 2px; padding: 7px 10px;" class="btn btn-default btn-sm" type="button">发送验证码</button>
+                    <button id="sendBtn" style="width:80px;margin-left: 2px; padding: 7px 10px;" class="btn btn-default btn-sm" type="button" onclick="smsSend();">发送验证码</button>
                 </span>
             </div>
             <br/>
@@ -177,7 +177,7 @@
             var check = $("input[type='checkbox']").is(':checked');
             $.ajax({
                 url: basePath + "main/bind",
-                data: {"phone":phone,"isSpecial":check,"redirecturl":'${redirecturl}'},
+                data: {"phone":phone,"code":mobileCheckno,"isSpecial":check,"redirecturl":'${redirecturl}'},
                 type: 'POST',
                 dataType: 'json',
                 success: function (res) {
@@ -220,5 +220,32 @@
             });
         })
     });
+
+    /**
+     * 发送手机验证码
+     */
+    function smsSend(){
+        $.ajax({
+            url: basePath + "main/smsSend",
+            data: {"mobile":$("#mobileNumber").val()},
+            type: 'POST',
+            dataType: 'json',
+            success: function (res) {
+                if(res.code == 0) {
+                    $("#sendBtn").attr("disabled",true);
+                    var num = 120;
+                    window.clearCode = setInterval(function () {
+                        num--;
+                        $("#sendBtn").html('倒计时' + num);
+                        if(num==0){
+                            $("#sendBtn").attr("disabled",false);
+                            $("#sendBtn").html('重新发送');
+                            clearInterval(window.clearCode);
+                        }
+                    },1000);
+                }
+            }
+        });
+    }
 </script>
 </html>
