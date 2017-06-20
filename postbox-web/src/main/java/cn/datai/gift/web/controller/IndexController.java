@@ -123,10 +123,11 @@ public class IndexController extends BaseController{
             if(!isMobileNO(mobile)){
                 return new RespResult(RespCode.FAIL,"手机号输入错误");
             }
-            String code = getRandomCode();//验证码
-            boolean result = smsSenderService.sendCaptcha(mobile,code);//发送短信
+            String code = "111111";
+//            String code = getRandomCode();//验证码
+//            boolean result = smsSenderService.sendCaptcha(mobile,code);//发送短信
 
-            if(result){
+            if(true){
                 MobileCode mobileCode = new MobileCode();
                 mobileCode.setMobile(mobile);//手机号
                 mobileCode.setCode(code);//验证码
