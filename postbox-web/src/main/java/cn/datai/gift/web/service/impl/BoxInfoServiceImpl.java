@@ -109,7 +109,7 @@ public class BoxInfoServiceImpl implements BoxInfoService {
     @Override
     public String updateAsExpressmanForDecode(TBoxInfo boxInfo, String mkey, TExpressmanInfo expressman) {
         String decode = "";
-        if (BoxExpressStatus.FULL.name().equalsIgnoreCase(boxInfo.getExpressStatus())) {
+        if (BoxExpressStatus.EMPTY.name().equalsIgnoreCase(boxInfo.getExpressStatus())) {
             if (debugEnable) {
                 logger.debug("快递员：{} 成功打开箱子：{}", expressman.getCustomerInfoId(), boxInfo.getBoxInfoId());
             }

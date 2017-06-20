@@ -12,6 +12,7 @@ import cn.datai.gift.web.service.BaseInfoService;
 import cn.datai.gift.web.service.BoxInfoService;
 import cn.datai.gift.web.service.CustomerInfoService;
 import cn.datai.gift.web.service.ExpressmanInfoService;
+import com.alibaba.fastjson.JSON;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -73,6 +74,9 @@ public class BoxSecretController extends BaseController {
             // 若此时无法解码，且箱子为空，则尝试作为快递员打开箱子
             if (StringUtils.isBlank(decode) && BoxExpressStatus.EMPTY.name().equalsIgnoreCase(box.getExpressStatus())) {
                 exp = expressmanInfoService.queryByCustomerInfoId(customerInfo.getCustomerInfoId());
+                if (logger.isDebugEnabled()) {
+                    logger.debug("无法解码，且箱子为空，查询快递员：{}", JSON.toJSON(exp));
+                }
                 if (exp != null) {
                     decode = boxInfoService.updateAsExpressmanForDecode(box, mkey, exp);
                 }
@@ -81,6 +85,9 @@ public class BoxSecretController extends BaseController {
             if (StringUtils.isNotBlank(decode)) {
                 model.addAttribute("decode", decode);
                 if (exp != null) {
+                    if (logger.isDebugEnabled()) {
+                        logger.debug("快递员打开箱子");
+                    }
                     String uuid = UUID.randomUUID().toString();
                     model.addAttribute("boxId", boxId);
                     model.addAttribute("isSpecial", "true");
