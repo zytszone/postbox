@@ -27,15 +27,15 @@ public interface CommonConstants {
     String OPEN_BOX_KEY = "OPEN_BOX_KEY";
 
 
+  /*  *//**
+     * 扫码
+     *//*
+    String OPEN_BOX_URL = "http://wangyong.developer.jsdttec.com/main/scanqrcode";*/
+
     /**
      * 扫码
      */
-    String OPEN_BOX_URL = "http://wangyong.developer.jsdttec.com/main/scanqrcode";
-
-//    /**
-//     * 扫码
-//     */
-//    String OPEN_BOX_URL = "https://weipan3.jsdttec.com/main/scanqrcode";
+    String OPEN_BOX_URL = "https://weipan3.jsdttec.com/main/scanqrcode";
 
 
     /**
