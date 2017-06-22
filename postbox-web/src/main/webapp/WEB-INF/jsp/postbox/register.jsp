@@ -177,7 +177,7 @@
             var check = $("input[type='checkbox']").is(':checked');
             $.ajax({
                 url: basePath + "main/bind",
-                data: {"phone":phone,"code":mobileCheckno,"isSpecial":check,"redirecturl":'${redirecturl}'},
+                data: {"customerName":customerName,"phone":phone,"code":mobileCheckno,"isSpecial":check,"redirecturl":'${redirecturl}'},
                 type: 'POST',
                 dataType: 'json',
                 success: function (res) {

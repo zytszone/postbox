@@ -27,15 +27,15 @@ public interface CommonConstants {
     String OPEN_BOX_KEY = "OPEN_BOX_KEY";
 
 
-//    /**
-//     * 扫码
-//     */
-//    String OPEN_BOX_URL = "http://wangyong.developer.jsdttec.com/main/scanqrcode";
-
     /**
      * 扫码
      */
-    String OPEN_BOX_URL = "https://weipan3.jsdttec.com/main/scanqrcode";
+    String OPEN_BOX_URL = "http://wangyong.developer.jsdttec.com/main/scanqrcode";
+
+//    /**
+//     * 扫码
+//     */
+//    String OPEN_BOX_URL = "https://weipan3.jsdttec.com/main/scanqrcode";
 
 
     /**
@@ -84,6 +84,11 @@ public interface CommonConstants {
     String FOR_ME_LEAD_KEY = "FOR_ME_LEAD_KEY";
 
     /**
+     * 替我代领
+     */
+    String FOR_ME_LEAD_URL = "https://weipan3.jsdttec.com/main/forMeLead";
+
+    /**
      *  报错/修理
      */
     String REPAIR_NAME = "报错/修理";
@@ -92,6 +97,11 @@ public interface CommonConstants {
      *  报错/修理
      */
     String REPAIR_KEY = "REPAIR_KEY";
+
+    /**
+     * 报错/修理
+     */
+    String REPAIR_URL  = "https://weipan3.jsdttec.com/main/repair";
 
     /**
      *  个人中心
@@ -114,6 +124,11 @@ public interface CommonConstants {
     String REPORT_REPAIR_KEY = "REPORT_REPAIR_KEY";
 
     /**
+     * 报修
+     */
+    String REPORT_REPAIR_URL  = "https://weipan3.jsdttec.com/main/reportRepair";
+
+    /**
      * 使用帮助
      */
     String HELP_FOR_USE_NAME = "使用帮助";
@@ -122,6 +137,11 @@ public interface CommonConstants {
      * 使用帮助
      */
     String HELP_FOR_USE_KEY = "HELP_FOR_USE_KEY";
+
+    /**
+     * 使用帮助
+     */
+    String HELP_FOR_USER_URL  = "https://weipan3.jsdttec.com/main/helpForUser";
 
 
 

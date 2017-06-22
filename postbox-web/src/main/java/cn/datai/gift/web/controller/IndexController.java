@@ -10,6 +10,7 @@ import cn.datai.gift.web.plugin.vo.MobileCode;
 import cn.datai.gift.web.plugin.vo.UserLoginInfo;
 import cn.datai.gift.web.service.BaseInfoService;
 import cn.datai.gift.web.service.SmsSenderService;
+import cn.datai.gift.web.utils.MyStringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,6 +58,7 @@ public class IndexController extends BaseController{
     @RequestMapping(value = "/bind",method = RequestMethod.POST)
     @ResponseBody
     public RespResult bind(@RequestParam("phone") String phone,
+                           @RequestParam("customerName") String customerName,
                            @RequestParam("isSpecial") String isSpecial,
                            @ModelAttribute("userWxInfo")UserWxInfo userWxInfo,
                            @ModelAttribute("userLoginInfo")UserLoginInfo userLoginInfo,
@@ -64,6 +66,9 @@ public class IndexController extends BaseController{
                            @RequestParam("code") String code,
                            HttpServletRequest request){
         try {
+            if(MyStringUtil.isBlank(customerName)){
+                return new RespResult(RespCode.FAIL,"请填写用户姓名");
+            }
             RespResult respResult = checkParams(phone, isSpecial);
             if(!respResult.getCode().equals(RespCode.SUCCESS.getCode())){
                 return new RespResult(RespCode.FAIL,"注册参数错误");
@@ -89,6 +94,7 @@ public class IndexController extends BaseController{
             }
 
 
+            tCustomerInfo.setRealname(customerName);
             tCustomerInfo.setMobilePhone(phone);
 
             if("true".equals(isSpecial)){
@@ -124,11 +130,10 @@ public class IndexController extends BaseController{
             if(!isMobileNO(mobile)){
                 return new RespResult(RespCode.FAIL,"手机号输入错误");
             }
-            String code = "111111";
-//            String code = getRandomCode();//验证码
-//            boolean result = smsSenderService.sendCaptcha(mobile,code);//发送短信
+            String code = getRandomCode();//验证码
+            boolean result = smsSenderService.sendCaptcha(mobile,code);//发送短信
 
-            if(true){
+            if(result){
                 MobileCode mobileCode = new MobileCode();
                 mobileCode.setMobile(mobile);//手机号
                 mobileCode.setCode(code);//验证码
@@ -149,7 +154,7 @@ public class IndexController extends BaseController{
      * 跳转扫码页面
      * @return
      */
-    @Auth(needLogin = true,weixinJsAuth = true)
+    @Auth(needLogin = true,weixinJsAuth = true,needPhone = true)
     @RequestMapping(value = "/scanqrcode" ,method = RequestMethod.GET)
     public String scanqrcode(){
         return "postbox/scanqrcode";

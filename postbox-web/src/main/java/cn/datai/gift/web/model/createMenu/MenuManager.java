@@ -21,11 +21,11 @@ public class MenuManager {
     public static Menu getMenu() {
 
         CommonButton btn21 = new CommonButton(CommonConstants.EXPRESS_DELIVERY_NAME,CommonConstants.VIEW_TYPE,"",CommonConstants.EXPRESS_DELIVERY_URL);
-        CommonButton btn22 = new CommonButton(CommonConstants.FOR_ME_LEAD_NAME,CommonConstants.CLICK_TYPE,CommonConstants.FOR_ME_LEAD_KEY,"");
-        CommonButton btn23 = new CommonButton(CommonConstants.REPAIR_NAME,CommonConstants.CLICK_TYPE,CommonConstants.REPAIR_KEY,"");
+        CommonButton btn22 = new CommonButton(CommonConstants.FOR_ME_LEAD_NAME,CommonConstants.VIEW_TYPE,"",CommonConstants.FOR_ME_LEAD_URL);
+        CommonButton btn23 = new CommonButton(CommonConstants.REPAIR_NAME,CommonConstants.VIEW_TYPE,"",CommonConstants.REPAIR_URL);
 
-        CommonButton btn31 = new CommonButton(CommonConstants.REPORT_REPAIR_NAME,CommonConstants.CLICK_TYPE,CommonConstants.REPORT_REPAIR_KEY,"");
-        CommonButton btn32 = new CommonButton(CommonConstants.HELP_FOR_USE_NAME,CommonConstants.CLICK_TYPE,CommonConstants.HELP_FOR_USE_KEY,"");
+        CommonButton btn31 = new CommonButton(CommonConstants.REPORT_REPAIR_NAME,CommonConstants.VIEW_TYPE,"",CommonConstants.REPORT_REPAIR_URL);
+        CommonButton btn32 = new CommonButton(CommonConstants.HELP_FOR_USE_NAME,CommonConstants.VIEW_TYPE,"",CommonConstants.HELP_FOR_USER_URL);
 
         /**
          * 微信：  mainBtn1,mainBtn2 ,mainBtn3 底部的3个一级菜单。
