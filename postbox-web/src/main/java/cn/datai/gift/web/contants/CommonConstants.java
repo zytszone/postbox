@@ -71,7 +71,7 @@ public interface CommonConstants {
     /**
      * 代领快递
      */
-    String EXPRESS_DELIVERY_URL = "https://weipan3.jsdttec.com/main/toReceivingList";
+    String EXPRESS_DELIVERY_URL = "https://weipan3.jsdttec.com/cuatomer/toReceivingList";
 
     /**
      * 替我代领
@@ -86,7 +86,7 @@ public interface CommonConstants {
     /**
      * 替我代领
      */
-    String FOR_ME_LEAD_URL = "https://weipan3.jsdttec.com/main/forMeLead";
+    String FOR_ME_LEAD_URL = "https://weipan3.jsdttec.com/customer/forMeLead";
 
     /**
      *  报错/修理
@@ -101,7 +101,7 @@ public interface CommonConstants {
     /**
      * 报错/修理
      */
-    String REPAIR_URL  = "https://weipan3.jsdttec.com/main/repair";
+    String REPAIR_URL  = "https://weipan3.jsdttec.com/main/customer";
 
     /**
      *  个人中心
@@ -131,7 +131,7 @@ public interface CommonConstants {
     /**
      * 使用帮助
      */
-    String HELP_FOR_USER_URL  = "https://weipan3.jsdttec.com/main/helpForUser";
+    String HELP_FOR_USER_URL  = "https://weipan3.jsdttec.com/customer/helpForUser";
 
 
 

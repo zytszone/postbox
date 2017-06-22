@@ -41,9 +41,6 @@ public class CustomerInfoController extends BaseController {
     @RequestMapping("toReceivingList")
     public String toReceivingList(Model model, @ModelAttribute("userLoginInfo") UserLoginInfo userLoginInfo) {
         try {
-            userLoginInfo = new UserLoginInfo();
-            userLoginInfo.setCustomerInfoId(1l);
-
             TCustomerInfo customerInfo = this.customerInfoService.queryById(userLoginInfo.getCustomerInfoId());
             List<TBoxInfo> dataList = this.boxInfoService.queryByMobilePhone(customerInfo.getMobilePhone());
             model.addAttribute("dataList", dataList);
