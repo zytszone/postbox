@@ -37,7 +37,7 @@ public class CustomerInfoController extends BaseController {
      * @param userLoginInfo
      * @return
      */
-    @Auth(needLogin = true,weixinJsAuth = true)
+    @Auth(needLogin = true,weixinJsAuth = true,needPhone = true)
     @RequestMapping("toReceivingList")
     public String toReceivingList(Model model, @ModelAttribute("userLoginInfo") UserLoginInfo userLoginInfo) {
         try {
@@ -66,5 +66,19 @@ public class CustomerInfoController extends BaseController {
         TCustomerInfo customerInfo = this.customerInfoService.queryById(userLoginInfo.getCustomerInfoId());
         model.addAttribute("customerInfo",customerInfo);
         return "/postbox/helpForUser";
+    }
+
+    /**
+     * 我的快递/替我代领
+     * @param model
+     * @param userLoginInfo
+     * @return
+     */
+    @Auth(needLogin = true,weixinJsAuth = true,needPhone = true)
+    @RequestMapping("forMeLead")
+    public String forMeLead(Model model, @ModelAttribute("userLoginInfo") UserLoginInfo userLoginInfo) {
+        TCustomerInfo customerInfo = this.customerInfoService.queryById(userLoginInfo.getCustomerInfoId());
+        model.addAttribute("customerInfo",customerInfo);
+        return "/postbox/forMeLead";
     }
 }

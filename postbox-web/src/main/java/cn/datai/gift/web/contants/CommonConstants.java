@@ -71,7 +71,7 @@ public interface CommonConstants {
     /**
      * 代领快递
      */
-    String EXPRESS_DELIVERY_URL = "http://www.baidu.com";
+    String EXPRESS_DELIVERY_URL = "https://weipan3.jsdttec.com/main/toReceivingList";
 
     /**
      * 替我代领
