@@ -119,19 +119,34 @@ public interface CommonConstants {
     String REPORT_REPAIR_NAME = "报修";
 
     /**
-     * 使用帮助
+     * 我的主页
      */
-    String HELP_FOR_USE_NAME = "使用帮助";
+    String MY_HOMEPAGE_NAME = "我的主页";
 
     /**
-     * 使用帮助
+     * 我的主页
      */
-    String HELP_FOR_USE_KEY = "HELP_FOR_USE_KEY";
+    String MY_HOMEPAGE_KEY = "MY_HOMEPAGE_KEY";
 
     /**
-     * 使用帮助
+     * 我的主页
      */
-    String HELP_FOR_USER_URL  = "https://weipan3.jsdttec.com/customer/helpForUser";
+    String MY_HOMEPAGE_URL = "https://weipan3.jsdttec.com/customer/myHomePage";
+
+    /**
+     * 帮助
+     */
+    String CENTER_HELP_NAME = "帮助";
+
+    /**
+     * 帮助
+     */
+    String CENTER_HELP_KEY = "CENTER_HELP_KEY";
+
+    /**
+     * 帮助
+     */
+    String CENTER_HELP_URL = "https://weipan3.jsdttec.com/customer/centerHelp";
 
 
 

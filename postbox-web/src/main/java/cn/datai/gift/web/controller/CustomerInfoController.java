@@ -52,17 +52,17 @@ public class CustomerInfoController extends BaseController {
     }
 
     /**
-     * 个人中心/帮助中心
+     * 个人中心/我的主页
      * @param model
      * @param userLoginInfo
      * @return
      */
     @Auth(needLogin = true,weixinJsAuth = true,needPhone = true)
-    @RequestMapping("helpForUser")
-    public String helpforUser(Model model, @ModelAttribute("userLoginInfo") UserLoginInfo userLoginInfo) {
+    @RequestMapping("myHomePage")
+    public String myHomePage(Model model, @ModelAttribute("userLoginInfo") UserLoginInfo userLoginInfo) {
         TCustomerInfo customerInfo = this.customerInfoService.queryById(userLoginInfo.getCustomerInfoId());
         model.addAttribute("customerInfo",customerInfo);
-        return "/postbox/helpForUser";
+        return "/postbox/myHomePage";
     }
 
     /**
