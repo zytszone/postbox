@@ -62,7 +62,10 @@
             <tr>
                 <td>
                     <div style="float:left;padding-top:8px;">无法取出？<a href="javascript:void(0);">点击报错</a></div>
-                    <div style="float:right;"><a href="javascript:void(0);" class="btn btn-sm btn-primary">导航</a></div>
+                    <div style="float:right;">
+                        <a href="javascript:void(0);" class="btn btn-sm btn-warning" style="width:65px;">替我代领</a>
+                        <a href="javascript:void(0);" class="btn btn-sm btn-primary" style="width:65px;">导&nbsp;&nbsp;航</a>
+                    </div>
                 </td>
             </tr>
         </table>
