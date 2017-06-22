@@ -111,6 +111,8 @@ public class BoxInfoServiceImpl implements BoxInfoService {
     public String updateAsExpressmanForDecode(TBoxInfo boxInfo, String mkey, TExpressmanInfo expressman) {
         String decode = "";
         if (BoxExpressStatus.EMPTY.name().equalsIgnoreCase(boxInfo.getExpressStatus())) {
+            boxInfo.setOpentime(new Date());
+            this.tBoxInfoMapperExt.updateByPrimaryKeySelective(boxInfo);
             if (debugEnable) {
                 logger.debug("快递员：{} 成功打开箱子：{}", expressman.getCustomerInfoId(), boxInfo.getBoxInfoId());
             }

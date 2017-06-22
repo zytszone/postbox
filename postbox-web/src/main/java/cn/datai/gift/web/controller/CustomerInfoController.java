@@ -31,13 +31,11 @@ public class CustomerInfoController extends BaseController {
     private static final Logger logger = LoggerFactory.getLogger(CustomerInfoController.class);
 
     @RequestMapping("toReceivingList")
-    public String toReceivingList(Model model) {
-        return "/postbox/toReceivingList";
-    }
-
-    @RequestMapping("getReceivingList")
-    public String getReceivingList(Model model, @ModelAttribute("userLoginInfo") UserLoginInfo userLoginInfo) {
+    public String toReceivingList(Model model, @ModelAttribute("userLoginInfo") UserLoginInfo userLoginInfo) {
         try {
+            userLoginInfo = new UserLoginInfo();
+            userLoginInfo.setCustomerInfoId(1l);
+
             TCustomerInfo customerInfo = this.customerInfoService.queryById(userLoginInfo.getCustomerInfoId());
             List<TBoxInfo> dataList = this.boxInfoService.queryByMobilePhone(customerInfo.getMobilePhone());
             model.addAttribute("dataList", dataList);
@@ -45,6 +43,6 @@ public class CustomerInfoController extends BaseController {
         catch (Exception ex) {
             logger.error("获取待领快件信息失败", ex);
         }
-        return null;
+        return "/postbox/toReceivingList";
     }
 }
