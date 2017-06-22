@@ -71,7 +71,7 @@ public interface CommonConstants {
     /**
      * 代领快递
      */
-    String EXPRESS_DELIVERY_URL = "https://weipan3.jsdttec.com/cuatomer/toReceivingList";
+    String EXPRESS_DELIVERY_URL = "https://weipan3.jsdttec.com/customer/toReceivingList";
 
     /**
      * 替我代领
@@ -101,7 +101,7 @@ public interface CommonConstants {
     /**
      * 报错/修理
      */
-    String REPAIR_URL  = "https://weipan3.jsdttec.com/main/customer";
+    String REPAIR_URL  = "https://weipan3.jsdttec.com/customer/repair";
 
     /**
      *  个人中心
