@@ -24,7 +24,8 @@ public class MenuManager {
         CommonButton btn22 = new CommonButton(CommonConstants.FOR_ME_LEAD_NAME,CommonConstants.VIEW_TYPE,"",CommonConstants.FOR_ME_LEAD_URL);
         CommonButton btn23 = new CommonButton(CommonConstants.REPAIR_NAME,CommonConstants.VIEW_TYPE,"",CommonConstants.REPAIR_URL);
 
-        CommonButton btn32 = new CommonButton(CommonConstants.HELP_FOR_USE_NAME,CommonConstants.VIEW_TYPE,"",CommonConstants.HELP_FOR_USER_URL);
+        CommonButton btn31 = new CommonButton(CommonConstants.MY_HOMEPAGE_NAME,CommonConstants.VIEW_TYPE,"",CommonConstants.MY_HOMEPAGE_URL);
+        CommonButton btn32 = new CommonButton(CommonConstants.CENTER_HELP_NAME,CommonConstants.VIEW_TYPE,"",CommonConstants.CENTER_HELP_URL);
 
         /**
          * 微信：  mainBtn1,mainBtn2 ,mainBtn3 底部的3个一级菜单。
@@ -38,7 +39,7 @@ public class MenuManager {
 
         ComplexButton mainBtn3 = new ComplexButton();
         mainBtn3.setName(CommonConstants.MY_CENTER_NAME);
-        mainBtn3.setSub_button(new CommonButton[] {btn32});
+        mainBtn3.setSub_button(new CommonButton[] {btn31,btn32});
 
         /**
          * 封装整个菜单
