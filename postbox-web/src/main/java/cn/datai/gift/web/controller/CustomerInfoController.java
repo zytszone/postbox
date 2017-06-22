@@ -77,8 +77,18 @@ public class CustomerInfoController extends BaseController {
     @Auth(needLogin = true,weixinJsAuth = true,needPhone = true)
     @RequestMapping("forMeLead")
     public String forMeLead(Model model, @ModelAttribute("userLoginInfo") UserLoginInfo userLoginInfo) {
-        TCustomerInfo customerInfo = this.customerInfoService.queryById(userLoginInfo.getCustomerInfoId());
-        model.addAttribute("customerInfo",customerInfo);
         return "/postbox/forMeLead";
+    }
+
+    /**
+     * 我的快递/报错修理
+     * @param model
+     * @param userLoginInfo
+     * @return
+     */
+    @Auth(needLogin = true,weixinJsAuth = true,needPhone = true)
+    @RequestMapping("repair")
+    public String repair(Model model, @ModelAttribute("userLoginInfo") UserLoginInfo userLoginInfo) {
+        return "/postbox/repair";
     }
 }

@@ -119,16 +119,6 @@ public interface CommonConstants {
     String REPORT_REPAIR_NAME = "报修";
 
     /**
-     *  报修
-     */
-    String REPORT_REPAIR_KEY = "REPORT_REPAIR_KEY";
-
-    /**
-     * 报修
-     */
-    String REPORT_REPAIR_URL  = "https://weipan3.jsdttec.com/main/reportRepair";
-
-    /**
      * 使用帮助
      */
     String HELP_FOR_USE_NAME = "使用帮助";
