@@ -10,12 +10,11 @@ import javax.servlet.http.HttpServletRequest;
  * 帮助中心
  * Created by H.CAAHN on 2017/6/22.
  */
+@RequestMapping("help")
 @Controller
 public class HelperController extends BaseController {
     @RequestMapping("/helpCenter")
     public String toHelp(Model model, HttpServletRequest request) {
-
-
         return "/postbox/helpCenter";
     }
 }

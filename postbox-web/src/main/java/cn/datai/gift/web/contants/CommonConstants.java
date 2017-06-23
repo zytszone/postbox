@@ -146,7 +146,7 @@ public interface CommonConstants {
     /**
      * 帮助
      */
-    String CENTER_HELP_URL = "https://weipan3.jsdttec.com/customer/centerHelp";
+    String CENTER_HELP_URL = "https://weipan3.jsdttec.com/help/helpCenter";
 
 
 
