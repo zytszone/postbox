@@ -49,14 +49,10 @@ public class WeixinTask {
             logger.info("系统启动微信公众号授权");
 
             //检查是否拥有微信token和jsapiTicket
-            String accessToken = TokenContants.WEIXIN_TOKEN;
-            String jsapiTicket = TokenContants.JSAPI_TICKET;
-            if (StrUtil.isBlank(accessToken) || StrUtil.isBlank(jsapiTicket)) {
-                logger.info("检查系统不存在授权信息，获取授权信息中......");
-                //如果系统中没有两个值，系统启动时就需要执行一次获取动作
-                this.refreshToken();
-                logger.info("微信授权信息获取结束。");
-            }
+            logger.info("检查系统不存在授权信息，获取授权信息中......");
+            //如果系统中没有两个值，系统启动时就需要执行一次获取动作
+            this.refreshToken();
+            logger.info("微信授权信息获取结束。");
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (IOException e) {
