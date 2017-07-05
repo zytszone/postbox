@@ -52,12 +52,10 @@ public class SmsSenderServiceImpl implements SmsSenderService {
         header.put("Authorization", "APPCODE " + appcode);
     }
 
-    @Async
     public boolean sendCaptcha(String mobileno, String captcha) {
         return this.sendSms(captchaCode, mobileno, "vcode", captcha);
     }
 
-    @Async
     public boolean sendReached(String mobileno, String address, String boxCode) {
         return this.sendSms(reachedCode, mobileno, "address", address, "code" ,boxCode);
     }
