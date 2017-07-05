@@ -86,7 +86,7 @@ create table T_CUSTOMER_INFO
   PROVINCE             varchar(32) comment '省份',
   CITY                 varchar(32) comment '城市',
   REALNAME             varchar(32) comment '真实姓名',
-  SEX                  enum('MALE','FEMALE') comment '性别',
+  SEX                  enum('UNKNOWN','MALE','FEMALE') comment '性别',
   MOBILE_PHONE         varchar(16) comment '客户手机号',
   STATUS               enum('NORMAL','FROZEN','DEMISE') comment '状态,NORMAL正常,FROZEN冻结,DEMISE销户',
   REGISTER_IP_ADDRESS  varchar(32) comment '注册IP地址',

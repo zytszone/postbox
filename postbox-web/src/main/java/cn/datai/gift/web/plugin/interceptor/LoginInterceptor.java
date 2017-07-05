@@ -379,7 +379,7 @@ public class LoginInterceptor extends HandlerInterceptorAdapter {
         userInfo.setCountry(userWxInfo.getCountry());
         userInfo.setProvince(userWxInfo.getProvince());
         userInfo.setCity(userWxInfo.getCity());
-        userInfo.setSex(userWxInfo.getSex());
+        userInfo.setSex(Integer.valueOf((userWxInfo.getSex()) + 1).toString());
         userInfo.setHeadImgPath(userWxInfo.getUnionid()+ PhotoContants.FILENAME_SUFFIX);//只保存用户头像名称（unionId.jpg）
         userInfo.setRegisterTime(new Date());
         userInfo.setStatus("NORMAL");
