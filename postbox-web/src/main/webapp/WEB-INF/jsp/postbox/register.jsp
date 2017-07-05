@@ -31,16 +31,10 @@
     <div class="container" style="width:98%">
         <legend></legend>
         <div class="row-fluid" style="text-align:center;margin-bottom:18px;font-size: 20px;">
-            注册成会员
+            加入我们
         </div>
         <legend></legend>
         <form id="register" method="post" action="">
-            <span class="error-notic name-error" style="display:none;color:red;">请输入真实姓名</span>
-            <div class="input-group">
-                <span class="input-group-addon" style="text-align:right;">您的真实姓名</span>
-                <input type="text" class="form-control" placeholder="请输入真实姓名" id="customerName" aria-describedby="basic-addon3">
-            </div>
-            <br/>
             <span class="error-notic mobile-error" style="display:none;color:red;">手机号码格式不正确</span>
             <div class="input-group">
                 <span class="input-group-addon" style="text-align:right;">您的手机号码</span>
@@ -54,36 +48,45 @@
                     <button id="sendBtn" style="width:80px;margin-left: 2px; padding: 7px 10px;" class="btn btn-default btn-sm" type="button" onclick="smsSend();">发送验证码</button>
                 </span>
             </div>
+            <div>手机号是您取快递时的唯一凭证，请务必真实有效！（<span style="color:red">重要告知：不要轻易泄漏您的短信验证码，谨防受骗！</span>）</div>
             <br/>
             <div class="input-group">
                 <label for="check">是否成为快递员：</label>
                 <input type="checkbox" id="check" name="check">
             </div>
             <br/>
-            <div class="input-group courier">
-                <div class="row">
-                    <div class="col-sm-12 col-md-12">
-                        <div class="thumbnail">
-                            <img src="${basePath}static/images/card2.png"/>
-                            <div class="caption">
-                                <h3>手持身份证照片</h3>
-                                <p>证件人五官以及身份证上所有信息必须完整有效且清晰可见</p>
-                                <p><a href="#" class="btn btn-primary" role="button">上传</a></p>
+            <div class="courier">
+                <span class="error-notic name-error" style="display:none;color:red;">请输入真实姓名</span>
+                <div class="input-group">
+                    <span class="input-group-addon" style="text-align:right;">您的真实姓名</span>
+                    <input type="text" class="form-control" placeholder="请输入真实姓名" id="customerName" aria-describedby="basic-addon3">
+                </div>
+                <br/>
+                <div class="input-group">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+                            <div class="thumbnail">
+                                <img src="${basePath}static/images/card2.png"/>
+                                <div class="caption">
+                                    <h3>手持身份证照片</h3>
+                                    <p>证件人五官以及身份证上所有信息必须完整有效且清晰可见</p>
+                                    <p><a href="#" class="btn btn-primary" role="button">上传</a></p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <br/>
-            <div class="input-group courier">
-                <div class="row">
-                    <div class="col-sm-12 col-md-12">
-                        <div class="thumbnail">
-                            <img src="${basePath}static/images/card3.png"/>
-                            <div class="caption">
-                                <h3>工作证件照片</h3>
-                                <p>证件照片上的信息必须完整有效且清晰可见</p>
-                                <p><a href="#" class="btn btn-primary" role="button">上传</a></p>
+                <br/>
+                <div class="input-group">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-12">
+                            <div class="thumbnail">
+                                <img src="${basePath}static/images/card3.png"/>
+                                <div class="caption">
+                                    <h3>工作证件照片</h3>
+                                    <p>证件照片上的信息必须完整有效且清晰可见</p>
+                                    <p><a href="#" class="btn btn-primary" role="button">上传</a></p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -91,7 +94,7 @@
             </div>
             <legend></legend>
             <div class="row-fluid" style="text-align:center;margin-bottom:10px;">
-                <button style="margin-left:8px;width:80px;" class="btn btn-success btn-sm submit" type="button">注册</button>
+                <button style="margin-left:8px;width:80px;" class="btn btn-success btn-sm submit" type="button">确定</button>
             </div>
         </form>
     </div>
@@ -129,20 +132,7 @@
         });
 
         $('.submit').on('click', function () {
-            var customerName=$('#customerName').val();
-            if(!customerName) {
-                easyDialog.open({
-                    container: {
-                        header: '<div style="font-size:15px;">操作提示</div>',
-                        content: '<div style="font-size:15px;">请输入真实姓名</div>',
-                        yesFn: function(){
-                            easyDialog.close();
-                        },
-                        noFn: false
-                    }
-                });
-                return;
-            }
+            var check = $("input[type='checkbox']").is(':checked');
 
             var phone = $("#mobileNumber").val();
             if(!phone) {
@@ -157,6 +147,23 @@
                     }
                 });
                 return;
+            }
+
+            var customerName=$('#customerName').val();
+            if(check==true||check=='true'){
+                if(!customerName) {
+                    easyDialog.open({
+                        container: {
+                            header: '<div style="font-size:15px;">操作提示</div>',
+                            content: '<div style="font-size:15px;">请输入真实姓名</div>',
+                            yesFn: function(){
+                                easyDialog.close();
+                            },
+                            noFn: false
+                        }
+                    });
+                    return;
+                }
             }
 
             var mobileCheckno=$('#mobileCheck').val();
@@ -174,18 +181,23 @@
                 return;
             }
 
-            var check = $("input[type='checkbox']").is(':checked');
             $.ajax({
                 url: basePath + "main/bind",
-                data: {"customerName":customerName,"phone":phone,"code":mobileCheckno,"isSpecial":check,"redirecturl":'${redirecturl}'},
+                data: {"customerName":customerName?customerName:'',"phone":phone,"code":mobileCheckno,"isSpecial":check,"redirecturl":'${redirecturl}'},
                 type: 'POST',
                 dataType: 'json',
                 success: function (res) {
                     if(res.code == 0){
+                        var msg_reg='';
+                        if(check==true||check=='true'){
+                            msg_reg='您已成功加入我们的团队，以后发快递就更便捷了！';
+                        }else{
+                            msg_reg='您已成功加入我们的团队，以后领取快递就更方便啦！';
+                        }
                         easyDialog.open({
                             container: {
                                 header: '<div style="font-size:15px;">操作提示</div>',
-                                content: '<div style="font-size:15px;">恭喜您，注册成功</div>',
+                                content: '<div style="font-size:15px;">'+msg_reg+'</div>',
                                 yesFn: function(){
                                     window.location.href=res.body;
                                 },

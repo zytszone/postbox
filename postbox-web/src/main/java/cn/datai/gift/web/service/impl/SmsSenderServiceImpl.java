@@ -9,6 +9,7 @@ import com.alibaba.fastjson.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
@@ -38,6 +39,9 @@ public class SmsSenderServiceImpl implements SmsSenderService {
     @Value("${api.sms.captcha.code}")
     private String captchaCode;
 
+    @Value("${api.sms.reached.code}")
+    private String reachedCode;
+
     private Map<String, String> header;
 
     private static final Logger logger = LoggerFactory.getLogger(SmsSenderServiceImpl.class);
@@ -48,8 +52,14 @@ public class SmsSenderServiceImpl implements SmsSenderService {
         header.put("Authorization", "APPCODE " + appcode);
     }
 
+    @Async
     public boolean sendCaptcha(String mobileno, String captcha) {
         return this.sendSms(captchaCode, mobileno, "vcode", captcha);
+    }
+
+    @Async
+    public boolean sendReached(String mobileno, String address, String boxCode) {
+        return this.sendSms(reachedCode, mobileno, "address", address, "code" ,boxCode);
     }
 
     public boolean sendSms(String templateCode, String mobileno, String... args) {

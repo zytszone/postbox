@@ -40,7 +40,7 @@
         <!-- 快递员 -->
         <c:if test="${not empty decode && isSpecial eq true}">
         <div class="well">
-            <div style="font-size: 18px;margin-bottom: 5px;">您的开箱密码是：<span style="color:blue;">${decode}</span></div>
+            <div style="font-size: 24px;margin-bottom: 5px;">您的开箱密码是：<span style="color:blue;">${decode}</span></div>
         </div>
             <legend></legend>
             <form id="phoneId" method="post" action="${basePath}secret/saveBoxMobile">
@@ -60,7 +60,7 @@
         <!-- 普通用户 -->
         <c:if test="${not empty decode && isSpecial ne true}">
         <div class="well">
-            <div style="font-size: 18px;margin-bottom: 5px;">您的开箱密码是：<span style="color:blue;">${decode}</span></div>
+            <div style="font-size: 24px;margin-bottom: 5px;">您的开箱密码是：<span style="color:blue;">${decode}</span></div>
             <legend></legend>
             <div>输入密码，箱子打开后取走快递，然后请关闭箱子！</div>
         </div>

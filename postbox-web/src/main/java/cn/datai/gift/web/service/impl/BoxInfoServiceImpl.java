@@ -9,6 +9,7 @@ import cn.datai.gift.utils.SecurityUtils;
 import cn.datai.gift.utils.Strings;
 import cn.datai.gift.web.enums.BoxExpressStatus;
 import cn.datai.gift.web.service.BoxInfoService;
+import cn.datai.gift.web.service.SmsSenderService;
 import cn.datai.gift.web.utils.DESUtil;
 import cn.datai.gift.web.utils.sec.AESCoder;
 import cn.datai.gift.web.utils.sec.HexUtil;
@@ -29,6 +30,9 @@ import java.util.List;
 public class BoxInfoServiceImpl implements BoxInfoService {
     @Autowired
     private TBoxInfoMapperExt tBoxInfoMapperExt;
+
+    @Autowired
+    private SmsSenderService smsSenderService;
 
     private static final Logger logger = LoggerFactory.getLogger(BoxInfoServiceImpl.class);
 
@@ -123,18 +127,26 @@ public class BoxInfoServiceImpl implements BoxInfoService {
 
     @Override
     public void updateBoxMobilePhone(Long boxId, String mobile) {
-        TBoxInfo record = new TBoxInfo();
-        record.setBoxInfoId(boxId);
-        record.setMobilePhone(mobile);
-        record.setExpressStatus(BoxExpressStatus.FULL.name());
-        this.tBoxInfoMapperExt.updateByPrimaryKeySelective(record);
+        TBoxInfo box = this.tBoxInfoMapperExt.selectByPrimaryKey(boxId);
+        if (box != null) {
+            TBoxInfo record = new TBoxInfo();
+            record.setBoxInfoId(boxId);
+            record.setMobilePhone(mobile);
+            record.setExpressStatus(BoxExpressStatus.FULL.name());
+            this.tBoxInfoMapperExt.updateByPrimaryKeySelective(record);
+
+            // 发送短信通知
+            this.smsSenderService.sendReached(mobile, box.getBoxName(), box.getBoxCode());
+
+            // 发送微信消息通知
+        }
     }
 
     private String decode(String code, String seckey) {
         String decode = "";
         try {
             byte[] bytes = AESCoder.ecbDec(HexUtil.hexToBytes(code), HexUtil.hexToBytes(seckey));
-            for (int i = 0; i < bytes.length && i < 6; i++) {
+            for (int i = 0; i < bytes.length && i < 4; i++) {
                 decode += bytes[i];
             }
         } catch (Exception e) {

@@ -66,7 +66,7 @@ public class IndexController extends BaseController{
                            @RequestParam("code") String code,
                            HttpServletRequest request){
         try {
-            if(MyStringUtil.isBlank(customerName)){
+            if("true".equalsIgnoreCase(isSpecial) && MyStringUtil.isBlank(customerName)){
                 return new RespResult(RespCode.FAIL,"请填写用户姓名");
             }
             RespResult respResult = checkParams(phone, isSpecial);
