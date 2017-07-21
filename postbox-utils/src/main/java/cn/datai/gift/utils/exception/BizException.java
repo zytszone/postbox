@@ -63,6 +63,7 @@ public class BizException extends RuntimeException {
     public BizException(RespCode resultCode) {
         super(resultCode.getMsg());
         this.errorCode = resultCode.getCode();
+        this.errorMsg = resultCode.getMsg();
     }
     
     /**

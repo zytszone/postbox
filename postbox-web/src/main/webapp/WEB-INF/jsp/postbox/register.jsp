@@ -26,6 +26,8 @@
             display: none;
         }
     </style>
+
+    <jsp:include page="../include/weixinDefaultShare.jsp"/>
 </head>
 <body>
     <div class="container" style="width:98%">
@@ -66,11 +68,11 @@
                     <div class="row">
                         <div class="col-sm-12 col-md-12">
                             <div class="thumbnail">
-                                <img src="${basePath}static/images/card2.png"/>
+                                <img id="cardImg" serverId="" src="${basePath}static/images/card2.png"/>
                                 <div class="caption">
                                     <h3>手持身份证照片</h3>
                                     <p>证件人五官以及身份证上所有信息必须完整有效且清晰可见</p>
-                                    <p><a href="#" class="btn btn-primary" role="button">上传</a></p>
+                                    <p><a onclick="uploadImg('cardImg');" class="btn btn-primary" role="button">上传</a></p>
                                 </div>
                             </div>
                         </div>
@@ -81,11 +83,11 @@
                     <div class="row">
                         <div class="col-sm-12 col-md-12">
                             <div class="thumbnail">
-                                <img src="${basePath}static/images/card3.png"/>
+                                <img id="workImg" serverId="" src="${basePath}static/images/card3.png"/>
                                 <div class="caption">
                                     <h3>工作证件照片</h3>
                                     <p>证件照片上的信息必须完整有效且清晰可见</p>
-                                    <p><a href="#" class="btn btn-primary" role="button">上传</a></p>
+                                    <p><a onclick="uploadImg('workImg');" class="btn btn-primary" role="button">上传</a></p>
                                 </div>
                             </div>
                         </div>
@@ -181,9 +183,37 @@
                 return;
             }
 
+            //获取本地上传的图片localIds
+            var serverIds = '';
+            if(check){
+                $(".container").find("img").each(function(i){
+                    var serverId = $(this).attr('serverId');
+                    if(null == serverId || '' == serverId){
+                        easyDialog.open({
+                            container: {
+                                header: '<div style="font-size:15px;">操作提示</div>',
+                                content: '<div style="font-size:15px;">请上传正确的图片</div>',
+                                yesFn: function(){
+                                    easyDialog.close();
+                                },
+                                noFn: false
+                            }
+                        });
+                        return;
+                    }
+                    serverIds += $(this).attr('serverId') + ",";
+                });
+                serverIds = serverIds.substring(0,serverIds.length-1);//以逗号分割
+            }
+
             $.ajax({
                 url: basePath + "main/bind",
-                data: {"customerName":customerName?customerName:'',"phone":phone,"code":mobileCheckno,"isSpecial":check,"redirecturl":'${redirecturl}'},
+                data: {"customerName":customerName?customerName:'',
+                        "phone":phone,
+                        "code":mobileCheckno,
+                        "isSpecial":check,
+                        "redirecturl":'${redirecturl}',
+                        'serverIds':serverIds},
                 type: 'POST',
                 dataType: 'json',
                 success: function (res) {
@@ -258,6 +288,34 @@
                 }
             }
         });
+    }
+
+    function uploadImg(id){
+        if(isWeixin()) {
+            wx.ready(function () {
+                var localIds = '';
+                wx.chooseImage({
+                    count: 1, // 默认9
+                    sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+                    sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+                    success: function (res) {
+                        localIds = res.localIds; // 返回选定照片的本地ID列表，localId可以作为img标签的src属性显示图片
+                        uploadImg(localIds);
+                    }
+                });
+                var uploadImg=function(localIds){
+                    wx.uploadImage({
+                        localId: ''+localIds, // 需要上传的图片的本地ID，由chooseImage接口获得
+                        isShowProgressTips: 1, // 默认为1，显示进度提示
+                        success: function (r) {
+                            var serverId = r.serverId; // 返回图片的服务器端ID
+                            $("#"+id).attr("src",localIds);
+                            $("#"+id).attr("serverId",serverId);
+                        }
+                    });
+                }
+            });
+        }
     }
 </script>
 </html>

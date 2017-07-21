@@ -5,10 +5,12 @@ import cn.datai.gift.persist.po.TExpressmanInfo;
 import cn.datai.gift.persist.po.UserWxInfo;
 import cn.datai.gift.utils.RespResult;
 import cn.datai.gift.utils.enums.RespCode;
+import cn.datai.gift.web.contants.TokenContants;
 import cn.datai.gift.web.plugin.annotation.Auth;
 import cn.datai.gift.web.plugin.vo.MobileCode;
 import cn.datai.gift.web.plugin.vo.UserLoginInfo;
 import cn.datai.gift.web.service.BaseInfoService;
+import cn.datai.gift.web.service.CustomerInfoService;
 import cn.datai.gift.web.service.SmsSenderService;
 import cn.datai.gift.web.utils.MyStringUtil;
 import org.slf4j.Logger;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Random;
 import java.util.regex.Matcher;
@@ -36,10 +39,10 @@ public class IndexController extends BaseController{
     public static final Logger logger = LoggerFactory.getLogger(IndexController.class);
 
     @Autowired
-    private BaseInfoService baseInfoService;
+    private SmsSenderService smsSenderService;
 
     @Autowired
-    private SmsSenderService smsSenderService;
+    private CustomerInfoService customerInfoService;
 
     @RequestMapping(value = "/register")
     @Auth(needLogin = true,weixinJsAuth = true,needPhone = false)
@@ -64,55 +67,14 @@ public class IndexController extends BaseController{
                            @ModelAttribute("userLoginInfo")UserLoginInfo userLoginInfo,
                            @RequestParam("redirecturl") String redirecturl,
                            @RequestParam("code") String code,
+                           @RequestParam("serverIds") String serverIds,
                            HttpServletRequest request){
         try {
-            if("true".equalsIgnoreCase(isSpecial) && MyStringUtil.isBlank(customerName)){
-                return new RespResult(RespCode.FAIL,"请填写用户姓名");
-            }
-            RespResult respResult = checkParams(phone, isSpecial);
-            if(!respResult.getCode().equals(RespCode.SUCCESS.getCode())){
-                return new RespResult(RespCode.FAIL,"注册参数错误");
-            }
-            //判断验证是否正确是不是超时
-            MobileCode mobileCode = userLoginInfo.getMobileCode();
-            if(!checkCode(mobileCode,phone,code)){
-                return new RespResult(RespCode.FAIL,"手机号或验证码错误");
-            }
-
-            //绑定手机号操作
-            TCustomerInfo tCustomerInfo = this.baseInfoService.queryTCustomerInfo(userLoginInfo.getCustomerInfoId());
-            if(null == tCustomerInfo){
-                return new RespResult(RespCode.FAIL,"没有找到该用户");
-            }
-            if(!StringUtils.isEmpty(tCustomerInfo.getMobilePhone())){
-                return new RespResult(RespCode.FAIL,"您已绑定手机号，不能重复绑定");
-            }
-
-            TCustomerInfo tCustomerInfo1 = this.baseInfoService.queryTCustomerInfoIdByPhone(phone);
-            if(null != tCustomerInfo1){
-                return new RespResult(RespCode.FAIL,"改手机号已被绑定");
-            }
-
-
-            tCustomerInfo.setRealname(customerName);
-            tCustomerInfo.setMobilePhone(phone);
-
-            if("true".equals(isSpecial)){
-                //快递员信息表中插入数据
-                TExpressmanInfo tExpressmanInfo = new TExpressmanInfo();
-                tExpressmanInfo.setCustomerInfoId(tCustomerInfo.getCustomerInfoId());
-                tExpressmanInfo.setApplytime(new Date());
-                tExpressmanInfo.setStatus("NORMAL");
-                this.baseInfoService.insertTExpressmanInfo(tExpressmanInfo);
-            }
-
-            baseInfoService.updateTCustomerInfo(tCustomerInfo);
-
-            return new RespResult(RespCode.SUCCESS,redirecturl);
+            return  customerInfoService.bind(phone, customerName, isSpecial, userWxInfo, userLoginInfo, redirecturl, code, serverIds,request);
         } catch (Exception e) {
             e.printStackTrace();
-            logger.error("注册失败，错误信息：{}",e);
-            return new RespResult(RespCode.FAIL,"注册绑定失败");
+            logger.error("绑定手机号发生异常，错误信息：{}",e);
+            return new RespResult(RespCode.FAIL,e.getMessage());
         }
 
     }
@@ -217,30 +179,6 @@ public class IndexController extends BaseController{
             sb.append(ch);
         }
         return sb.toString();
-    }
-
-    /**
-     * 校验手机验证码是否正确是否超时
-     * @param mobileCode
-     * @param code
-     * @return
-     */
-    private static boolean checkCode(MobileCode mobileCode,String mobile,String code){
-        if(null == mobileCode || StringUtils.isEmpty(code) || StringUtils.isEmpty(mobile)){
-            return false;
-        }
-        if(!mobileCode.getCode().equals(code)){
-            return false;
-        }
-        if(!mobileCode.getMobile().equals(mobile)){
-            return false;
-        }
-        Long periodTime = System.currentTimeMillis() - mobileCode.getDateTime();
-        if(periodTime > 2 * 60 * 1000){
-            return false;
-        }
-
-        return true;
     }
 
 

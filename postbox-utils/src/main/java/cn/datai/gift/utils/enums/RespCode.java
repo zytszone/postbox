@@ -56,6 +56,15 @@ public enum RespCode {
     NOT_PAY("2017", "订单已支付或尚未支付，不能执行该操作"),
     ERROR_USER_BIZ("2018", "查询业务概况时发生异常"),
 
+    EXCEPTION_UPLOAD("2019", "请上传正确的图片"),
+    EXCEPTION_USERNAME("2020", "请填写用户姓名"),
+    EXCEPTION_BIND_PHONE("2021", "手机号已被绑定"),
+    EXCEPTION_BIND_PARAMS("2022", "注册参数错误"),
+    EXCEPTION_PHONE_ERROR("2023", "手机号或验证码错误"),
+    EXCEPTION_NOT_FIND_USER("2024", "没有找到该用户"),
+
+
+
     //支付相关
     PAY_NO_CHANNEL("3000", "不存在的支付渠道"),
     PAY_ALREADY("3001", "已完成支付，请勿重复支付"),

@@ -4,6 +4,8 @@ import cn.datai.gift.persist.po.TCustomerInfo;
 import cn.datai.gift.persist.po.TExpressmanInfo;
 import cn.datai.gift.persist.po.UserWxInfo;
 import cn.datai.gift.persist.po.UserWxRelt;
+import cn.datai.gift.web.contants.PhotoContants;
+import cn.datai.gift.web.utils.PhotoUtil;
 
 /**
  * Created by Administrator on 2017/3/10.
@@ -101,6 +103,13 @@ public interface BaseInfoService {
      * @param tExpressmanInfo
      */
     void insertTExpressmanInfo(TExpressmanInfo tExpressmanInfo);
+    /**
+     * 上传图片
+     * @param fileName
+     * @param url
+     */
+    void uploadPhoto(String fileName,String url) throws Exception;
+
 
 
 }

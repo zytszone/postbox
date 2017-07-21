@@ -5,7 +5,9 @@ import cn.datai.gift.persist.mapper.TExpressmanInfoMapperExt;
 import cn.datai.gift.persist.mapper.UserWxInfoMapperExt;
 import cn.datai.gift.persist.mapper.UserWxReltMapperExt;
 import cn.datai.gift.persist.po.*;
+import cn.datai.gift.web.contants.PhotoContants;
 import cn.datai.gift.web.service.BaseInfoService;
+import cn.datai.gift.web.utils.PhotoUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -208,6 +210,16 @@ public class BaseInfoServiceImpl implements BaseInfoService {
     @Override
     public void insertTExpressmanInfo(TExpressmanInfo tExpressmanInfo) {
         tExpressmanInfoMapperExt.insertSelective(tExpressmanInfo);
+    }
+
+    /**
+     * 上传图片
+     * @param fileName
+     * @param url
+     */
+    @Override
+    public void uploadPhoto(String fileName, String url) throws Exception {
+        PhotoUtil.uploadFile(fileName + PhotoContants.FILENAME_SUFFIX,url);
     }
 
 }
