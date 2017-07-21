@@ -27,15 +27,15 @@ public interface CommonConstants {
     String OPEN_BOX_KEY = "OPEN_BOX_KEY";
 
 
-  /*  *//**
-     * 扫码
-     *//*
-    String OPEN_BOX_URL = "http://wangyong.developer.jsdttec.com/main/scanqrcode";*/
+    /**
+     * 扫码*/
+
+    String OPEN_BOX_URL = "http://wangyong.developer.jsdttec.com/main/scanqrcode";
 
     /**
      * 扫码
      */
-    String OPEN_BOX_URL = "https://weipan3.jsdttec.com/main/scanqrcode";
+//    String OPEN_BOX_URL = "https://weipan3.jsdttec.com/main/scanqrcode";
 
 
     /**
@@ -71,7 +71,8 @@ public interface CommonConstants {
     /**
      * 代领快递
      */
-    String EXPRESS_DELIVERY_URL = "https://weipan3.jsdttec.com/customer/toReceivingList";
+//    String EXPRESS_DELIVERY_URL = "https://weipan3.jsdttec.com/customer/toReceivingList";
+    String EXPRESS_DELIVERY_URL = "http://wangyong.developer.jsdttec.com/customer/toReceivingList";
 
     /**
      * 替我代领
@@ -86,7 +87,8 @@ public interface CommonConstants {
     /**
      * 替我代领
      */
-    String FOR_ME_LEAD_URL = "https://weipan3.jsdttec.com/customer/forMeLead";
+//    String FOR_ME_LEAD_URL = "https://weipan3.jsdttec.com/customer/forMeLead";
+    String FOR_ME_LEAD_URL = "http://wangyong.developer.jsdttec.com/customer/forMeLead";
 
     /**
      *  报错/修理
@@ -101,7 +103,8 @@ public interface CommonConstants {
     /**
      * 报错/修理
      */
-    String REPAIR_URL  = "https://weipan3.jsdttec.com/customer/repair";
+//    String REPAIR_URL  = "https://weipan3.jsdttec.com/customer/repair";
+    String REPAIR_URL  = "http://wangyong.developer.jsdttec.com/customer/repair";
 
     /**
      *  个人中心
@@ -131,7 +134,8 @@ public interface CommonConstants {
     /**
      * 我的主页
      */
-    String MY_HOMEPAGE_URL = "https://weipan3.jsdttec.com/customer/myHomePage";
+//    String MY_HOMEPAGE_URL = "https://weipan3.jsdttec.com/customer/myHomePage";
+    String MY_HOMEPAGE_URL = "http://wangyong.developer.jsdttec.com/customer/myHomePage";
 
     /**
      * 帮助
@@ -146,7 +150,8 @@ public interface CommonConstants {
     /**
      * 帮助
      */
-    String CENTER_HELP_URL = "https://weipan3.jsdttec.com/help/helpCenter";
+//    String CENTER_HELP_URL = "https://weipan3.jsdttec.com/help/helpCenter";
+    String CENTER_HELP_URL = "http://wangyong.developer.jsdttec.com/help/helpCenter";
 
 
 

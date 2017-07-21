@@ -11,7 +11,7 @@
 %>
 <c:set var="basePath" value="<%=basePath %>"></c:set>
 
-<script src="<%=request.getScheme()%>://res.wx.qq.com/open/js/jweixin-1.1.0.js"></script>
+<script src="<%=request.getScheme()%>://res.wx.qq.com/open/js/jweixin-1.2.0.js"></script>
 <script>
 
     wx.config({
@@ -20,7 +20,7 @@
         timestamp: '${weixinJsSign.timestamp}', // 必填，生成签名的时间戳
         nonceStr: '${weixinJsSign.nonceStr}', // 必填，生成签名的随机串
         signature: '${weixinJsSign.signature}',// 必填，签名，见附录1
-        jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage','scanQRCode','chooseImage', /*'hideMenuItems',*/'closeWindow',/*'hideAllNonBaseMenuItem'*/] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+        jsApiList: ['onMenuShareTimeline', 'onMenuShareAppMessage','scanQRCode','chooseImage','getLocalImgData','downloadImage','uploadImage', 'previewImage',/*'hideMenuItems',*/'closeWindow',/*'hideAllNonBaseMenuItem'*/] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
     });
 
 

@@ -2,6 +2,7 @@ package cn.datai.gift.web.controller;
 
 import cn.datai.gift.persist.po.TBoxInfo;
 import cn.datai.gift.persist.po.TCustomerInfo;
+import cn.datai.gift.web.contants.TokenContants;
 import cn.datai.gift.web.plugin.annotation.Auth;
 import cn.datai.gift.web.plugin.vo.UserLoginInfo;
 import cn.datai.gift.web.service.BoxInfoService;
