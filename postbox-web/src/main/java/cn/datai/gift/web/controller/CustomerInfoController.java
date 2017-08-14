@@ -33,7 +33,7 @@ public class CustomerInfoController extends BaseController {
     private static final Logger logger = LoggerFactory.getLogger(CustomerInfoController.class);
 
     /**
-     * 带领快递
+     * 待领快递
      * @param model
      * @param userLoginInfo
      * @return
@@ -67,7 +67,7 @@ public class CustomerInfoController extends BaseController {
     }
 
     /**
-     * 我的快递/替我代领
+     * 我的快递/替我待领
      * @param model
      * @param userLoginInfo
      * @return
