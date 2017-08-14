@@ -45,8 +45,12 @@ public class PublicSignalController {
     @Value("${weixin.appID}")
     private String appid;
 
+    @Value("${button.type}")
+    private String buttonType;
+
     @Autowired
     private WechatService wechatService;
+
 
     /**
      * 验证微信服务器
@@ -166,7 +170,7 @@ public class PublicSignalController {
     @ResponseBody
     public void createMenu() throws Exception {
         String accessToken = TokenContants.WEIXIN_TOKEN;
-        CreateMenuUtil.createMenu(MenuManager.getMenu(),accessToken);
+        CreateMenuUtil.createMenu(MenuManager.getMenu(buttonType),accessToken);
     }
 
     /**

@@ -18,20 +18,20 @@ public class MenuManager {
      * 
      * @return
      */
-    public static Menu getMenu() {
+    public static Menu getMenu(String type) {
 
-        CommonButton btn21 = new CommonButton(CommonConstants.EXPRESS_DELIVERY_NAME,CommonConstants.VIEW_TYPE,"",CommonConstants.EXPRESS_DELIVERY_URL);
-        CommonButton btn22 = new CommonButton(CommonConstants.FOR_ME_LEAD_NAME,CommonConstants.VIEW_TYPE,"",CommonConstants.FOR_ME_LEAD_URL);
-        CommonButton btn23 = new CommonButton(CommonConstants.REPAIR_NAME,CommonConstants.VIEW_TYPE,"",CommonConstants.REPAIR_URL);
+        CommonButton btn21 = new CommonButton(CommonConstants.EXPRESS_DELIVERY_NAME,CommonConstants.VIEW_TYPE,"",type.equalsIgnoreCase("dev") ? CommonConstants.EXPRESS_DELIVERY_URL_DEV : CommonConstants.EXPRESS_DELIVERY_URL_NOT_DEV);
+        CommonButton btn22 = new CommonButton(CommonConstants.FOR_ME_LEAD_NAME,CommonConstants.VIEW_TYPE,"",type.equalsIgnoreCase("dev") ? CommonConstants.FOR_ME_LEAD_URL_DEV :CommonConstants.FOR_ME_LEAD_URL_NOT_DEV);
+        CommonButton btn23 = new CommonButton(CommonConstants.REPAIR_NAME,CommonConstants.VIEW_TYPE,"",type.equalsIgnoreCase("dev") ? CommonConstants.REPAIR_URL_DEV : CommonConstants.REPAIR_URL_NOT_DEV);
 
-        CommonButton btn31 = new CommonButton(CommonConstants.MY_HOMEPAGE_NAME,CommonConstants.VIEW_TYPE,"",CommonConstants.MY_HOMEPAGE_URL);
-        CommonButton btn32 = new CommonButton(CommonConstants.CENTER_HELP_NAME,CommonConstants.VIEW_TYPE,"",CommonConstants.CENTER_HELP_URL);
+        CommonButton btn31 = new CommonButton(CommonConstants.MY_HOMEPAGE_NAME,CommonConstants.VIEW_TYPE,"",type.equalsIgnoreCase("dev") ? CommonConstants.MY_HOMEPAGE_URL_DEV : CommonConstants.MY_HOMEPAGE_URL_NOT_DEV);
+        CommonButton btn32 = new CommonButton(CommonConstants.CENTER_HELP_NAME,CommonConstants.VIEW_TYPE,"",type.equalsIgnoreCase("dev") ? CommonConstants.CENTER_HELP_URL_DEV : CommonConstants.CENTER_HELP_URL_NOT_DEV);
 
         /**
          * 微信：  mainBtn1,mainBtn2 ,mainBtn3 底部的3个一级菜单。
          */
 
-        CommonButton mainBtn1 = new CommonButton(CommonConstants.OPEN_BOX_NAME,CommonConstants.VIEW_TYPE, "",CommonConstants.OPEN_BOX_URL);
+        CommonButton mainBtn1 = new CommonButton(CommonConstants.OPEN_BOX_NAME,CommonConstants.VIEW_TYPE, "",type.equalsIgnoreCase("dev") ? CommonConstants.OPEN_BOX_URL_DEV : CommonConstants.OPEN_BOX_URL_NOT_DEV);
 
         ComplexButton mainBtn2 = new ComplexButton();
         mainBtn2.setName(CommonConstants.MY_EXPRESS_NAME);

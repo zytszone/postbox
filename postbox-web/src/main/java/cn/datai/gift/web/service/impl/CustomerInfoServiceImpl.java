@@ -87,15 +87,6 @@ public class CustomerInfoServiceImpl implements CustomerInfoService {
         tCustomerInfo.setRealname(customerName);
         tCustomerInfo.setMobilePhone(phone);
 
-        if("true".equals(isSpecial)){
-            //快递员信息表中插入数据
-            TExpressmanInfo tExpressmanInfo = new TExpressmanInfo();
-            tExpressmanInfo.setCustomerInfoId(tCustomerInfo.getCustomerInfoId());
-            tExpressmanInfo.setApplytime(new Date());
-            tExpressmanInfo.setStatus("NORMAL");
-            this.baseInfoService.insertTExpressmanInfo(tExpressmanInfo);
-        }
-
         baseInfoService.updateTCustomerInfo(tCustomerInfo);
 
         if("true".equalsIgnoreCase(isSpecial)){
@@ -106,17 +97,26 @@ public class CustomerInfoServiceImpl implements CustomerInfoService {
             if(imgs.length !=2 || imgs[0].equals(imgs[1]) || MyStringUtil.isBlank(imgs[0]) || MyStringUtil.isBlank(imgs[1])){
                 throw new BizException(RespCode.EXCEPTION_UPLOAD);
             }
+
+            //快递员信息表中插入数据
+            TExpressmanInfo tExpressmanInfo = new TExpressmanInfo();
+            tExpressmanInfo.setCustomerInfoId(tCustomerInfo.getCustomerInfoId());
+            tExpressmanInfo.setApplytime(new Date());
+            tExpressmanInfo.setStatus("NORMAL");
+            tExpressmanInfo.setIdcardImgPath("(" + phone + "-"+ customerName + ")" + imgs[0] + ".jpg");
+            tExpressmanInfo.setWorkcardImgPath("(" + phone + "-"+ customerName + ")" + imgs[1] + ".jpg");
+
             Arrays.asList(imgs).stream().forEach(item ->{
                 String requestUrl = "http://file.api.weixin.qq.com/cgi-bin/media/get?access_token=ACCESS_TOKEN&media_id=MEDIA_ID";
                 requestUrl = requestUrl.replace("ACCESS_TOKEN", TokenContants.WEIXIN_TOKEN).replace(
                         "MEDIA_ID", item);
                 try {
-                    baseInfoService.uploadPhoto("(" + phone + "-"+ customerName + ")" + item,requestUrl);
+                    baseInfoService.uploadPhoto("(" + phone + "-"+ customerName + ")" + item,requestUrl);//上传图片
                 } catch (Exception e) {
                     throw new BizException(RespCode.EXCEPTION_UPLOAD);
                 }
-
             });
+            this.baseInfoService.insertTExpressmanInfo(tExpressmanInfo);//插入快递员信息
         }
 
         return new RespResult(RespCode.SUCCESS,redirecturl);
