@@ -111,7 +111,7 @@ public class CustomerInfoServiceImpl implements CustomerInfoService {
                 requestUrl = requestUrl.replace("ACCESS_TOKEN", TokenContants.WEIXIN_TOKEN).replace(
                         "MEDIA_ID", item);
                 try {
-                    baseInfoService.uploadPhoto("(" + phone + "-"+ customerName + ")" + item,requestUrl);//上传图片
+                    baseInfoService.uploadPhoto( phone +"_" + item,requestUrl);//上传图片
                 } catch (Exception e) {
                     throw new BizException(RespCode.EXCEPTION_UPLOAD);
                 }
