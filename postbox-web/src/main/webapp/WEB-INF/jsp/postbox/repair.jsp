@@ -13,7 +13,7 @@
 <body>
 
 <div class="panel panel-default" style="margin: 30% auto 0;width: 75%;">
-    <div class="panel-body">
+    <div class="panel-body" >
         <img id="faceImg" style="height: 300px;height: 300px;"/>
     </div>
 </div>
