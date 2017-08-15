@@ -12,11 +12,11 @@
 </head>
 <body>
 
-<div class="panel panel-default" style="margin: 30% auto 0;width: 75%;">
-    <div class="panel-body" >
-        <img id="faceImg" style="height: 300px;height: 300px;"/>
-    </div>
+
+<div class="panel panel-default" style="margin: 30% auto 0;width: 75%;height: 300px;">
+    <img id="faceImg" style="height: 100%;width: 100%;"/>
 </div>
+
 
 <button type="submit" class="btn btn-default form-control" style="position:fixed;bottom: 0px;background:green;height: 50px;font-size: 20px;" onclick="uploadPhoto();">上传照片</button>
 </body>
