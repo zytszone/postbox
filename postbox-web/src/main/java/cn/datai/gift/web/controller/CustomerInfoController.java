@@ -2,6 +2,7 @@ package cn.datai.gift.web.controller;
 
 import cn.datai.gift.persist.po.TBoxInfo;
 import cn.datai.gift.persist.po.TCustomerInfo;
+import cn.datai.gift.utils.RespResult;
 import cn.datai.gift.web.contants.TokenContants;
 import cn.datai.gift.web.plugin.annotation.Auth;
 import cn.datai.gift.web.plugin.vo.UserLoginInfo;
@@ -12,8 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -89,4 +89,18 @@ public class CustomerInfoController extends BaseController {
     public String repair(Model model, @ModelAttribute("userLoginInfo") UserLoginInfo userLoginInfo) {
         return "/postbox/repair";
     }
+
+    /**
+     * 替我代领更新代领人的手机号
+     * @param mobile
+     * @param boxCode
+     * @return
+     */
+    @Auth(needLogin = true,weixinJsAuth = true,needPhone = true)
+    @PostMapping("forMeLead")
+    @ResponseBody
+    public RespResult updateForMeLead(@RequestParam("mobile") String mobile,@RequestParam("boxCode") String boxCode){
+        return null;
+    }
+
 }

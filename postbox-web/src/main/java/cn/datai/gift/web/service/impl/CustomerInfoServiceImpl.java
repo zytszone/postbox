@@ -1,9 +1,8 @@
 package cn.datai.gift.web.service.impl;
 
+import cn.datai.gift.persist.mapper.TBoxInfoMapperExt;
 import cn.datai.gift.persist.mapper.TCustomerInfoMapperExt;
-import cn.datai.gift.persist.po.TCustomerInfo;
-import cn.datai.gift.persist.po.TExpressmanInfo;
-import cn.datai.gift.persist.po.UserWxInfo;
+import cn.datai.gift.persist.po.*;
 import cn.datai.gift.utils.RespResult;
 import cn.datai.gift.utils.enums.RespCode;
 import cn.datai.gift.utils.exception.BizException;
@@ -34,6 +33,9 @@ import static cn.datai.gift.web.controller.IndexController.checkParams;
 public class CustomerInfoServiceImpl implements CustomerInfoService {
     @Autowired
     private TCustomerInfoMapperExt tCustomerInfoMapperExt;
+
+    @Autowired
+    private TBoxInfoMapperExt tBoxInfoMapperExt;
 
     @Autowired
     private BaseInfoService baseInfoService;
@@ -120,6 +122,23 @@ public class CustomerInfoServiceImpl implements CustomerInfoService {
         }
 
         return new RespResult(RespCode.SUCCESS,redirecturl);
+    }
+
+    /**
+     * 通过箱子code更新箱子当前的手机号
+     * @param mobile
+     * @param boxCode
+     */
+    @Transactional
+    @Override
+    public void updateBoxInfo(String mobile, String boxCode) {
+        TBoxInfo boxInfo = new TBoxInfo();
+        boxInfo.setMobilePhone(mobile);
+
+        TBoxInfoExample example = new TBoxInfoExample();
+        example.createCriteria().andBoxCodeEqualTo(boxCode);
+
+        this.tBoxInfoMapperExt.updateByExampleSelective(boxInfo,example);
     }
 
     /**
