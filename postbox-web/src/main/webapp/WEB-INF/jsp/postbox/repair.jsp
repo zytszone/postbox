@@ -11,12 +11,14 @@
     <jsp:include page="../include/weixinDefaultShare.jsp"/>
 </head>
 <body>
-<button type="submit" class="btn btn-default" onclick="uploadPhoto();">上传照片</button>
-<form class="form-inline">
-    <div class="form-group">
-        <img id="faceImg" style="height: 200px;height: 200px;"/>
+
+<div class="panel panel-default" style="margin: 30% auto 0;width: 75%;">
+    <div class="panel-body">
+        <img id="faceImg" style="height: 300px;height: 300px;"/>
     </div>
-</form>
+</div>
+
+<button type="submit" class="btn btn-default form-control" style="position:fixed;bottom: 0px;background:green;height: 50px;font-size: 20px;" onclick="uploadPhoto();">上传照片</button>
 </body>
 <script type="text/javascript" src="${ctx}/static/js/views/jquery.min.js"></script>
 <script type="text/javascript" src="${ctx}/static/plugins/bootstrap-3.3.5/js/bootstrap.min.js"></script>
