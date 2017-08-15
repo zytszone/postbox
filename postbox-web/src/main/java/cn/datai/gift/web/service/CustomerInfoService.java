@@ -35,11 +35,4 @@ public interface CustomerInfoService {
                     String code,
                     String serverIds,
                     HttpServletRequest request);
-
-    /**
-     * 通过箱子code更新箱子当前的手机号
-     * @param mobile
-     * @param boxCode
-     */
-    void updateBoxInfo(String mobile,String boxCode);
 }

@@ -82,6 +82,9 @@ public enum RespCode {
     WX_PAY_REFUND_SUBMITTED("3108", "微信退款已上报，请勿重复提交"),
 
 
+    ERROR_MOBILE("4001", "手机号错误"),
+    ERROR_BOX_CODE("4002", "箱子编码错误"),
+
     /** 服务端错误. */
     SERVER_ERROR("500", "服务端错误"),
 

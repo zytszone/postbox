@@ -5,12 +5,13 @@ import cn.datai.gift.persist.po.TBoxInfo;
 import cn.datai.gift.persist.po.TBoxInfoExample;
 import cn.datai.gift.persist.po.TCustomerInfo;
 import cn.datai.gift.persist.po.TExpressmanInfo;
-import cn.datai.gift.utils.SecurityUtils;
-import cn.datai.gift.utils.Strings;
+import cn.datai.gift.utils.RespResult;
+import cn.datai.gift.utils.enums.RespCode;
 import cn.datai.gift.web.enums.BoxExpressStatus;
 import cn.datai.gift.web.service.BoxInfoService;
+import cn.datai.gift.web.service.CustomerInfoService;
 import cn.datai.gift.web.service.SmsSenderService;
-import cn.datai.gift.web.utils.DESUtil;
+import cn.datai.gift.web.utils.MyStringUtil;
 import cn.datai.gift.web.utils.sec.AESCoder;
 import cn.datai.gift.web.utils.sec.HexUtil;
 import org.apache.commons.lang3.StringUtils;
@@ -22,6 +23,8 @@ import org.springframework.stereotype.Service;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by H.CAAHN on 2017/5/16.
@@ -33,6 +36,9 @@ public class BoxInfoServiceImpl implements BoxInfoService {
 
     @Autowired
     private SmsSenderService smsSenderService;
+
+    @Autowired
+    private CustomerInfoService customerInfoService;
 
     private static final Logger logger = LoggerFactory.getLogger(BoxInfoServiceImpl.class);
 
@@ -142,6 +148,32 @@ public class BoxInfoServiceImpl implements BoxInfoService {
         }
     }
 
+    /**
+     * 更新手机号（代领人）
+     *
+     * @param mobile
+     * @param boxCode
+     * @return
+     */
+    @Override
+    public RespResult updateForMeLead(String mobile, String boxCode) {
+        boolean mobileNO = isMobileNO(mobile);
+        if(!mobileNO){
+            return new RespResult(RespCode.FAIL,RespCode.ERROR_MOBILE);
+        }
+        boolean checkBoxCode = this.checkBoxCode(boxCode);
+        if(!checkBoxCode){
+            return new RespResult(RespCode.FAIL,RespCode.ERROR_BOX_CODE);
+        }
+        TBoxInfo tboxInfo = this.tBoxInfoMapperExt.findAndLockTboxInfo(boxCode);
+        if(tboxInfo == null){
+            return new RespResult(RespCode.FAIL,RespCode.ERROR_BOX_CODE);
+        }
+        tboxInfo.setMobilePhone(mobile);
+        this.tBoxInfoMapperExt.updateByPrimaryKeySelective(tboxInfo);
+        return new RespResult(RespCode.SUCCESS,"设置代领人成功");
+    }
+
     private String decode(String code, String seckey) {
         String decode = "";
         try {
@@ -167,5 +199,33 @@ public class BoxInfoServiceImpl implements BoxInfoService {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * 验证手机号
+     * @param mobiles
+     * @return
+     */
+    public static boolean isMobileNO(String mobiles){
+        if(MyStringUtil.isBlank(mobiles)){
+            return false;
+        }
+        Pattern p = Pattern.compile("^((13[0-9])|(15[^4,\\D])|(18[0,5-9])|(17[0-9]))\\d{8}$");
+        Matcher m = p.matcher(mobiles);
+        return m.matches();
+    }
+
+    /**
+     * 验证code
+     * @param boxCode
+     * @return
+     */
+    public static boolean checkBoxCode(String boxCode){
+        if(MyStringUtil.isBlank(boxCode)){
+            return false;
+        }
+        Pattern p = Pattern.compile("^[A-Za-z0-9]+$");
+        Matcher m = p.matcher(boxCode);
+        return m.matches();
     }
 }

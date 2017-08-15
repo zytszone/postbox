@@ -8,6 +8,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
     <link href="${ctx}/static/plugins/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     <link href="${ctx}/static/plugins/easydialog/easydialog.css" rel="stylesheet" type="text/css">
+    <%
+        String path = request.getContextPath();
+
+        String basePath = request.getScheme() + "://" + request.getServerName();
+        if (request.getServerPort() != 80 && request.getServerPort() != 443) {
+            basePath = basePath + ":" + request.getServerPort();
+        }
+        basePath = basePath + path + "/";
+    %>
+    <c:set var="basePath" value="<%=basePath %>"></c:set>
+    <script>
+        var basePath = '<%=basePath %>';
+    </script>
 </head>
 <body>
     <div class="container" style="width:90%;margin: 45% auto 0">
@@ -82,16 +95,53 @@
             $('.btn').attr("disabled",true);
             return;
         }
-        easyDialog.open({
-            container: {
-                header: '<div style="font-size:15px;">操作提示</div>',
-                content: '<div style="font-size:15px;">该功能暂不对外开放</div>',
-                yesFn: function(){
-                    easyDialog.close();
-                },
-                noFn: false
+
+        $.ajax({
+            url: basePath + "customer/forMeLead",
+            data: {"mobile":mobileNumber,"boxCode":boxCode},
+            type: 'POST',
+            dataType: 'json',
+            success: function (res) {
+                if(res.code == 0) {
+                    easyDialog.open({
+                        container: {
+                            header: '<div style="font-size:15px;">提示信息</div>',
+                            content: '<div style="font-size:15px;">设置带领人成功</div>',
+                            yesFn: function(){
+                                easyDialog.close();
+                            },
+                            noFn: false
+                        }
+                    });
+                }else{
+                    easyDialog.open({
+                        container: {
+                            header: '<div style="font-size:15px;">错误信息</div>',
+                            content: '<div style="font-size:15px;">设置带领人失败</div>',
+                            yesFn: function(){
+                                easyDialog.close();
+                            },
+                            noFn: false
+                        }
+                    });
+                }
+            },
+            error:function(err){
+                easyDialog.open({
+                    container: {
+                        header: '<div style="font-size:15px;">错误提示</div>',
+                        content: '<div style="font-size:15px;">请求失败,请检查</div>',
+                        yesFn: function(){
+                            easyDialog.close();
+                        },
+                        noFn: false
+                    }
+                });
             }
         });
+
+
+
     }
 </script>
 </html>

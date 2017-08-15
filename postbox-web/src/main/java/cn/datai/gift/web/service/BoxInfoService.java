@@ -55,4 +55,12 @@ public interface BoxInfoService {
      * @param mobile
      */
     void updateBoxMobilePhone(Long boxId, String mobile);
+
+    /**
+     * 更新手机号（代领人）
+     * @param mobile
+     * @param boxCode
+     * @return
+     */
+    RespResult updateForMeLead(String mobile,String boxCode);
 }

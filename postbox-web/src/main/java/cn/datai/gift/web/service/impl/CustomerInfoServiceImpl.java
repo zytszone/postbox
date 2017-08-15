@@ -125,23 +125,6 @@ public class CustomerInfoServiceImpl implements CustomerInfoService {
     }
 
     /**
-     * 通过箱子code更新箱子当前的手机号
-     * @param mobile
-     * @param boxCode
-     */
-    @Transactional
-    @Override
-    public void updateBoxInfo(String mobile, String boxCode) {
-        TBoxInfo boxInfo = new TBoxInfo();
-        boxInfo.setMobilePhone(mobile);
-
-        TBoxInfoExample example = new TBoxInfoExample();
-        example.createCriteria().andBoxCodeEqualTo(boxCode);
-
-        this.tBoxInfoMapperExt.updateByExampleSelective(boxInfo,example);
-    }
-
-    /**
      * 校验手机验证码是否正确是否超时
      * @param mobileCode
      * @param code
