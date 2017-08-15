@@ -77,7 +77,7 @@ public interface CommonConstants {
     /**
      * 替我代领
      */
-    String FOR_ME_LEAD_NAME = "替我待领";
+    String FOR_ME_LEAD_NAME = "替我代领";
 
     /**
      * 替我代领
