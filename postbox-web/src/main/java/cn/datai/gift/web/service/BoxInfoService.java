@@ -58,9 +58,10 @@ public interface BoxInfoService {
 
     /**
      * 更新手机号（代领人）
+     * @param customerInfoId
      * @param mobile
      * @param boxCode
      * @return
      */
-    RespResult updateForMeLead(String mobile,String boxCode);
+    RespResult updateForMeLead(Long customerInfoId,String mobile,String boxCode);
 }

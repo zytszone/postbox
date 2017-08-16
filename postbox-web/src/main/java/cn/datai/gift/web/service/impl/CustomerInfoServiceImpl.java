@@ -1,8 +1,9 @@
 package cn.datai.gift.web.service.impl;
 
-import cn.datai.gift.persist.mapper.TBoxInfoMapperExt;
 import cn.datai.gift.persist.mapper.TCustomerInfoMapperExt;
-import cn.datai.gift.persist.po.*;
+import cn.datai.gift.persist.po.TCustomerInfo;
+import cn.datai.gift.persist.po.TExpressmanInfo;
+import cn.datai.gift.persist.po.UserWxInfo;
 import cn.datai.gift.utils.RespResult;
 import cn.datai.gift.utils.enums.RespCode;
 import cn.datai.gift.utils.exception.BizException;
@@ -12,7 +13,6 @@ import cn.datai.gift.web.plugin.vo.UserLoginInfo;
 import cn.datai.gift.web.service.BaseInfoService;
 import cn.datai.gift.web.service.CustomerInfoService;
 import cn.datai.gift.web.utils.MyStringUtil;
-import org.bouncycastle.jcajce.provider.symmetric.ARC4;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -33,9 +33,6 @@ import static cn.datai.gift.web.controller.IndexController.checkParams;
 public class CustomerInfoServiceImpl implements CustomerInfoService {
     @Autowired
     private TCustomerInfoMapperExt tCustomerInfoMapperExt;
-
-    @Autowired
-    private TBoxInfoMapperExt tBoxInfoMapperExt;
 
     @Autowired
     private BaseInfoService baseInfoService;
@@ -122,6 +119,16 @@ public class CustomerInfoServiceImpl implements CustomerInfoService {
         }
 
         return new RespResult(RespCode.SUCCESS,redirecturl);
+    }
+
+    /**
+     * 通过Id查询用户信息
+     * @param customerInfoId
+     * @return
+     */
+    @Override
+    public TCustomerInfo queryTCustomerInfoById(Long customerInfoId) {
+        return this.tCustomerInfoMapperExt.selectByPrimaryKey(customerInfoId);
     }
 
     /**

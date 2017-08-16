@@ -94,6 +94,7 @@ public class CustomerInfoController extends BaseController {
 
     /**
      * 替我代领更新代领人的手机号
+     * @param customerInfoId
      * @param mobile
      * @param boxCode
      * @return
@@ -101,10 +102,10 @@ public class CustomerInfoController extends BaseController {
     @Auth(needLogin = true,weixinJsAuth = true,needPhone = true)
     @PostMapping("forMeLead")
     @ResponseBody
-    public RespResult updateForMeLead(@RequestParam("mobile") String mobile,@RequestParam("boxCode") String boxCode){
+    public RespResult updateForMeLead(@ModelAttribute("customerInfoId") Long customerInfoId, @RequestParam("mobile") String mobile,@RequestParam("boxCode") String boxCode){
         RespResult respResult = null;
         try {
-            respResult = this.boxInfoService.updateForMeLead(mobile, boxCode);
+            respResult = this.boxInfoService.updateForMeLead(customerInfoId,mobile, boxCode);
         } catch (BizException biz) {
             biz.printStackTrace();
             logger.error("设置代领人信息异常,手机号：{}，箱子编码：{}，错误信息：{}",mobile,boxCode,biz.getMessage());

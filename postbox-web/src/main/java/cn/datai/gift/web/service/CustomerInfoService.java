@@ -35,4 +35,11 @@ public interface CustomerInfoService {
                     String code,
                     String serverIds,
                     HttpServletRequest request);
+
+    /**
+     * 通过Id查询用户信息
+     * @param customerInfoId
+     * @return
+     */
+    TCustomerInfo queryTCustomerInfoById(Long customerInfoId);
 }

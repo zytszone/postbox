@@ -153,14 +153,14 @@ public class BoxInfoServiceImpl implements BoxInfoService {
 
     /**
      * 更新手机号（代领人）
-     *
+     * @param customerInfoId
      * @param mobile
      * @param boxCode
      * @return
      */
     @Transactional(isolation = Isolation.READ_COMMITTED)
     @Override
-    public RespResult updateForMeLead(String mobile, String boxCode) {
+    public RespResult updateForMeLead(Long customerInfoId,String mobile, String boxCode) {
         boolean mobileNO = isMobileNO(mobile);
         if(!mobileNO){
             throw new BizException(RespCode.ERROR_MOBILE);
@@ -176,8 +176,13 @@ public class BoxInfoServiceImpl implements BoxInfoService {
         if(MyStringUtil.isBlank(tboxInfo.getMobilePhone()) || tboxInfo.getMobilePhone().equals(mobile)){
             throw new BizException(RespCode.NO_EXPRESS_OR_SELF);
         }
+        TCustomerInfo tCustomerInfo = this.customerInfoService.queryById(customerInfoId);
+        if(tCustomerInfo == null || MyStringUtil.isBlank(tCustomerInfo.getMobilePhone()) || !tboxInfo.getMobilePhone().equals(tCustomerInfo.getMobilePhone())){
+            throw new BizException(RespCode.NO_EXPRESS_OR_SELF);
+        }
         tboxInfo.setMobilePhone(mobile);
         this.tBoxInfoMapperExt.updateByPrimaryKeySelective(tboxInfo);
+        // TODO: 2017/8/16 发送短信给代领人 
         return new RespResult(RespCode.SUCCESS,"设置代领人成功");
     }
 
