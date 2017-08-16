@@ -1,18 +1,13 @@
 package cn.datai.gift.web.controller;
 
-import cn.datai.gift.persist.po.TCustomerInfo;
-import cn.datai.gift.persist.po.TExpressmanInfo;
 import cn.datai.gift.persist.po.UserWxInfo;
 import cn.datai.gift.utils.RespResult;
 import cn.datai.gift.utils.enums.RespCode;
-import cn.datai.gift.web.contants.TokenContants;
 import cn.datai.gift.web.plugin.annotation.Auth;
 import cn.datai.gift.web.plugin.vo.MobileCode;
 import cn.datai.gift.web.plugin.vo.UserLoginInfo;
-import cn.datai.gift.web.service.BaseInfoService;
 import cn.datai.gift.web.service.CustomerInfoService;
 import cn.datai.gift.web.service.SmsSenderService;
-import cn.datai.gift.web.utils.MyStringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +18,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
-import java.util.Arrays;
-import java.util.Date;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

@@ -34,7 +34,7 @@
     </div>
 </div>
 <ul class="list-group"></div>
-    <li class="list-group-item" onclick="submit();"><span style="color: red;" class="glyphicon glyphicon-yen" aria-hidden="true"></span>&nbsp;&nbsp;我的钱包<span style="float: right;color: #777777;" class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></li>
+    <li class="list-group-item" onclick="submit('myWallet');"><span style="color: red;" class="glyphicon glyphicon-yen" aria-hidden="true"></span>&nbsp;&nbsp;我的钱包<span style="float: right;color: #777777;" class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></li>
     <li class="list-group-item" onclick="submit('expressTakeInfo');"><span style="color: orangered;" class="glyphicon glyphicon-move" aria-hidden="true"></span>&nbsp;&nbsp;领取快递历史<span style="float: right;color: #777777;" class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></li>
     <li class="list-group-item" onclick="submit();"><span style="color: green;" class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;&nbsp;邀请好友<span style="float: right;color: #777777;" class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></li>
     <li class="list-group-item" onclick="submit();"><span style="color: #a5cb21;" class="glyphicon glyphicon-pencil" aria-hidden="true"></span>&nbsp;&nbsp;设置<span style="float: right;color: #777777;" class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></li>
@@ -54,6 +54,8 @@
     function submit(type){
         if(type == "expressTakeInfo"){
             window.location.href = basePath + "express/expressTakeInfo";
+        }else if(type == "myWallet"){
+            window.location.href = basePath + "customer/toMyWallet";
         }else{
             easyDialog.open({
                 container: {

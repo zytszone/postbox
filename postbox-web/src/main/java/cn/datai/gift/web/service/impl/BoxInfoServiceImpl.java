@@ -176,13 +176,14 @@ public class BoxInfoServiceImpl implements BoxInfoService {
         if(MyStringUtil.isBlank(tboxInfo.getMobilePhone()) || tboxInfo.getMobilePhone().equals(mobile)){
             throw new BizException(RespCode.NO_EXPRESS_OR_SELF);
         }
+
         TCustomerInfo tCustomerInfo = this.customerInfoService.queryById(customerInfoId);
         if(tCustomerInfo == null || MyStringUtil.isBlank(tCustomerInfo.getMobilePhone()) || !tboxInfo.getMobilePhone().equals(tCustomerInfo.getMobilePhone())){
             throw new BizException(RespCode.NO_EXPRESS_OR_SELF);
         }
         tboxInfo.setMobilePhone(mobile);
         this.tBoxInfoMapperExt.updateByPrimaryKeySelective(tboxInfo);
-        // TODO: 2017/8/16 发送短信给代领人 
+        // TODO: 2017/8/16 发送短信给代领人
         return new RespResult(RespCode.SUCCESS,"设置代领人成功");
     }
 

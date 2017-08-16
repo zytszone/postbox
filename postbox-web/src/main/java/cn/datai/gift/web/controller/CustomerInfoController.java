@@ -118,4 +118,16 @@ public class CustomerInfoController extends BaseController {
         return respResult;
     }
 
+    /**
+     * 个人中心/我的钱包
+     * @return
+     */
+    @Auth(needLogin = true,weixinJsAuth = true,needPhone = true)
+    @RequestMapping("toMyWallet")
+    public String toMyWallet() {
+        return "/postbox/myWallet";
+    }
+
+
+
 }
