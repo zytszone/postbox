@@ -7,6 +7,7 @@ import cn.datai.gift.persist.po.TCustomerInfo;
 import cn.datai.gift.persist.po.TExpressmanInfo;
 import cn.datai.gift.utils.RespResult;
 import cn.datai.gift.utils.enums.RespCode;
+import cn.datai.gift.utils.exception.BizException;
 import cn.datai.gift.web.enums.BoxExpressStatus;
 import cn.datai.gift.web.service.BoxInfoService;
 import cn.datai.gift.web.service.CustomerInfoService;
@@ -19,6 +20,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -155,19 +158,23 @@ public class BoxInfoServiceImpl implements BoxInfoService {
      * @param boxCode
      * @return
      */
+    @Transactional(isolation = Isolation.READ_COMMITTED)
     @Override
     public RespResult updateForMeLead(String mobile, String boxCode) {
         boolean mobileNO = isMobileNO(mobile);
         if(!mobileNO){
-            return new RespResult(RespCode.FAIL,RespCode.ERROR_MOBILE);
+            throw new BizException(RespCode.ERROR_MOBILE);
         }
         boolean checkBoxCode = this.checkBoxCode(boxCode);
         if(!checkBoxCode){
-            return new RespResult(RespCode.FAIL,RespCode.ERROR_BOX_CODE);
+            throw new BizException(RespCode.ERROR_BOX_CODE);
         }
         TBoxInfo tboxInfo = this.tBoxInfoMapperExt.findAndLockTboxInfo(boxCode);
         if(tboxInfo == null){
-            return new RespResult(RespCode.FAIL,RespCode.ERROR_BOX_CODE);
+            throw new BizException(RespCode.ERROR_BOX_CODE);
+        }
+        if(MyStringUtil.isBlank(tboxInfo.getMobilePhone()) || tboxInfo.getMobilePhone().equals(mobile)){
+            throw new BizException(RespCode.NO_EXPRESS_OR_SELF);
         }
         tboxInfo.setMobilePhone(mobile);
         this.tBoxInfoMapperExt.updateByPrimaryKeySelective(tboxInfo);

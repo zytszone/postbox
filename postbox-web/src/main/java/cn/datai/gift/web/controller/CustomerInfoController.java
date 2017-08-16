@@ -4,6 +4,7 @@ import cn.datai.gift.persist.po.TBoxInfo;
 import cn.datai.gift.persist.po.TCustomerInfo;
 import cn.datai.gift.utils.RespResult;
 import cn.datai.gift.utils.enums.RespCode;
+import cn.datai.gift.utils.exception.BizException;
 import cn.datai.gift.web.contants.TokenContants;
 import cn.datai.gift.web.plugin.annotation.Auth;
 import cn.datai.gift.web.plugin.vo.UserLoginInfo;
@@ -104,6 +105,10 @@ public class CustomerInfoController extends BaseController {
         RespResult respResult = null;
         try {
             respResult = this.boxInfoService.updateForMeLead(mobile, boxCode);
+        } catch (BizException biz) {
+            biz.printStackTrace();
+            logger.error("设置代领人信息异常,手机号：{}，箱子编码：{}，错误信息：{}",mobile,boxCode,biz.getMessage());
+            respResult = new RespResult(RespCode.FAIL,biz.getErrorMsg());
         } catch (Exception e) {
             e.printStackTrace();
             logger.error("设置代领人信息异常,手机号：{}，箱子编码：{}，错误信息：{}",mobile,boxCode,e);
