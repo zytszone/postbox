@@ -172,43 +172,43 @@
                 wx.onMenuShareAppMessage({
                     title: '${applicationScope['shareTitle']}', // 分享标题
                     desc: '${applicationScope['weixinDefaultShareDesc']}', // 分享描述
-                    link: "http://baidu.com",//分享当前url
-                    imgUrl: basePath +'${applicationScope['weixinGiveGiftShareIcon']}', // 分享图标
+                    link: "http:www//baidu.com",//分享当前url
+                    imgUrl: basePath +'${applicationScope['weixinDefaultShareIcon']}', // 分享图标
                     type: 'link', // 分享类型,music、video或link，不填默认为link
                     dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
                     success: function () {
                         // 用户确认分享后执行的回调函数
-                        $.ajax({
-                            url: basePath+'customer/updateProxyCustomerInfoId',
-                            type: "GET",
-                            dataType: "json",
-                            success: function (rsp) {
-                                if (rsp.code == 0) {
-                                    easyDialog.open({
-                                        container: {
-                                            header: '<div style="font-size:15px;">提示信息</div>',
-                                            content: '<div style="font-size:15px;">设置代领人成功</div>',
-                                            yesFn: function(){
-                                                easyDialog.close();
-                                            },
-                                            noFn: false
-                                        }
-                                    });
-                                }else{
-                                    easyDialog.open({
-                                        container: {
-                                            header: '<div style="font-size:15px;">提示信息</div>',
-                                            content: '<div style="font-size:15px;">设置带领人失败</div>',
-                                            yesFn: function(){
-                                                easyDialog.close();
-                                            },
-                                            noFn: false
-                                        }
-                                    });
-                                }
-                            }
-
-                        });
+//                        $.ajax({
+//                            url: basePath+'customer/updateProxyCustomerInfoId',
+//                            type: "GET",
+//                            dataType: "json",
+//                            success: function (rsp) {
+//                                if (rsp.code == 0) {
+//                                    easyDialog.open({
+//                                        container: {
+//                                            header: '<div style="font-size:15px;">提示信息</div>',
+//                                            content: '<div style="font-size:15px;">设置代领人成功</div>',
+//                                            yesFn: function(){
+//                                                easyDialog.close();
+//                                            },
+//                                            noFn: false
+//                                        }
+//                                    });
+//                                }else{
+//                                    easyDialog.open({
+//                                        container: {
+//                                            header: '<div style="font-size:15px;">提示信息</div>',
+//                                            content: '<div style="font-size:15px;">设置带领人失败</div>',
+//                                            yesFn: function(){
+//                                                easyDialog.close();
+//                                            },
+//                                            noFn: false
+//                                        }
+//                                    });
+//                                }
+//                            }
+//
+//                        });
                     },
                     cancel: function () {
                         // 用户取消分享后执行的回调函数
