@@ -2,17 +2,22 @@ package cn.datai.gift.web.service.impl;
 
 import cn.datai.gift.persist.mapper.TCustomerInfoMapperExt;
 import cn.datai.gift.persist.po.TCustomerInfo;
+import cn.datai.gift.persist.po.TCustomerInfoExample;
 import cn.datai.gift.persist.po.TExpressmanInfo;
 import cn.datai.gift.persist.po.UserWxInfo;
 import cn.datai.gift.utils.RespResult;
 import cn.datai.gift.utils.enums.RespCode;
 import cn.datai.gift.utils.exception.BizException;
+import cn.datai.gift.web.contants.TemplateConstants;
 import cn.datai.gift.web.contants.TokenContants;
 import cn.datai.gift.web.plugin.vo.MobileCode;
 import cn.datai.gift.web.plugin.vo.UserLoginInfo;
 import cn.datai.gift.web.service.BaseInfoService;
 import cn.datai.gift.web.service.CustomerInfoService;
 import cn.datai.gift.web.utils.MyStringUtil;
+import cn.datai.gift.web.utils.SendPublicServerSmgUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -22,6 +27,8 @@ import org.springframework.util.StringUtils;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 import static cn.datai.gift.web.controller.IndexController.checkParams;
 
@@ -36,6 +43,8 @@ public class CustomerInfoServiceImpl implements CustomerInfoService {
 
     @Autowired
     private BaseInfoService baseInfoService;
+
+    private static final Logger logger = LoggerFactory.getLogger(CustomerInfoServiceImpl.class);
 
     public TCustomerInfo queryById(Long customerId) {
         return tCustomerInfoMapperExt.selectByPrimaryKey(customerId);
@@ -118,6 +127,8 @@ public class CustomerInfoServiceImpl implements CustomerInfoService {
             this.baseInfoService.insertTExpressmanInfo(tExpressmanInfo);//插入快递员信息
         }
 
+        //公众号推送注册事件
+        SendPublicServerSmgUtils.registerMsg(TokenContants.WEIXIN_TOKEN, TemplateConstants.REGISTER_TEM_ID,userLoginInfo.getWeixinOpenId());
         return new RespResult(RespCode.SUCCESS,redirecturl);
     }
 
@@ -129,6 +140,34 @@ public class CustomerInfoServiceImpl implements CustomerInfoService {
     @Override
     public TCustomerInfo queryTCustomerInfoById(Long customerInfoId) {
         return this.tCustomerInfoMapperExt.selectByPrimaryKey(customerInfoId);
+    }
+
+    /**
+     * 通过参数查询用户openId
+     *
+     * @param map
+     * @return
+     */
+    @Override
+    public String queryUserOpenId(Map<String, Object> map) {
+        return this.tCustomerInfoMapperExt.queryUserOpenId(map);
+    }
+
+    /**
+     * 根据手机号查询用户信息
+     *
+     * @param mobile
+     * @return
+     */
+    @Override
+    public TCustomerInfo queryTCustomerInfoByMobile(String mobile) {
+        TCustomerInfoExample example = new TCustomerInfoExample();
+        example.createCriteria().andMobilePhoneEqualTo(mobile);
+        List<TCustomerInfo> list = this.tCustomerInfoMapperExt.selectByExample(example);
+        if(null == list || list.isEmpty()){
+            return null;
+        }
+        return list.get(0);
     }
 
     /**
@@ -154,4 +193,5 @@ public class CustomerInfoServiceImpl implements CustomerInfoService {
 
         return true;
     }
+
 }

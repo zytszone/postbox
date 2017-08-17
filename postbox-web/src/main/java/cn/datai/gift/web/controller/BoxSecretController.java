@@ -5,6 +5,8 @@ import cn.datai.gift.persist.po.TCustomerInfo;
 import cn.datai.gift.persist.po.TExpressmanInfo;
 import cn.datai.gift.utils.RespResult;
 import cn.datai.gift.utils.enums.RespCode;
+import cn.datai.gift.web.contants.TemplateConstants;
+import cn.datai.gift.web.contants.TokenContants;
 import cn.datai.gift.web.enums.BoxExpressStatus;
 import cn.datai.gift.web.plugin.annotation.Auth;
 import cn.datai.gift.web.plugin.vo.UserLoginInfo;
@@ -12,6 +14,8 @@ import cn.datai.gift.web.service.BaseInfoService;
 import cn.datai.gift.web.service.BoxInfoService;
 import cn.datai.gift.web.service.CustomerInfoService;
 import cn.datai.gift.web.service.ExpressmanInfoService;
+import cn.datai.gift.web.utils.MyStringUtil;
+import cn.datai.gift.web.utils.SendPublicServerSmgUtils;
 import com.alibaba.fastjson.JSON;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -22,6 +26,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -119,6 +125,13 @@ public class BoxSecretController extends BaseController {
             // 更新箱子的属主手机号
             if (StringUtils.isNotBlank(uuid) && StringUtils.equals(skey, uuid)) {
                 this.boxInfoService.updateBoxMobilePhone(boxId, mobile);
+                //公众号推送注册事件
+                Map<String,Object> map = new HashMap<>();
+                map.put("mobile",mobile);
+                String openId = this.customerInfoService.queryUserOpenId(map);
+                if(MyStringUtil.isNotBlank(openId)){
+                    SendPublicServerSmgUtils.expressInfoChangeMobile(TokenContants.WEIXIN_TOKEN, TemplateConstants.EXPRESS_CHANGE_MOBILE_TEM_ID,openId);
+                }
                 return new RespResult(RespCode.SUCCESS);
             }
         }

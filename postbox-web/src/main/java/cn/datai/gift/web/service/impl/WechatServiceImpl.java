@@ -53,7 +53,7 @@ public class WechatServiceImpl implements WechatService {
                 try {
 
                     WxTemplate wechatTemplate = new WxTemplate();
-                    wechatTemplate.setTemplate_id(TemplateConstants.TEM_ID);
+                    wechatTemplate.setTemplate_id(TemplateConstants.PUBLIC_TEM_ID);
                     wechatTemplate.setTouser(fromUserName);
                     wechatTemplate.setUrl("http://baidu.com");
                     wechatTemplate.setTopcolor("#173177");

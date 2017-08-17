@@ -116,51 +116,51 @@ public class PublicSignalController {
     @RequestMapping(value = "/testTemplateMessage", method = RequestMethod.POST)
     @ResponseBody
     public void testTemplateMessage(PrintWriter out, HttpServletRequest request, HttpServletResponse response) {
-
-        String accessToken = TokenContants.WEIXIN_TOKEN;
-        WxTemplate wechatTemplate = new WxTemplate();
-        wechatTemplate.setTemplate_id(TemplateConstants.TEM_ID);
-        wechatTemplate.setTouser("olWxVwxa8OI5X1O1FLyRcKsF-bOs");
-        wechatTemplate.setUrl("http://baidu.com");
-        wechatTemplate.setTopcolor("#173177");
-
-        Map<String,TemplateData> m = new HashMap<>();
-
-        TemplateData first = new TemplateData();
-
-        first.setValue("xxx");
-        first.setColor("#173177");
-        m.put("first", first);
-
-//                    大于0    #bd4745        小于0  #26b463
-
-        TemplateData keyword1 = new TemplateData();
-        keyword1.setValue("xxxxxxx");
-        keyword1.setColor("#173177");
-        m.put("keyword1", keyword1);
-
-        TemplateData keyword2 = new TemplateData();
-        keyword2.setValue("xxxxxx");
-        keyword2.setColor("#173177");
-        m.put("keyword2", keyword2);
-
-        TemplateData keyword3 = new TemplateData();
-        keyword3.setValue("xxxxxx");
-        keyword3.setColor("#173177");
-        m.put("keyword3", keyword3);
-
-        TemplateData remark = new TemplateData();
-        remark.setValue("点击查看最新实时行情");
-        remark.setColor("#173177");
-        m.put("remark", remark);
-        wechatTemplate.setData(m);
-
-        try {
-            SendTemplateMessageUtil.sendTemplateMessage(accessToken,wechatTemplate);
-        } catch (Exception e) {
-            logger.error("模板发送发生异常！！！！！");
-            e.printStackTrace();
-        }
+//
+//        String accessToken = TokenContants.WEIXIN_TOKEN;
+//        WxTemplate wechatTemplate = new WxTemplate();
+//        wechatTemplate.setTemplate_id(TemplateConstants.TEM_ID);
+//        wechatTemplate.setTouser("olWxVwxa8OI5X1O1FLyRcKsF-bOs");
+//        wechatTemplate.setUrl("http://baidu.com");
+//        wechatTemplate.setTopcolor("#173177");
+//
+//        Map<String,TemplateData> m = new HashMap<>();
+//
+//        TemplateData first = new TemplateData();
+//
+//        first.setValue("xxx");
+//        first.setColor("#173177");
+//        m.put("first", first);
+//
+////                    大于0    #bd4745        小于0  #26b463
+//
+//        TemplateData keyword1 = new TemplateData();
+//        keyword1.setValue("xxxxxxx");
+//        keyword1.setColor("#173177");
+//        m.put("keyword1", keyword1);
+//
+//        TemplateData keyword2 = new TemplateData();
+//        keyword2.setValue("xxxxxx");
+//        keyword2.setColor("#173177");
+//        m.put("keyword2", keyword2);
+//
+//        TemplateData keyword3 = new TemplateData();
+//        keyword3.setValue("xxxxxx");
+//        keyword3.setColor("#173177");
+//        m.put("keyword3", keyword3);
+//
+//        TemplateData remark = new TemplateData();
+//        remark.setValue("点击查看最新实时行情");
+//        remark.setColor("#173177");
+//        m.put("remark", remark);
+//        wechatTemplate.setData(m);
+//
+//        try {
+//            SendTemplateMessageUtil.sendTemplateMessage(accessToken,wechatTemplate);
+//        } catch (Exception e) {
+//            logger.error("模板发送发生异常！！！！！");
+//            e.printStackTrace();
+//        }
     }
 
     /**

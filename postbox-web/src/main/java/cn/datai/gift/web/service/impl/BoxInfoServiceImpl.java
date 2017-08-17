@@ -1,10 +1,7 @@
 package cn.datai.gift.web.service.impl;
 
 import cn.datai.gift.persist.mapper.TBoxInfoMapperExt;
-import cn.datai.gift.persist.po.TBoxInfo;
-import cn.datai.gift.persist.po.TBoxInfoExample;
-import cn.datai.gift.persist.po.TCustomerInfo;
-import cn.datai.gift.persist.po.TExpressmanInfo;
+import cn.datai.gift.persist.po.*;
 import cn.datai.gift.utils.RespResult;
 import cn.datai.gift.utils.enums.RespCode;
 import cn.datai.gift.utils.exception.BizException;
@@ -181,7 +178,12 @@ public class BoxInfoServiceImpl implements BoxInfoService {
         if(tCustomerInfo == null || MyStringUtil.isBlank(tCustomerInfo.getMobilePhone()) || !tboxInfo.getMobilePhone().equals(tCustomerInfo.getMobilePhone())){
             throw new BizException(RespCode.NO_EXPRESS_OR_SELF);
         }
-        tboxInfo.setMobilePhone(mobile);
+
+        TCustomerInfo customerInfo = this.customerInfoService.queryTCustomerInfoByMobile(mobile);
+        if(null == customerInfo){
+            throw new BizException(RespCode.NOT_FIND_USERINFO);
+        }
+        tboxInfo.setProxyCustomerInfoId(customerInfo.getCustomerInfoId().toString());
         this.tBoxInfoMapperExt.updateByPrimaryKeySelective(tboxInfo);
         // TODO: 2017/8/16 发送短信给代领人
         return new RespResult(RespCode.SUCCESS,"设置代领人成功");

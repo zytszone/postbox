@@ -99,24 +99,24 @@ public class CustomerInfoController extends BaseController {
      * @param boxCode
      * @return
      */
-    @Auth(needLogin = true,weixinJsAuth = true,needPhone = true)
-    @PostMapping("forMeLead")
-    @ResponseBody
-    public RespResult updateForMeLead(@ModelAttribute("customerInfoId") Long customerInfoId, @RequestParam("mobile") String mobile,@RequestParam("boxCode") String boxCode){
-        RespResult respResult = null;
-        try {
-            respResult = this.boxInfoService.updateForMeLead(customerInfoId,mobile, boxCode);
-        } catch (BizException biz) {
-            biz.printStackTrace();
-            logger.error("设置代领人信息异常,手机号：{}，箱子编码：{}，错误信息：{}",mobile,boxCode,biz.getMessage());
-            respResult = new RespResult(RespCode.FAIL,biz.getErrorMsg());
-        } catch (Exception e) {
-            e.printStackTrace();
-            logger.error("设置代领人信息异常,手机号：{}，箱子编码：{}，错误信息：{}",mobile,boxCode,e);
-            respResult = new RespResult(RespCode.FAIL,"设置代领人失败");
-        }
-        return respResult;
-    }
+//    @Auth(needLogin = true,weixinJsAuth = true,needPhone = true)
+//    @PostMapping("forMeLead")
+//    @ResponseBody
+//    public RespResult updateForMeLead(@ModelAttribute("customerInfoId") Long customerInfoId, @RequestParam("mobile") String mobile,@RequestParam("boxCode") String boxCode){
+//        RespResult respResult = null;
+//        try {
+//            respResult = this.boxInfoService.updateForMeLead(customerInfoId,mobile, boxCode);
+//        } catch (BizException biz) {
+//            biz.printStackTrace();
+//            logger.error("设置代领人信息异常,手机号：{}，箱子编码：{}，错误信息：{}",mobile,boxCode,biz.getMessage());
+//            respResult = new RespResult(RespCode.FAIL,biz.getErrorMsg());
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            logger.error("设置代领人信息异常,手机号：{}，箱子编码：{}，错误信息：{}",mobile,boxCode,e);
+//            respResult = new RespResult(RespCode.FAIL,"设置代领人失败");
+//        }
+//        return respResult;
+//    }
 
     /**
      * 个人中心/我的钱包
@@ -126,6 +126,16 @@ public class CustomerInfoController extends BaseController {
     @RequestMapping("toMyWallet")
     public String toMyWallet() {
         return "/postbox/myWallet";
+    }
+
+    /**
+     * 分享后更新代理人
+     * @return
+     */
+    @Auth(needLogin = true,weixinJsAuth = true,needPhone = true)
+    @PostMapping("updateProxyCustomerInfoId")
+    public RespResult updateProxyCustomerInfoId(){
+        return null;
     }
 
 

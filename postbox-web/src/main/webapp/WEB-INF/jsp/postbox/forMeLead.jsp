@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="/WEB-INF/jsp/include/include.jsp" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,6 +24,7 @@
     <script>
         var basePath = '<%=basePath %>';
     </script>
+    <jsp:include page="../include/weixinDefaultShare.jsp"/>
 </head>
 <body>
     <div class="container" style="width:90%;margin: 45% auto 0">
@@ -41,8 +45,9 @@
 
         <legend></legend>
         <div class="row-fluid" style="text-align:center;margin-bottom:10px;">
-            <button style="margin-left:8px;width:80px;" class="btn btn-success btn-sm submit" type="button" onclick="submitForm();">确定</button>
+            <button style="margin-left:8px;width:80px;" class="btn btn-success btn-sm submit" type="button" <%--onclick="submitForm();"--%>>确定</button>
         </div>
+        <span style="color: red;">*现只支持分享给指定好友代领，手动填写手机号代领功能暂不开放</span>
     </div>
 </body>
 <script type="text/javascript" src="${ctx}/static/js/views/jquery.min.js"></script>
@@ -143,5 +148,74 @@
 
 
     }
+
+    $(function(){
+        if(isWeixin()) {
+            wx.ready(function () {
+                wx.hideMenuItems({
+                    menuList: [
+                        "menuItem:share:facebook",
+                        "menuItem:copyUrl",
+                        "menuItem:originPage",
+                        "menuItem:readMode",
+                        "menuItem:share:email",
+                        /* "menuItem:share:appMessage",*/
+                        "menuItem:share:timeline",
+                        "menuItem:share:qq",
+                        "menuItem:share:weiboApp",
+                        "menuItem:openWithSafari",
+                        "menuItem:favorite",
+                        "menuItem:share:QZone"
+                    ] // 要隐藏的菜单项，只能隐藏“传播类”和“保护类”按钮，所有menu项见附录3
+                });
+
+                wx.onMenuShareAppMessage({
+                    title: '${applicationScope['shareTitle']}', // 分享标题
+                    desc: '${applicationScope['weixinDefaultShareDesc']}', // 分享描述
+                    link: "http://baidu.com",//分享当前url
+                    imgUrl: basePath +'${applicationScope['weixinGiveGiftShareIcon']}', // 分享图标
+                    type: 'link', // 分享类型,music、video或link，不填默认为link
+                    dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+                    success: function () {
+                        // 用户确认分享后执行的回调函数
+                        $.ajax({
+                            url: basePath+'customer/updateProxyCustomerInfoId',
+                            type: "GET",
+                            dataType: "json",
+                            success: function (rsp) {
+                                if (rsp.code == 0) {
+                                    easyDialog.open({
+                                        container: {
+                                            header: '<div style="font-size:15px;">提示信息</div>',
+                                            content: '<div style="font-size:15px;">设置代领人成功</div>',
+                                            yesFn: function(){
+                                                easyDialog.close();
+                                            },
+                                            noFn: false
+                                        }
+                                    });
+                                }else{
+                                    easyDialog.open({
+                                        container: {
+                                            header: '<div style="font-size:15px;">提示信息</div>',
+                                            content: '<div style="font-size:15px;">设置带领人失败</div>',
+                                            yesFn: function(){
+                                                easyDialog.close();
+                                            },
+                                            noFn: false
+                                        }
+                                    });
+                                }
+                            }
+
+                        });
+                    },
+                    cancel: function () {
+                        // 用户取消分享后执行的回调函数
+                    }
+                });
+            })
+        }
+    })
 </script>
 </html>

@@ -59,6 +59,9 @@
         <task:scheduled ref="weixinTask" method="init" cron="0 0 */1 * * ?" />
     </task:scheduled-tasks>
 
+   <!-- &lt;!&ndash; 缺省的异步任务线程池 &ndash;&gt;
+    <task:annotation-driven executor="asyncExecutor" />
+    <task:executor id="asyncExecutor" pool-size="100-10000" queue-capacity="10" />-->
 
     <!--<import resource="classpath:applicationContext-redis.xml"/>-->
     <import resource="classpath:applicationContext-persist.xml"/>

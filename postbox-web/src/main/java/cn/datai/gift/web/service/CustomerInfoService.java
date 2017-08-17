@@ -6,6 +6,7 @@ import cn.datai.gift.utils.RespResult;
 import cn.datai.gift.web.plugin.vo.UserLoginInfo;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Map;
 
 /**
  * Created by H.CAAHN on 2017/6/19.
@@ -42,4 +43,18 @@ public interface CustomerInfoService {
      * @return
      */
     TCustomerInfo queryTCustomerInfoById(Long customerInfoId);
+
+    /**
+     * 通过参数查询用户openId
+     * @param map
+     * @return
+     */
+    String queryUserOpenId(Map<String,Object> map);
+
+    /**
+     * 根据手机号查询用户信息
+     * @param mobile
+     * @return
+     */
+    TCustomerInfo queryTCustomerInfoByMobile(String mobile);
 }
