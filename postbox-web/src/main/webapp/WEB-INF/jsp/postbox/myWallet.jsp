@@ -35,7 +35,6 @@
 <a href="#" class="list-group-item">绑定银行卡</a>
 <a href="#" class="list-group-item">设置支付密码</a>
 <a href="#" class="list-group-item">账户明细</a>
-<a href="#" class="list-group-item">每年更新成本</a>
 
 </body>
 <script type="text/javascript" src="${ctx}/static/js/views/jquery.min.js"></script>

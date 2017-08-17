@@ -11,6 +11,7 @@ import cn.datai.gift.web.service.SmsSenderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
@@ -36,6 +37,9 @@ public class IndexController extends BaseController{
 
     @Autowired
     private CustomerInfoService customerInfoService;
+
+    @Value("${send.msg}")
+    private boolean sendMsg;
 
     @RequestMapping(value = "/register")
     @Auth(needLogin = true,weixinJsAuth = true,needPhone = false)
@@ -85,12 +89,9 @@ public class IndexController extends BaseController{
             if(!isMobileNO(mobile)){
                 return new RespResult(RespCode.FAIL,"手机号输入错误");
             }
-//            String code = getRandomCode();//验证码
-//            boolean result = smsSenderService.sendCaptcha(mobile,code);//发送短信
 
-            String code = "111111";//验证码
-            boolean result = true;//发送短信
-
+            String code = sendMsg ? getRandomCode() : "111111";//验证码
+            boolean result = sendMsg ? this.smsSenderService.sendCaptcha(mobile,code) : true;//发送短信
             if(result){
                 MobileCode mobileCode = new MobileCode();
                 mobileCode.setMobile(mobile);//手机号
