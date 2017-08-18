@@ -116,11 +116,7 @@ public class CustomerInfoController extends BaseController {
     @Auth(needLogin = true,weixinJsAuth = true,needPhone = true)
     @RequestMapping("sureForLead")
     public String sureForLead(Model model, @ModelAttribute("userLoginInfo") UserLoginInfo userLoginInfo,String boxIds,String tcustomerInfoId) {
-        if(MyStringUtil.isBlank(boxIds) || MyStringUtil.isBlank(tcustomerInfoId)){
-            model.addAttribute("dataList",null);
-            return "/postbox/sureForLead";
-        }
-        if((userLoginInfo.getCustomerInfoId()).equals(tcustomerInfoId)){
+        if(MyStringUtil.isBlank(boxIds) || MyStringUtil.isBlank(tcustomerInfoId) || (userLoginInfo.getCustomerInfoId().toString()).equals(tcustomerInfoId)){
             model.addAttribute("dataList",null);
             return "/postbox/sureForLead";
         }
