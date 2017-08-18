@@ -115,13 +115,17 @@ public class CustomerInfoController extends BaseController {
      */
     @Auth(needLogin = true,weixinJsAuth = true,needPhone = true)
     @RequestMapping("sureForLead")
-    public String sureForLead(Model model, @ModelAttribute("userLoginInfo") UserLoginInfo userLoginInfo,String boxIds,String customerInfoId) {
-        if(MyStringUtil.isBlank(boxIds) || MyStringUtil.isBlank(customerInfoId) || userLoginInfo.getCustomerInfoId().equals(customerInfoId)){
+    public String sureForLead(Model model, @ModelAttribute("userLoginInfo") UserLoginInfo userLoginInfo,String boxIds,String tcustomerInfoId) {
+        if(MyStringUtil.isBlank(boxIds) || MyStringUtil.isBlank(tcustomerInfoId)){
+            model.addAttribute("dataList",null);
+            return "/postbox/sureForLead";
+        }
+        if((userLoginInfo.getCustomerInfoId()).equals(tcustomerInfoId)){
             model.addAttribute("dataList",null);
             return "/postbox/sureForLead";
         }
         Map<String,Object> map = new HashMap<>();
-        map.put("customerInfoId",customerInfoId);
+        map.put("customerInfoId",tcustomerInfoId);
         UserInfoVo infoVo = this.customerInfoService.queryUserWxInfoByCons(map);
         String[] split = boxIds.split(",");
         List<TBoxInfoVo> dataList = Arrays.asList(split).stream().map(boxId -> {
@@ -138,7 +142,7 @@ public class CustomerInfoController extends BaseController {
     }
 
     /**
-     * 替我代领更新代领人的手机号
+     * 替我代领更新代领人
      * @param customerInfoId
      * @param boxIds
      * @return

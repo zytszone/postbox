@@ -36,12 +36,12 @@
                     </td>
                     <td><fmt:formatDate value="${item.opentime}" pattern="yyyy-MM-dd"/></td>
                     <c:if test="${empty item.proxyCustomerInfoId}">
-                        <td><a style="color: brown;text-decoration: underline;">替我代领</a></td>
+                        <td><a style="color: brown;">自己的包裹</a></td>
                     </c:if>
                     <c:if test="${not empty item.proxyCustomerInfoId}">
-                        <td><a style="color: green;text-decoration: underline;">好友叫我代领</a></td>
+                        <td><a style="color: green;">好友叫我代领</a></td>
                     </c:if>
-                    <td class="detailMessage"><a style="color: red;text-decoration: underline;">详情</a></td>
+                    <td class="detailMessage"><a style="color: red;text-decoration: underline;">包裹详情</a></td>
                 </tr>
                 </c:forEach>
             </table>

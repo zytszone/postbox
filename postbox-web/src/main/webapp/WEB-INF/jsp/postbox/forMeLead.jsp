@@ -106,7 +106,7 @@
             chk_value.push($(this).val());
         });
         boxIds = chk_value.join(",");
-        shareUrl  = basePath + "customer/sureForLead?boxIds="+boxIds + "&customerInfoId=" + $("#customerInfoId").val();//分享带上要代领的所有箱子的Id
+        shareUrl  = basePath + "customer/sureForLead?boxIds="+boxIds + "&tcustomerInfoId=" + $("#customerInfoId").val();//分享带上要代领的所有箱子的Id
         share(shareUrl);
     }
 

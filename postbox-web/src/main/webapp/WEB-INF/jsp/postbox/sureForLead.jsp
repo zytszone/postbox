@@ -34,7 +34,6 @@
 </head>
 <body>
 <div class="banner">
-
 </div>
 <div class="container-fluid" style="width:90%">
     <input id="boxIds" value = "${boxIds}" type="hidden"/>
@@ -45,11 +44,11 @@
                 <c:forEach items="${dataList}" var="item">
                     <tr>
                         <td>
-                            <input name="boxName" type="hidden" value="${item.boxInfoId}"/>
+                            <input name="boxInfoId" type="hidden" value="${item.boxInfoId}"/>
                                 ${item.boxName}
                         </td>
-                        <td><fmt:formatDate value="${item.opentime}" pattern="yyyy-MM-dd"/></td>
                         <td><span style="color: green;">${item.nickName}</span>的代领请求</td>
+                        <td class="detailMessage"><span style="color: red;text-decoration: underline;">查看明细</span></td>
                     </tr>
                 </c:forEach>
             </table>
@@ -62,6 +61,24 @@
             </table>
         </c:if>
     </div>
+    <c:forEach items="${dataList}" var="item" varStatus="status">
+        <div class="row boxDetail" id="detail_${item.boxInfoId}" ${status.index>0?'style="display:none;"':''}>
+            <table class="table table-bordered">
+                <tr>
+                    <td>快递地点：${item.boxName}</td>
+                </tr>
+                <tr>
+                    <td>箱子编号：${item.boxCode}</td>
+                </tr>
+                <tr>
+                    <td>投递日期：<fmt:formatDate value="${item.opentime}" pattern="yyyy-MM-dd"/></td>
+                </tr>
+                <tr>
+                    <td>详细：您的快递包裹位于${item.boxName}附近，${item.boxCode}号箱子。您可以直接扫描箱子上的二维码，即刻领取包裹。感谢您的使用。</td>
+                </tr>
+            </table>
+        </div>
+    </c:forEach>
 </div>
 
 </body>
@@ -116,5 +133,11 @@
             }
         });
     }
+
+    $('.boxList').on('click', '.detailMessage', function() {
+        var $input=$(this).parent().find('input[name="boxInfoId"]');
+        $('.boxDetail').hide();
+        $('#detail_'+$input.val()).show();
+    });
 </script>
 </html>
