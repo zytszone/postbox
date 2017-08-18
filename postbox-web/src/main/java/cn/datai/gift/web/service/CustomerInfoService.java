@@ -2,6 +2,7 @@ package cn.datai.gift.web.service;
 
 import cn.datai.gift.persist.po.TCustomerInfo;
 import cn.datai.gift.persist.po.UserWxInfo;
+import cn.datai.gift.persist.vo.UserInfoVo;
 import cn.datai.gift.utils.RespResult;
 import cn.datai.gift.web.plugin.vo.UserLoginInfo;
 
@@ -38,23 +39,10 @@ public interface CustomerInfoService {
                     HttpServletRequest request);
 
     /**
-     * 通过Id查询用户信息
-     * @param customerInfoId
-     * @return
-     */
-    TCustomerInfo queryTCustomerInfoById(Long customerInfoId);
-
-    /**
-     * 通过参数查询用户openId
+     * 通过参数查询微信信息
      * @param map
      * @return
      */
-    String queryUserOpenId(Map<String,Object> map);
+    UserInfoVo queryUserWxInfoByCons(Map<String,Object> map);
 
-    /**
-     * 根据手机号查询用户信息
-     * @param mobile
-     * @return
-     */
-    TCustomerInfo queryTCustomerInfoByMobile(String mobile);
 }

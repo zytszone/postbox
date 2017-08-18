@@ -37,6 +37,7 @@
 
 </div>
 <div class="container-fluid" style="width:90%">
+    <input id="customerInfoId" value = "${customerInfoId}" type="hidden"/>
     <div class="row" style="margin-top: 10px;">
         <c:if test="${not empty dataList and dataList.size()>0}">
             <button id="selectAll" type="button" class="btn btn-warning" style="margin-bottom: 5px;">全部选中</button>
@@ -87,13 +88,16 @@
             chk_value.push($(this).val());
         });
         boxIds = chk_value.join(",");
-        shareUrl  = basePath + "customer/sureForLead?boxIds="+boxIds;//分享带上要代领的所有箱子的Id
+        shareUrl  = basePath + "customer/sureForLead?boxIds="+boxIds + "&customerInfoId=" + $("#customerInfoId").val();//分享带上要代领的所有箱子的Id
+        share(shareUrl);
+
     });
     //全部取消
     $("#cancelAll").on('click',function () {
         $("[name=items]:checkbox").attr("checked", false);
         boxIds='';
         shareUrl  = basePath + "customer/sureForLead";
+        share(shareUrl);
     });
     //单个
     function singleCheck(){
@@ -102,10 +106,15 @@
             chk_value.push($(this).val());
         });
         boxIds = chk_value.join(",");
-        shareUrl  = basePath + "customer/sureForLead?boxIds="+boxIds;//分享带上要代领的所有箱子的Id
+        shareUrl  = basePath + "customer/sureForLead?boxIds="+boxIds + "&customerInfoId=" + $("#customerInfoId").val();//分享带上要代领的所有箱子的Id
+        share(shareUrl);
     }
 
     $(function(){
+        share(shareUrl);
+    })
+
+    function share(shareUrl){
         if(isWeixin()) {
             wx.ready(function () {
                 wx.hideMenuItems({
@@ -149,7 +158,7 @@
                 });
             })
         }
-    })
+    }
 
 
 

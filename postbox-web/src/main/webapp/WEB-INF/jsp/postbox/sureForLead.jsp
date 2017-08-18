@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>替我代领</title>
+    <title>代领请求列表</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" />
     <link href="${ctx}/static/plugins/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
@@ -49,6 +49,7 @@
                                 ${item.boxName}
                         </td>
                         <td><fmt:formatDate value="${item.opentime}" pattern="yyyy-MM-dd"/></td>
+                        <td><span style="color: green;">${item.nickName}</span>的代领请求</td>
                     </tr>
                 </c:forEach>
             </table>

@@ -1,5 +1,7 @@
 package cn.datai.gift.persist.mapper;
 
+import cn.datai.gift.persist.vo.UserInfoVo;
+
 import java.util.Map;
 
 public interface TCustomerInfoMapperExt extends TCustomerInfoMapper {
@@ -9,5 +11,5 @@ public interface TCustomerInfoMapperExt extends TCustomerInfoMapper {
      * @param params
      * @return
      */
-    String queryUserOpenId(Map<String,Object> params);
+    UserInfoVo queryUserWxInfoByCons(Map<String,Object> params);
 }

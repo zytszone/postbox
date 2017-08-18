@@ -3,6 +3,8 @@ package cn.datai.gift.web.controller;
 import cn.datai.gift.persist.po.TBoxInfo;
 import cn.datai.gift.persist.po.TCustomerInfo;
 import cn.datai.gift.persist.po.TExpressmanInfo;
+import cn.datai.gift.persist.po.UserWxInfo;
+import cn.datai.gift.persist.vo.UserInfoVo;
 import cn.datai.gift.utils.RespResult;
 import cn.datai.gift.utils.enums.RespCode;
 import cn.datai.gift.web.contants.TemplateConstants;
@@ -128,9 +130,9 @@ public class BoxSecretController extends BaseController {
                 //公众号推送注册事件
                 Map<String,Object> map = new HashMap<>();
                 map.put("mobile",mobile);
-                String openId = this.customerInfoService.queryUserOpenId(map);
-                if(MyStringUtil.isNotBlank(openId)){
-                    SendPublicServerSmgUtils.expressInfoChangeMobile(TokenContants.WEIXIN_TOKEN, TemplateConstants.EXPRESS_CHANGE_MOBILE_TEM_ID,openId);
+                UserInfoVo infoVo = this.customerInfoService.queryUserWxInfoByCons(map);
+                if(null != infoVo && MyStringUtil.isNotBlank(infoVo.getOpenId())){
+                    SendPublicServerSmgUtils.expressInfoChangeMobile(TokenContants.WEIXIN_TOKEN, TemplateConstants.EXPRESS_CHANGE_MOBILE_TEM_ID,infoVo.getOpenId());
                 }
                 return new RespResult(RespCode.SUCCESS);
             }

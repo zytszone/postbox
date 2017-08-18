@@ -2,6 +2,9 @@ package cn.datai.gift.web.controller;
 
 import cn.datai.gift.persist.po.TBoxInfo;
 import cn.datai.gift.persist.po.TCustomerInfo;
+import cn.datai.gift.persist.po.UserWxInfo;
+import cn.datai.gift.persist.vo.UserInfoVo;
+import cn.datai.gift.utils.PropertiesUtil;
 import cn.datai.gift.utils.RespResult;
 import cn.datai.gift.utils.enums.RespCode;
 import cn.datai.gift.utils.exception.BizException;
@@ -11,15 +14,19 @@ import cn.datai.gift.web.plugin.vo.UserLoginInfo;
 import cn.datai.gift.web.service.BoxInfoService;
 import cn.datai.gift.web.service.CustomerInfoService;
 import cn.datai.gift.web.utils.MyStringUtil;
+import cn.datai.gift.web.vo.TBoxInfoVo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
@@ -83,6 +90,7 @@ public class CustomerInfoController extends BaseController {
         TCustomerInfo customerInfo = this.customerInfoService.queryById(userLoginInfo.getCustomerInfoId());
         List<TBoxInfo> dataList = this.boxInfoService.queryTBoxInfoByMobileOrproxyCustomerInfoId(customerInfo.getMobilePhone(),null);
         model.addAttribute("dataList", dataList);
+        model.addAttribute("customerInfoId",userLoginInfo.getCustomerInfoId());
         return "/postbox/forMeLead";
     }
 
@@ -107,13 +115,21 @@ public class CustomerInfoController extends BaseController {
      */
     @Auth(needLogin = true,weixinJsAuth = true,needPhone = true)
     @RequestMapping("sureForLead")
-    public String sureForLead(Model model, @ModelAttribute("userLoginInfo") UserLoginInfo userLoginInfo,String boxIds) {
-        if(MyStringUtil.isBlank(boxIds)){
+    public String sureForLead(Model model, @ModelAttribute("userLoginInfo") UserLoginInfo userLoginInfo,String boxIds,String customerInfoId) {
+        if(MyStringUtil.isBlank(boxIds) || MyStringUtil.isBlank(customerInfoId) || userLoginInfo.getCustomerInfoId().equals(customerInfoId)){
             model.addAttribute("dataList",null);
+            return "/postbox/sureForLead";
         }
+        Map<String,Object> map = new HashMap<>();
+        map.put("customerInfoId",customerInfoId);
+        UserInfoVo infoVo = this.customerInfoService.queryUserWxInfoByCons(map);
         String[] split = boxIds.split(",");
-        List<TBoxInfo> dataList = Arrays.asList(split).stream().map(boxId -> {
-            return this.boxInfoService.queryById(Long.valueOf(boxId));
+        List<TBoxInfoVo> dataList = Arrays.asList(split).stream().map(boxId -> {
+            TBoxInfo boxInfo = this.boxInfoService.queryById(Long.valueOf(boxId));
+            TBoxInfoVo tBoxInfoVo = new TBoxInfoVo();
+            BeanUtils.copyProperties(boxInfo,tBoxInfoVo);
+            tBoxInfoVo.setNickName(infoVo.getNickname());
+            return tBoxInfoVo;
         }).collect(Collectors.toList());
         model.addAttribute("dataList",dataList);
         model.addAttribute("boxIds",boxIds);
@@ -128,7 +144,7 @@ public class CustomerInfoController extends BaseController {
      * @return
      */
     @Auth(needLogin = true,weixinJsAuth = true,needPhone = true)
-    @PostMapping("forMeLead")
+    @PostMapping("updateForMeLead")
     @ResponseBody
     public RespResult updateForMeLead(@ModelAttribute("customerInfoId") Long customerInfoId,@RequestParam("boxIds") String boxIds){
         RespResult respResult = null;

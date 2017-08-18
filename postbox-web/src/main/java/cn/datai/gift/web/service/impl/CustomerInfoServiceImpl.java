@@ -2,9 +2,9 @@ package cn.datai.gift.web.service.impl;
 
 import cn.datai.gift.persist.mapper.TCustomerInfoMapperExt;
 import cn.datai.gift.persist.po.TCustomerInfo;
-import cn.datai.gift.persist.po.TCustomerInfoExample;
 import cn.datai.gift.persist.po.TExpressmanInfo;
 import cn.datai.gift.persist.po.UserWxInfo;
+import cn.datai.gift.persist.vo.UserInfoVo;
 import cn.datai.gift.utils.RespResult;
 import cn.datai.gift.utils.enums.RespCode;
 import cn.datai.gift.utils.exception.BizException;
@@ -27,7 +27,6 @@ import org.springframework.util.StringUtils;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
 
 import static cn.datai.gift.web.controller.IndexController.checkParams;
@@ -133,41 +132,13 @@ public class CustomerInfoServiceImpl implements CustomerInfoService {
     }
 
     /**
-     * 通过Id查询用户信息
-     * @param customerInfoId
-     * @return
-     */
-    @Override
-    public TCustomerInfo queryTCustomerInfoById(Long customerInfoId) {
-        return this.tCustomerInfoMapperExt.selectByPrimaryKey(customerInfoId);
-    }
-
-    /**
-     * 通过参数查询用户openId
-     *
+     * 通过查询查询微信信息
      * @param map
      * @return
      */
     @Override
-    public String queryUserOpenId(Map<String, Object> map) {
-        return this.tCustomerInfoMapperExt.queryUserOpenId(map);
-    }
-
-    /**
-     * 根据手机号查询用户信息
-     *
-     * @param mobile
-     * @return
-     */
-    @Override
-    public TCustomerInfo queryTCustomerInfoByMobile(String mobile) {
-        TCustomerInfoExample example = new TCustomerInfoExample();
-        example.createCriteria().andMobilePhoneEqualTo(mobile);
-        List<TCustomerInfo> list = this.tCustomerInfoMapperExt.selectByExample(example);
-        if(null == list || list.isEmpty()){
-            return null;
-        }
-        return list.get(0);
+    public UserInfoVo queryUserWxInfoByCons(Map<String, Object> map) {
+        return this.tCustomerInfoMapperExt.queryUserWxInfoByCons(map);
     }
 
     /**

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.datai.gift.persist.mapper.TCustomerInfoMapperExt">
-    <select id="queryUserOpenId" resultType="java.lang.String" parameterType="java.util.HashMap">
+    <select id="queryUserWxInfoByCons" resultType="cn.datai.gift.persist.vo.UserInfoVo" parameterType="java.util.HashMap">
         SELECT
-          openid
+          openId AS openId,
+          nickName AS nickName
         FROM
           t_customer_info as tci,
           user_wx_info as uxi,
@@ -12,8 +13,12 @@
     </select>
     <sql id="where_params">
         <where>
+            tci.CUSTOMER_INFO_ID = uxr.CUSTOMER_INFO_ID AND uxr.unionid = uxi.unionid
+            <if test="customerInfoId != null and customerInfoId != ''">
+               AND tci.CUSTOMER_INFO_ID= #{customerInfoId}
+            </if>
             <if test="mobile != null and mobile != ''">
-                tci.CUSTOMER_INFO_ID = uxr.CUSTOMER_INFO_ID AND urx.unionid = uxi.unionid AND tci.MOBILE_PHONE= #{mobile}
+                AND tci.MOBILE_PHONE= #{mobile}
             </if>
         </where>
     </sql>
