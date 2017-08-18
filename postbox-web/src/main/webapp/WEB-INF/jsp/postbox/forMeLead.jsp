@@ -38,10 +38,10 @@
 </div>
 <div class="container-fluid" style="width:90%">
     <div class="row" style="margin-top: 10px;">
-        <button id="selectAll" type="button" class="btn btn-warning" style="margin-bottom: 5px;">全部选中</button>
-        <button id="cancelAll" type="button" class="btn btn-primary" style="margin-bottom: 5px;">全部取消</button>
-        <table id="listTable" class="table table-bordered boxList">
-            <c:if test="${not empty dataList and dataList.size()>0}">
+        <c:if test="${not empty dataList and dataList.size()>0}">
+            <button id="selectAll" type="button" class="btn btn-warning" style="margin-bottom: 5px;">全部选中</button>
+            <button id="cancelAll" type="button" class="btn btn-primary" style="margin-bottom: 5px;">全部取消</button>
+            <table id="listTable" class="table table-bordered boxList">
                 <c:forEach items="${dataList}" var="item">
                     <tr>
                         <td>
@@ -54,16 +54,18 @@
                         <td><fmt:formatDate value="${item.opentime}" pattern="yyyy-MM-dd"/></td>
                     </tr>
                 </c:forEach>
-            </c:if>
-            <c:if test="${empty dataList or dataList.size()<=0}">
+            </table>
+            <div class="row-fluid">
+                <span style="color: red">*</span>&nbsp;选择指定的快递，可以通过<span style="color: red;">右上角微信分享指定好友</span>让好友替你收取快递哦！
+            </div>
+        </c:if>
+        <c:if test="${empty dataList or dataList.size()<=0}">
+            <table id="listTable" class="table table-bordered boxList">
                 <tr>
-                    <td>您当前没有待领的快递</td>
+                    <td style="text-align: center;">您当前没有需要领取的快递!</td>
                 </tr>
-            </c:if>
-        </table>
-        <div class="row-fluid">
-            <span style="color: red">*</span>&nbsp;选择指定的快递，可以通过<span style="color: red;">右上角微信分享指定好友</span>让好友替你收取快递哦！
-        </div>
+            </table>
+        </c:if>
     </div>
 </div>
 

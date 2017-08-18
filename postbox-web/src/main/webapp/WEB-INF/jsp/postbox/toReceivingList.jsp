@@ -22,37 +22,38 @@
 
 </div>
 <div class="container-fluid" style="width:90%">
-    <div class="row">
-        <div class="row-fluid" style="text-align:left;margin-bottom:12px;font-size: 18px;margin-top:12px;font-weight: bold;">
-            我的待领快递
-        </div>
-    </div>
-    <div class="row">
-        <table class="table table-bordered boxList">
-            <c:if test="${not empty dataList and dataList.size()>0}">
-            <c:forEach items="${dataList}" var="item">
-            <tr>
-                <td>
-                    <input name="boxInfoId" type="hidden" value="${item.boxInfoId}"/>
-                    ${item.boxName}
-                </td>
-                <td><fmt:formatDate value="${item.opentime}" pattern="yyyy-MM-dd"/></td>
-                <c:if test="${empty item.proxyCustomerInfoId}">
-                    <td><a style="color: brown;text-decoration: underline;">替我代领</a></td>
-                </c:if>
-                <c:if test="${not empty item.proxyCustomerInfoId}">
-                    <td><a style="color: green;text-decoration: underline;">好友叫我代领</a></td>
-                </c:if>
-                <td class="detailMessage"><a style="color: red;text-decoration: underline;">详情</a></td>
-            </tr>
-            </c:forEach>
-            </c:if>
-            <c:if test="${empty dataList or dataList.size()<=0}">
-            <tr>
-                <td>您当前没有待领的快递</td>
-            </tr>
-            </c:if>
-        </table>
+    <div class="row" style="margin-top: 10px;">
+        <c:if test="${not empty dataList and dataList.size()>0}">
+            <div class="row-fluid" style="text-align:left;margin-bottom:12px;font-size: 18px;margin-top:12px;font-weight: bold;">
+                我的待领快递
+            </div>
+            <table class="table table-bordered boxList">
+                <c:forEach items="${dataList}" var="item">
+                <tr>
+                    <td>
+                        <input name="boxInfoId" type="hidden" value="${item.boxInfoId}"/>
+                        ${item.boxName}
+                    </td>
+                    <td><fmt:formatDate value="${item.opentime}" pattern="yyyy-MM-dd"/></td>
+                    <c:if test="${empty item.proxyCustomerInfoId}">
+                        <td><a style="color: brown;text-decoration: underline;">替我代领</a></td>
+                    </c:if>
+                    <c:if test="${not empty item.proxyCustomerInfoId}">
+                        <td><a style="color: green;text-decoration: underline;">好友叫我代领</a></td>
+                    </c:if>
+                    <td class="detailMessage"><a style="color: red;text-decoration: underline;">详情</a></td>
+                </tr>
+                </c:forEach>
+            </table>
+        </c:if>
+
+        <c:if test="${empty dataList or dataList.size()<=0}">
+            <table class="table table-bordered boxList">
+                <tr>
+                    <td style="text-align: center;">您当前没有待领的快递!</td>
+                </tr>
+            </table>
+        </c:if>
     </div>
     <c:forEach items="${dataList}" var="item" varStatus="status">
     <div class="row boxDetail" id="detail_${item.boxInfoId}" ${status.index>0?'style="display:none;"':''}>
