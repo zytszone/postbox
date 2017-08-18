@@ -45,7 +45,7 @@
                 <c:forEach items="${dataList}" var="item">
                     <tr>
                         <td>
-                            <input name="items" type="checkbox" value="${item.boxInfoId}"/>
+                            <input name="items" type="checkbox" value="${item.boxInfoId}" onclick="singleCheck();"/>
                         </td>
                         <td>
                             <input name="boxName" type="hidden" value="${item.boxInfoId}"/>
@@ -72,6 +72,32 @@
 <script type="text/javascript" src="${ctx}/static/plugins/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="${ctx}/static/plugins/easydialog/easydialog.min.js"></script>
 <script type="text/javascript">
+    //要代领的快递
+    var boxIds='';
+
+    //全选
+    $("#selectAll").on('click',function () {
+        $("[name=items]:checkbox").prop("checked", true);
+        var chk_value =[];
+        $('input[name=items]:checkbox').each(function(){
+            chk_value.push($(this).val());
+        });
+        boxIds = chk_value.join(",");
+    });
+    //全部取消
+    $("#cancelAll").on('click',function () {
+        $("[name=items]:checkbox").attr("checked", false);
+        boxIds='';
+    });
+    //单个
+    function singleCheck(){
+        var chk_value =[];
+        $('input[name=items]:checked').each(function(){
+            chk_value.push($(this).val());
+        });
+        boxIds = chk_value.join(",");
+    }
+
     $(function(){
         if(isWeixin()) {
             wx.ready(function () {
@@ -141,12 +167,7 @@
         }
     })
 
-    $("#selectAll").on('click',function () {
-            $("[name=items]:checkbox").prop("checked", true);
-    });
-    $("#cancelAll").on('click',function () {
-        $("[name=items]:checkbox").attr("checked", false);
-    });
+
 
 </script>
 </html>
