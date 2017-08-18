@@ -5,4 +5,25 @@
         SELECT <include refid="Base_Column_List"/>
         FROM t_box_info WHERE BOX_CODE=#{boxCode} FOR UPDATE
     </select>
+
+    <select id="queryTBoxInfoByMobileOrproxyCustomerInfoId" resultMap="BaseResultMap">
+
+        SELECT
+          <include refid="Base_Column_List"/>
+        FROM t_box_info
+          <include refid="where_params"/>
+    </select>
+
+    <sql id="where_params">
+          <where>
+              EXPRESS_STATUS = 'FULL'
+              AND (
+              <if test="mobile != null and mobile != ''">
+                  MOBILE_PHONE=#{mobile}
+              </if>
+              <if test="proxyCustomerInfoId != null and proxyCustomerInfoId != ''">
+                  or PROXY_CUSTOMER_INFO_ID=#{proxyCustomerInfoId}
+              </if>)
+          </where>
+    </sql>
 </mapper>

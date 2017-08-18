@@ -20,9 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -51,13 +49,10 @@ public class BoxInfoServiceImpl implements BoxInfoService {
 
     @Override
     public List<TBoxInfo> queryTBoxInfoByMobileOrproxyCustomerInfoId(String mobilePhone,String proxyCustomerInfoId) {
-        TBoxInfoExample example = new TBoxInfoExample();
-        TBoxInfoExample.Criteria criteria = example.createCriteria();
-        criteria.andExpressStatusEqualTo(BoxExpressStatus.FULL.name());
-        criteria.andMobilePhoneEqualTo(mobilePhone);
-        criteria.andProxyCustomerInfoIdEqualTo(proxyCustomerInfoId);
-
-        return this.tBoxInfoMapperExt.selectByExample(example);
+        Map<String,Object> map = new HashMap<>();
+        map.put("mobile",mobilePhone);
+        map.put("proxyCustomerInfoId",proxyCustomerInfoId);
+        return this.tBoxInfoMapperExt.queryTBoxInfoByMobileOrproxyCustomerInfoId(map);
     }
 
     @Override

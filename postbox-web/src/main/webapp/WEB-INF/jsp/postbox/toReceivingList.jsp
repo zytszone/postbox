@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ include file="/WEB-INF/jsp/include/include.jsp" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,6 +37,13 @@
                     ${item.boxName}
                 </td>
                 <td><fmt:formatDate value="${item.opentime}" pattern="yyyy-MM-dd"/></td>
+                <c:if test="${empty item.proxyCustomerInfoId}">
+                    <td><a style="color: brown;text-decoration: underline;">替我代领</a></td>
+                </c:if>
+                <c:if test="${not empty item.proxyCustomerInfoId}">
+                    <td><a style="color: green;text-decoration: underline;">好友叫我代领</a></td>
+                </c:if>
+                <td><a style="color: red;text-decoration: underline;">详情</a></td>
             </tr>
             </c:forEach>
             </c:if>
@@ -62,10 +72,10 @@
             <tr>
                 <td>
                     <div style="float:left;padding-top:8px;">无法取出？<a href="javascript:void(0);">点击报错</a></div>
-                    <div style="float:right;">
+                   <%-- <div style="float:right;">
                         <a href="javascript:void(0);" class="btn btn-sm btn-warning" style="width:65px;">替我代领</a>
                         <a href="javascript:void(0);" class="btn btn-sm btn-primary" style="width:65px;">导&nbsp;&nbsp;航</a>
-                    </div>
+                    </div>--%>
                 </td>
             </tr>
         </table>
