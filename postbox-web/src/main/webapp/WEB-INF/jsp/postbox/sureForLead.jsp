@@ -77,13 +77,42 @@
             dataType: 'json',
             success: function (res) {
                 if(res.code == 0){
+                    easyDialog.open({
+                        container: {
+                            header: '<div style="font-size:15px;">操作提示</div>',
+                            content: '<div style="font-size:15px;">代领成功，可以去取货啦!</div>',
+                            yesFn: function(){
+                                easyDialog.close();
+                            },
+                            noFn: false
+                        }
+                    });
                 }else{
+                    easyDialog.open({
+                        container: {
+                            header: '<div style="font-size:15px;">操作提示</div>',
+                            content: '<div style="font-size:15px;">带领失败，请联系管理员!</div>',
+                            yesFn: function(){
+                                easyDialog.close();
+                            },
+                            noFn: false
+                        }
+                    });
 
                 }
             },
             error:function(err){
-
-        }
+                easyDialog.open({
+                    container: {
+                        header: '<div style="font-size:15px;">操作提示</div>',
+                        content: '<div style="font-size:15px;">网络异常，请稍后再试!</div>',
+                        yesFn: function(){
+                            easyDialog.close();
+                        },
+                        noFn: false
+                    }
+                });
+            }
         });
     }
 </script>
