@@ -57,11 +57,10 @@ public interface BoxInfoService {
     void updateBoxMobilePhone(Long boxId, String mobile);
 
     /**
-     * 更新手机号（代领人）
+     * 更新代理人
      * @param customerInfoId
-     * @param mobile
-     * @param boxCode
+     * @param boxIds
      * @return
      */
-    RespResult updateForMeLead(Long customerInfoId,String mobile,String boxCode);
+    RespResult updateForMeLead(Long customerInfoId,String boxIds);
 }

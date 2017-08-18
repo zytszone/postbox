@@ -10,6 +10,7 @@ import cn.datai.gift.web.plugin.annotation.Auth;
 import cn.datai.gift.web.plugin.vo.UserLoginInfo;
 import cn.datai.gift.web.service.BoxInfoService;
 import cn.datai.gift.web.service.CustomerInfoService;
+import cn.datai.gift.web.utils.MyStringUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +18,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * 客户信息管理
@@ -97,30 +100,51 @@ public class CustomerInfoController extends BaseController {
     }
 
     /**
-     * 替我代领更新代领人的手机号
-     * @param customerInfoId
-     * @param mobile
-     * @param boxCode
+     * 代领人点击链接跳转到代领人确认带领页面
+     * @param model
+     * @param userLoginInfo
      * @return
      */
-//    @Auth(needLogin = true,weixinJsAuth = true,needPhone = true)
-//    @PostMapping("forMeLead")
-//    @ResponseBody
-//    public RespResult updateForMeLead(@ModelAttribute("customerInfoId") Long customerInfoId, @RequestParam("mobile") String mobile,@RequestParam("boxCode") String boxCode){
-//        RespResult respResult = null;
-//        try {
-//            respResult = this.boxInfoService.updateForMeLead(customerInfoId,mobile, boxCode);
-//        } catch (BizException biz) {
-//            biz.printStackTrace();
-//            logger.error("设置代领人信息异常,手机号：{}，箱子编码：{}，错误信息：{}",mobile,boxCode,biz.getMessage());
-//            respResult = new RespResult(RespCode.FAIL,biz.getErrorMsg());
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//            logger.error("设置代领人信息异常,手机号：{}，箱子编码：{}，错误信息：{}",mobile,boxCode,e);
-//            respResult = new RespResult(RespCode.FAIL,"设置代领人失败");
-//        }
-//        return respResult;
-//    }
+    @Auth(needLogin = true,weixinJsAuth = true,needPhone = true)
+    @RequestMapping("sureForLead")
+    public String sureForLead(Model model, @ModelAttribute("userLoginInfo") UserLoginInfo userLoginInfo,String boxIds) {
+        if(MyStringUtil.isBlank(boxIds)){
+            model.addAttribute("dataList",null);
+        }
+        String[] split = boxIds.split(",");
+        List<TBoxInfo> dataList = Arrays.asList(split).stream().map(boxId -> {
+            return this.boxInfoService.queryById(Long.valueOf(boxId));
+        }).collect(Collectors.toList());
+        model.addAttribute("dataList",dataList);
+        model.addAttribute("boxIds",boxIds);
+
+        return "/postbox/sureForLead";
+    }
+
+    /**
+     * 替我代领更新代领人的手机号
+     * @param customerInfoId
+     * @param boxIds
+     * @return
+     */
+    @Auth(needLogin = true,weixinJsAuth = true,needPhone = true)
+    @PostMapping("forMeLead")
+    @ResponseBody
+    public RespResult updateForMeLead(@ModelAttribute("customerInfoId") Long customerInfoId,@RequestParam("boxIds") String boxIds){
+        RespResult respResult = null;
+        try {
+            respResult = this.boxInfoService.updateForMeLead(customerInfoId,boxIds);
+        } catch (BizException biz) {
+            biz.printStackTrace();
+            logger.error("设置代领人信息异常,箱子Ids：{}，错误信息：{}",boxIds,biz.getMessage());
+            respResult = new RespResult(RespCode.FAIL,biz.getErrorMsg());
+        } catch (Exception e) {
+            e.printStackTrace();
+            logger.error("设置代领人信息异常,箱子Ids：{}，错误信息：{}",boxIds,e);
+            respResult = new RespResult(RespCode.FAIL,"设置代领人失败");
+        }
+        return respResult;
+    }
 
     /**
      * 个人中心/我的钱包
@@ -131,17 +155,6 @@ public class CustomerInfoController extends BaseController {
     public String toMyWallet() {
         return "/postbox/myWallet";
     }
-
-    /**
-     * 分享后更新代理人
-     * @return
-     */
-    @Auth(needLogin = true,weixinJsAuth = true,needPhone = true)
-    @PostMapping("updateProxyCustomerInfoId")
-    public RespResult updateProxyCustomerInfoId(){
-        return null;
-    }
-
 
 
 }

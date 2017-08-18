@@ -74,6 +74,8 @@
 <script type="text/javascript" src="${ctx}/static/plugins/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="${ctx}/static/plugins/easydialog/easydialog.min.js"></script>
 <script type="text/javascript">
+    //默认的分享链接
+    var shareUrl  = basePath + "customer/sureForLead";
     //要代领的快递
     var boxIds='';
 
@@ -85,11 +87,13 @@
             chk_value.push($(this).val());
         });
         boxIds = chk_value.join(",");
+        shareUrl  = basePath + "customer/sureForLead?boxIds="+boxIds;//分享带上要代领的所有箱子的Id
     });
     //全部取消
     $("#cancelAll").on('click',function () {
         $("[name=items]:checkbox").attr("checked", false);
         boxIds='';
+        shareUrl  = basePath + "customer/sureForLead";
     });
     //单个
     function singleCheck(){
@@ -98,6 +102,7 @@
             chk_value.push($(this).val());
         });
         boxIds = chk_value.join(",");
+        shareUrl  = basePath + "customer/sureForLead?boxIds="+boxIds;//分享带上要代领的所有箱子的Id
     }
 
     $(function(){
@@ -123,46 +128,23 @@
                 wx.onMenuShareAppMessage({
                     title: '${applicationScope['shareTitle']}', // 分享标题
                     desc: '${applicationScope['weixinDefaultShareDesc']}', // 分享描述
-                    link: "http:www//baidu.com",//分享当前url
+                    link: shareUrl,//分享当前url
                     imgUrl: basePath +'${applicationScope['weixinDefaultShareIcon']}', // 分享图标
                     type: 'link', // 分享类型,music、video或link，不填默认为link
                     dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
                     success: function () {
-                        // 用户确认分享后执行的回调函数
-//                        $.ajax({
-//                            url: basePath+'customer/updateProxyCustomerInfoId',
-//                            type: "GET",
-//                            dataType: "json",
-//                            success: function (rsp) {
-//                                if (rsp.code == 0) {
-//                                    easyDialog.open({
-//                                        container: {
-//                                            header: '<div style="font-size:15px;">提示信息</div>',
-//                                            content: '<div style="font-size:15px;">设置代领人成功</div>',
-//                                            yesFn: function(){
-//                                                easyDialog.close();
-//                                            },
-//                                            noFn: false
-//                                        }
-//                                    });
-//                                }else{
-//                                    easyDialog.open({
-//                                        container: {
-//                                            header: '<div style="font-size:15px;">提示信息</div>',
-//                                            content: '<div style="font-size:15px;">设置带领人失败</div>',
-//                                            yesFn: function(){
-//                                                easyDialog.close();
-//                                            },
-//                                            noFn: false
-//                                        }
-//                                    });
-//                                }
-//                            }
-//
-//                        });
+                        easyDialog.open({
+                            container: {
+                                header: '<div style="font-size:15px;">操作提示</div>',
+                                content: '<div style="font-size:15px;">代领人分享设置成功!</div>',
+                                yesFn: function(){
+                                    easyDialog.close();
+                                },
+                                noFn: false
+                            }
+                        });
                     },
                     cancel: function () {
-                        // 用户取消分享后执行的回调函数
                     }
                 });
             })

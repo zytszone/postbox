@@ -145,43 +145,31 @@ public class BoxInfoServiceImpl implements BoxInfoService {
     }
 
     /**
-     * 更新手机号（代领人）
+     * 更新代理人
      * @param customerInfoId
-     * @param mobile
-     * @param boxCode
+     * @param boxIds
      * @return
      */
     @Transactional(isolation = Isolation.READ_COMMITTED)
     @Override
-    public RespResult updateForMeLead(Long customerInfoId,String mobile, String boxCode) {
-        boolean mobileNO = isMobileNO(mobile);
-        if(!mobileNO){
-            throw new BizException(RespCode.ERROR_MOBILE);
-        }
-        boolean checkBoxCode = this.checkBoxCode(boxCode);
-        if(!checkBoxCode){
-            throw new BizException(RespCode.ERROR_BOX_CODE);
-        }
-        TBoxInfo tboxInfo = this.tBoxInfoMapperExt.findAndLockTboxInfo(boxCode);
-        if(tboxInfo == null){
-            throw new BizException(RespCode.ERROR_BOX_CODE);
-        }
-        if(MyStringUtil.isBlank(tboxInfo.getMobilePhone()) || tboxInfo.getMobilePhone().equals(mobile)){
-            throw new BizException(RespCode.NO_EXPRESS_OR_SELF);
-        }
+    public RespResult updateForMeLead(Long customerInfoId,String boxIds) {
 
-        TCustomerInfo tCustomerInfo = this.customerInfoService.queryById(customerInfoId);
-        if(tCustomerInfo == null || MyStringUtil.isBlank(tCustomerInfo.getMobilePhone()) || !tboxInfo.getMobilePhone().equals(tCustomerInfo.getMobilePhone())){
-            throw new BizException(RespCode.NO_EXPRESS_OR_SELF);
+        // TODO: 2017/8/18 这里需要验证是否可以被代理，不然可能出现而已代理，从而非法开箱 
+        
+        if(MyStringUtil.isBlank(boxIds)){
+            throw  new BizException(RespCode.NOT_FIND_FOR_LEAD_BOX);
         }
-
-        TCustomerInfo customerInfo = this.customerInfoService.queryTCustomerInfoByMobile(mobile);
-        if(null == customerInfo){
-            throw new BizException(RespCode.NOT_FIND_USERINFO);
-        }
-        tboxInfo.setProxyCustomerInfoId(customerInfo.getCustomerInfoId().toString());
-        this.tBoxInfoMapperExt.updateByPrimaryKeySelective(tboxInfo);
-        // TODO: 2017/8/16 发送短信给代领人
+        Arrays.asList(boxIds.split(",")).forEach(boxId ->{
+            TBoxInfo tBoxInfo = this.queryById(Long.valueOf(boxId));
+            if(tBoxInfo == null){
+                throw  new BizException(RespCode.NOT_FIND_FOR_LEAD_BOX);
+            }
+            tBoxInfo.setProxyCustomerInfoId(customerInfoId.toString());
+            this.tBoxInfoMapperExt.updateByPrimaryKeySelective(tBoxInfo);
+        });
+        
+        // TODO: 2017/8/16 可以发送短信给代领人
+        // TODO: 2017/8/18 可以发送代领人模板消息
         return new RespResult(RespCode.SUCCESS,"设置代领人成功");
     }
 
@@ -226,17 +214,4 @@ public class BoxInfoServiceImpl implements BoxInfoService {
         return m.matches();
     }
 
-    /**
-     * 验证code
-     * @param boxCode
-     * @return
-     */
-    public static boolean checkBoxCode(String boxCode){
-        if(MyStringUtil.isBlank(boxCode)){
-            return false;
-        }
-        Pattern p = Pattern.compile("^[A-Za-z0-9]+$");
-        Matcher m = p.matcher(boxCode);
-        return m.matches();
-    }
 }

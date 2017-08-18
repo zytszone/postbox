@@ -86,6 +86,7 @@ public enum RespCode {
     ERROR_BOX_CODE("4002", "箱子编码错误"),
     NO_EXPRESS_OR_SELF("4003", "没有对应的快递或不能是本人代领"),
     NOT_FIND_USERINFO("4004", "没有找到对应的用户"),
+    NOT_FIND_FOR_LEAD_BOX("4005", "没有找到对应要代领的箱子"),
 
     /** 服务端错误. */
     SERVER_ERROR("500", "服务端错误"),
