@@ -19,11 +19,11 @@ public interface BoxInfoService {
     TBoxInfo queryById(Long id);
 
     /**
-     * 根据客户手机号码查询当前客户待领的快递箱子信息
+     * 根据客户手机号码和代领人id查询当前客户待领的快递箱子信息
      * @param mobilePhone
      * @return
      */
-    List<TBoxInfo> queryByMobilePhone(String mobilePhone);
+    List<TBoxInfo> queryTBoxInfoByMobileOrproxyCustomerInfoId(String mobilePhone,String proxyCustomerInfoId);
 
     /**
      * 普通用户打开箱子<br/>

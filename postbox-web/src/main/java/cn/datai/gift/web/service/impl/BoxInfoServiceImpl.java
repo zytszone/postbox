@@ -50,11 +50,12 @@ public class BoxInfoServiceImpl implements BoxInfoService {
     }
 
     @Override
-    public List<TBoxInfo> queryByMobilePhone(String mobilePhone) {
+    public List<TBoxInfo> queryTBoxInfoByMobileOrproxyCustomerInfoId(String mobilePhone,String proxyCustomerInfoId) {
         TBoxInfoExample example = new TBoxInfoExample();
         TBoxInfoExample.Criteria criteria = example.createCriteria();
         criteria.andExpressStatusEqualTo(BoxExpressStatus.FULL.name());
         criteria.andMobilePhoneEqualTo(mobilePhone);
+        criteria.andProxyCustomerInfoIdEqualTo(proxyCustomerInfoId);
 
         return this.tBoxInfoMapperExt.selectByExample(example);
     }

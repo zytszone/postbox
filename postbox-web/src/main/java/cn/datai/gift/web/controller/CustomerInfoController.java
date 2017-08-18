@@ -45,7 +45,7 @@ public class CustomerInfoController extends BaseController {
     public String toReceivingList(Model model, @ModelAttribute("userLoginInfo") UserLoginInfo userLoginInfo) {
         try {
             TCustomerInfo customerInfo = this.customerInfoService.queryById(userLoginInfo.getCustomerInfoId());
-            List<TBoxInfo> dataList = this.boxInfoService.queryByMobilePhone(customerInfo.getMobilePhone());
+            List<TBoxInfo> dataList = this.boxInfoService.queryTBoxInfoByMobileOrproxyCustomerInfoId(customerInfo.getMobilePhone(),customerInfo.getCustomerInfoId().toString());
             model.addAttribute("dataList", dataList);
         }
         catch (Exception ex) {
@@ -69,7 +69,7 @@ public class CustomerInfoController extends BaseController {
     }
 
     /**
-     * 我的快递/替我待领
+     * 我的快递/替我代领
      * @param model
      * @param userLoginInfo
      * @return
