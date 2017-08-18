@@ -43,7 +43,7 @@
                 <c:if test="${not empty item.proxyCustomerInfoId}">
                     <td><a style="color: green;text-decoration: underline;">好友叫我代领</a></td>
                 </c:if>
-                <td><a style="color: red;text-decoration: underline;">详情</a></td>
+                <td class="detailMessage"><a style="color: red;text-decoration: underline;">详情</a></td>
             </tr>
             </c:forEach>
             </c:if>
@@ -88,8 +88,8 @@
 <script type="text/javascript" src="${ctx}/static/plugins/bootstrap-3.3.5/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="${ctx}/static/plugins/easydialog/easydialog.min.js"></script>
 <script type="text/javascript">
-    $('.boxList').on('click', 'tr', function() {
-        var $input=$(this).find('input[name="boxInfoId"]');
+    $('.boxList').on('click', '.detailMessage', function() {
+        var $input=$(this).parent().find('input[name="boxInfoId"]');
         $('.boxDetail').hide();
         $('#detail_'+$input.val()).show();
     });

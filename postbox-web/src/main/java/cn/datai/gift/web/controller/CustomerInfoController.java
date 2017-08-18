@@ -77,8 +77,12 @@ public class CustomerInfoController extends BaseController {
     @Auth(needLogin = true,weixinJsAuth = true,needPhone = true)
     @RequestMapping("forMeLead")
     public String forMeLead(Model model, @ModelAttribute("userLoginInfo") UserLoginInfo userLoginInfo) {
+        TCustomerInfo customerInfo = this.customerInfoService.queryById(userLoginInfo.getCustomerInfoId());
+        List<TBoxInfo> dataList = this.boxInfoService.queryTBoxInfoByMobileOrproxyCustomerInfoId(customerInfo.getMobilePhone(),null);
+        model.addAttribute("dataList", dataList);
         return "/postbox/forMeLead";
     }
+
 
     /**
      * 我的快递/报错修理
